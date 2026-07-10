@@ -75,7 +75,7 @@ export function ServiceIconTile({
     return (
       <span
         className={cn(
-          "relative inline-block shrink-0 overflow-hidden rounded-xl shadow-sm",
+          "relative inline-block shrink-0 overflow-hidden rounded-xl shadow-sm ring-1 ring-black/5",
           dims,
           className,
         )}
@@ -85,7 +85,7 @@ export function ServiceIconTile({
           alt=""
           fill
           sizes="64px"
-          className="object-contain"
+          className="object-cover"
           aria-hidden="true"
         />
         <span className="sr-only">{service.name} icon</span>

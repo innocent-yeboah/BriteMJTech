@@ -61,6 +61,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: [{ url: "/images/logo/mj-mark.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/images/logo/mj-mark.svg" }],
+  },
 };
 
 export const viewport: Viewport = {

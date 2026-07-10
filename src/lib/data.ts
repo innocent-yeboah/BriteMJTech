@@ -50,7 +50,7 @@ export const services: Service[] = [
       "Secure cloud & local recording",
     ],
     icon: "cctv",
-    iconImage: "/images/icons/cctv.png",
+    iconImage: "/images/icons/cctv-real.jpg",
     image: "/images/cctv/cameras-pole.png",
     gallery: [
       {
