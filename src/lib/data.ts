@@ -27,7 +27,11 @@ export interface Service {
   longDescription: string;
   benefits: string[];
   icon: ServiceIcon;
+  /** Optional custom icon image (replaces the Lucide glyph). */
+  iconImage?: string;
   image: string;
+  /** Optional gallery for animated slideshows (e.g. CCTV section). */
+  gallery?: { src: string; alt: string }[];
   featured: boolean;
 }
 
@@ -46,8 +50,42 @@ export const services: Service[] = [
       "Secure cloud & local recording",
     ],
     icon: "cctv",
-    image:
-      "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1200&q=80",
+    iconImage: "/images/icons/cctv.png",
+    image: "/images/cctv/cameras-pole.png",
+    gallery: [
+      {
+        src: "/images/cctv/install-1.png",
+        alt: "Technician installing a CCTV camera with a power drill",
+      },
+      {
+        src: "/images/cctv/cameras-pole.png",
+        alt: "Dual bullet CCTV cameras mounted on a pole against blue sky",
+      },
+      {
+        src: "/images/cctv/camera-closeup.png",
+        alt: "Close-up of a white outdoor CCTV security camera",
+      },
+      {
+        src: "/images/cctv/install-2.png",
+        alt: "Hands adjusting a CCTV camera during professional installation",
+      },
+      {
+        src: "/images/cctv/surevision-camera.png",
+        alt: "White bullet CCTV camera mounted on an exterior wall",
+      },
+      {
+        src: "/images/cctv/nvr-system.png",
+        alt: "CCTV camera and NVR monitoring system installation",
+      },
+      {
+        src: "/images/cctv/school-camera.png",
+        alt: "Security camera installed at a school entrance",
+      },
+      {
+        src: "/images/cctv/indoor-cameras.png",
+        alt: "Selection of modern indoor security cameras",
+      },
+    ],
     featured: true,
   },
   {

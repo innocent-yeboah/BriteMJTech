@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   Cctv,
   Fence,
@@ -13,8 +14,8 @@ import {
   HeartHandshake,
   type LucideIcon,
 } from "lucide-react";
-import type { ServiceIcon } from "@/lib/data";
-import type { WhyChoosePillar } from "@/lib/data";
+import type { Service, ServiceIcon, WhyChoosePillar } from "@/lib/data";
+import { cn } from "@/lib/utils";
 
 const serviceIcons: Record<ServiceIcon, LucideIcon> = {
   cctv: Cctv,
@@ -43,6 +44,66 @@ export function ServiceGlyph({
 }) {
   const Icon = serviceIcons[icon];
   return <Icon className={className} aria-hidden="true" />;
+}
+
+/**
+ * Service icon tile. Uses a custom `iconImage` when provided (e.g. CCTV),
+ * otherwise falls back to the Lucide glyph on the brand gradient.
+ */
+export function ServiceIconTile({
+  service,
+  size = "md",
+  className,
+}: {
+  service: Pick<Service, "name" | "icon" | "iconImage">;
+  size?: "sm" | "md" | "lg";
+  className?: string;
+}) {
+  const dims = {
+    sm: "h-11 w-11",
+    md: "h-14 w-14",
+    lg: "h-16 w-16",
+  }[size];
+
+  const glyph = {
+    sm: "h-5 w-5",
+    md: "h-7 w-7",
+    lg: "h-8 w-8",
+  }[size];
+
+  if (service.iconImage) {
+    return (
+      <span
+        className={cn(
+          "relative inline-block shrink-0 overflow-hidden rounded-xl shadow-sm",
+          dims,
+          className,
+        )}
+      >
+        <Image
+          src={service.iconImage}
+          alt=""
+          fill
+          sizes="64px"
+          className="object-contain"
+          aria-hidden="true"
+        />
+        <span className="sr-only">{service.name} icon</span>
+      </span>
+    );
+  }
+
+  return (
+    <span
+      className={cn(
+        "inline-flex shrink-0 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-sm",
+        dims,
+        className,
+      )}
+    >
+      <ServiceGlyph icon={service.icon} className={glyph} />
+    </span>
+  );
 }
 
 export function PillarGlyph({

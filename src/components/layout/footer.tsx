@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { Logo } from "@/components/layout/logo";
 import { NewsletterForm } from "@/components/forms/newsletter-form";
-import { mainNav, siteConfig, telLink, whatsappLink } from "@/lib/site";
+import { mainNav, siteConfig, telLink } from "@/lib/site";
 import { services } from "@/lib/data";
 
 export function Footer() {
@@ -151,15 +151,9 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container flex flex-col items-center justify-between gap-3 py-5 text-xs text-brand-100/70 sm:flex-row">
+        <div className="container py-5 text-center text-xs text-brand-100/70 sm:text-left">
           <p>
             &copy; {year} {siteConfig.name}. All rights reserved.
-          </p>
-          <p>
-            <a href={whatsappLink()} className="hover:text-accent">
-              WhatsApp Us
-            </a>{" "}
-            &middot; Built for Build With Innocent
           </p>
         </div>
       </div>

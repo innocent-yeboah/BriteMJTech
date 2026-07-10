@@ -1,14 +1,16 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ServiceGlyph } from "@/components/service-icon";
+import { ServiceIconTile } from "@/components/service-icon";
 import type { Service } from "@/lib/data";
 
 export function ServiceCard({ service }: { service: Service }) {
   return (
     <article className="group relative flex h-full flex-col rounded-2xl border border-slate-100 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-brand-100 hover:shadow-card-hover">
-      <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-sm transition-transform duration-300 group-hover:scale-110">
-        <ServiceGlyph icon={service.icon} className="h-7 w-7" />
-      </span>
+      <ServiceIconTile
+        service={service}
+        size="md"
+        className="transition-transform duration-300 group-hover:scale-110"
+      />
       <h3 className="mt-5 text-xl text-brand-950">{service.name}</h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">
         {service.shortDescription}

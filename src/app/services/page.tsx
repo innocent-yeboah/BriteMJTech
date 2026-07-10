@@ -6,8 +6,9 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CtaSection } from "@/components/sections/cta-section";
-import { ServiceGlyph } from "@/components/service-icon";
+import { ServiceIconTile } from "@/components/service-icon";
 import { BreadcrumbJsonLd } from "@/components/structured-data";
+import { ImageSlideshow } from "@/components/ui/image-slideshow";
 import { services } from "@/lib/data";
 import { whatsappLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -52,9 +53,7 @@ export default function ServicesPage() {
                 href={`#${service.slug}`}
                 className="group flex items-center gap-3 rounded-xl border border-slate-100 bg-white p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-card"
               >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-gradient text-white">
-                  <ServiceGlyph icon={service.icon} className="h-5 w-5" />
-                </span>
+                <ServiceIconTile service={service} size="sm" />
                 <span className="text-sm font-semibold text-brand-950">
                   {service.name}
                 </span>
@@ -78,22 +77,29 @@ export default function ServicesPage() {
                 <div className="grid items-center gap-10 lg:grid-cols-2">
                   <div
                     className={cn(
-                      "relative aspect-[4/3] overflow-hidden rounded-2xl shadow-card",
+                      "relative",
                       reversed && "lg:order-2",
+                      !service.gallery?.length &&
+                        "aspect-[4/3] overflow-hidden rounded-2xl shadow-card",
                     )}
                   >
-                    <Image
-                      src={service.image}
-                      alt={service.name}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover"
-                    />
+                    {service.gallery && service.gallery.length > 0 ? (
+                      <ImageSlideshow
+                        images={service.gallery}
+                        priority={index === 0}
+                      />
+                    ) : (
+                      <Image
+                        src={service.image}
+                        alt={service.name}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-cover"
+                      />
+                    )}
                   </div>
                   <div className={cn(reversed && "lg:order-1")}>
-                    <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-accent/10 text-accent">
-                      <ServiceGlyph icon={service.icon} className="h-7 w-7" />
-                    </span>
+                    <ServiceIconTile service={service} size="md" />
                     <h2 className="mt-5 text-3xl text-brand-950">
                       {service.name}
                     </h2>
