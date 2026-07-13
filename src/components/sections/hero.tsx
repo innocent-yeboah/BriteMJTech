@@ -38,30 +38,36 @@ export function Hero() {
     <section className="relative isolate min-h-[min(88vh,760px)] overflow-hidden bg-brand-950">
       <HeroSlideshow slides={heroSlides} />
 
-      {/* Readability overlays — keep copy clear over photography */}
+      {/* Light global wash — photos stay visible */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-brand-950 via-brand-950/90 to-brand-950/25 md:via-brand-950/85 md:to-transparent"
+        className="absolute inset-0 bg-brand-950/25"
       />
+      {/* Soft left scrim only behind copy */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-t from-brand-950/75 via-transparent to-brand-950/40"
+        className="absolute inset-y-0 left-0 w-full max-w-3xl bg-gradient-to-r from-brand-950/70 via-brand-950/45 to-transparent md:from-brand-950/55 md:via-brand-950/25"
+      />
+      {/* Subtle bottom fade for badge row */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-brand-950/40 to-transparent"
       />
 
       <Container className="relative flex min-h-[min(88vh,760px)] items-center py-20 md:py-28">
         <div className="max-w-2xl animate-fade-up">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-brand-100 backdrop-blur-sm">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/25 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
             <span className="h-2 w-2 rounded-full bg-accent" />
             Trusted Security Partner in Accra, Ghana
           </span>
 
-          <h1 className="mt-6 font-heading text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="mt-6 font-heading text-4xl font-extrabold leading-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:text-5xl lg:text-6xl">
             Smart Solutions.{" "}
             <span className="text-accent">Stronger Security.</span> Better
             Connections.
           </h1>
 
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-100">
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/95 drop-shadow-[0_1px_8px_rgba(0,0,0,0.4)]">
             Protect your property with advanced security systems from Brite MJ
             Technologies — expert CCTV, fencing, networking, and smart access
             for homes, businesses, and institutions.
@@ -80,7 +86,7 @@ export function Hero() {
             {badges.map((badge) => (
               <li key={badge.label} className="flex items-center gap-2.5">
                 <badge.icon className="h-5 w-5 text-accent" aria-hidden="true" />
-                <span className="text-sm font-semibold text-white">
+                <span className="text-sm font-semibold text-white drop-shadow-sm">
                   {badge.label}
                 </span>
               </li>
