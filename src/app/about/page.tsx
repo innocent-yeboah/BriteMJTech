@@ -77,7 +77,7 @@ export default function AboutPage() {
                   We specialise in advanced CCTV surveillance, security and
                   electric fencing, networking, and smart access systems. Every
                   project begins with a free site inspection and ends with a
-                  system you can rely on — backed by responsive, ongoing support.
+                  system you can rely on, backed by responsive, ongoing support.
                 </p>
               </div>
               <ul className="mt-6 space-y-3">

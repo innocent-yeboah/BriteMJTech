@@ -1,11 +1,9 @@
-import Image from "next/image";
 import {
   Cctv,
   Fence,
   Network,
   DoorOpen,
   Video,
-  Zap,
   ShieldCheck,
   Wrench,
   Award,
@@ -23,7 +21,6 @@ const serviceIcons: Record<ServiceIcon, LucideIcon> = {
   network: Network,
   gate: DoorOpen,
   intercom: Video,
-  electric: Zap,
   shield: ShieldCheck,
   wrench: Wrench,
 };
@@ -75,17 +72,19 @@ export function ServiceIconTile({
     return (
       <span
         className={cn(
-          "relative inline-block shrink-0 overflow-hidden rounded-xl shadow-sm ring-1 ring-black/5",
+          "relative block shrink-0 overflow-hidden rounded-xl shadow-sm ring-1 ring-black/10",
           dims,
           className,
         )}
       >
-        <Image
+        {/* Native img avoids Next image cache sticking to old icons */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={service.iconImage}
           alt=""
-          fill
-          sizes="64px"
-          className="object-cover"
+          width={64}
+          height={64}
+          className="absolute inset-0 h-full w-full object-cover"
           aria-hidden="true"
         />
         <span className="sr-only">{service.name} icon</span>

@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Our Security Solutions",
   description:
-    "Explore Brite MJ Technologies' full range of security services: CCTV installation, security & electric fencing, networking, remote gate control, video intercom, and smart systems in Accra, Ghana.",
+    "Explore Brite MJ Technologies' full range of security services: CCTV installation, security and electric fencing, networking, remote gate control, video intercom, and smart systems in Accra, Ghana.",
   alternates: { canonical: "/services" },
 };
 
@@ -87,6 +87,7 @@ export default function ServicesPage() {
                       <ImageSlideshow
                         images={service.gallery}
                         priority={index === 0}
+                        label={`${service.name} photos`}
                       />
                     ) : (
                       <Image

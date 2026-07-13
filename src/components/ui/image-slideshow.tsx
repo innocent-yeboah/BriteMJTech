@@ -32,6 +32,7 @@ interface ImageSlideshowProps {
   className?: string;
   sizes?: string;
   priority?: boolean;
+  label?: string;
 }
 
 /**
@@ -44,6 +45,7 @@ export function ImageSlideshow({
   className,
   sizes = "(max-width: 1024px) 100vw, 50vw",
   priority = false,
+  label = "Service photos",
 }: ImageSlideshowProps) {
   const [index, setIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState(0);
@@ -104,7 +106,7 @@ export function ImageSlideshow({
       onMouseLeave={() => setPaused(false)}
       role="region"
       aria-roledescription="carousel"
-      aria-label="CCTV installation photos"
+      aria-label={label}
     >
       {/* Outgoing slide */}
       {animating && previous ? (

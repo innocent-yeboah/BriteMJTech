@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -11,22 +11,24 @@ const TRANSITIONS: Transition[] = ["fade", "slide-left", "zoom", "blur"];
 export interface HeroSlide {
   src: string;
   alt: string;
-  /** Tailwind object-position for framing the subject. */
   position?: string;
+  eyebrow: string;
+  headline: { text: string; accent?: boolean }[];
+  description: string;
 }
 
 /**
- * Full-bleed hero background slideshow with random transitions.
+ * Full-bleed hero background. Parent owns the active index so copy stays synced.
  */
 export function HeroSlideshow({
   slides,
-  intervalMs = 5500,
+  activeIndex,
 }: {
   slides: HeroSlide[];
-  intervalMs?: number;
+  activeIndex: number;
 }) {
-  const [index, setIndex] = useState(0);
-  const [prevIndex, setPrevIndex] = useState(0);
+  const [displayIndex, setDisplayIndex] = useState(activeIndex);
+  const [prevIndex, setPrevIndex] = useState(activeIndex);
   const [transition, setTransition] = useState<Transition>("fade");
   const [animating, setAnimating] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -40,38 +42,32 @@ export function HeroSlideshow({
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  const pickTransition = useCallback((): Transition => {
-    if (reducedMotion) return "fade";
-    const pool = TRANSITIONS.filter((t) => t !== lastTransition.current);
-    const next = pool[Math.floor(Math.random() * pool.length)] ?? "fade";
-    lastTransition.current = next;
-    return next;
-  }, [reducedMotion]);
-
-  const goTo = useCallback(
-    (next: number) => {
-      if (animating || next === index || slides.length < 2) return;
-      setPrevIndex(index);
-      setTransition(pickTransition());
-      setAnimating(true);
-      setIndex(next);
-      window.setTimeout(() => setAnimating(false), reducedMotion ? 0 : 1000);
-    },
-    [animating, index, slides.length, pickTransition, reducedMotion],
-  );
-
   useEffect(() => {
-    if (slides.length < 2) return;
-    const id = window.setInterval(() => {
-      goTo((index + 1) % slides.length);
-    }, intervalMs);
-    return () => window.clearInterval(id);
-  }, [slides.length, intervalMs, index, goTo]);
+    if (activeIndex === displayIndex) return;
+
+    const pool = TRANSITIONS.filter((t) => t !== lastTransition.current);
+    const next =
+      reducedMotion
+        ? "fade"
+        : (pool[Math.floor(Math.random() * pool.length)] ?? "fade");
+    lastTransition.current = next;
+
+    setPrevIndex(displayIndex);
+    setTransition(next);
+    setAnimating(true);
+    setDisplayIndex(activeIndex);
+
+    const timeout = window.setTimeout(
+      () => setAnimating(false),
+      reducedMotion ? 0 : 1000,
+    );
+    return () => window.clearTimeout(timeout);
+  }, [activeIndex, displayIndex, reducedMotion]);
 
   if (slides.length === 0) return null;
 
-  const current = slides[index];
-  const previous = slides[prevIndex];
+  const current = slides[displayIndex] ?? slides[0];
+  const previous = slides[prevIndex] ?? slides[0];
 
   return (
     <div className="absolute inset-0" aria-hidden="true">
@@ -93,7 +89,7 @@ export function HeroSlideshow({
       ) : null}
 
       <div
-        key={`${index}-${transition}-${animating}`}
+        key={`${displayIndex}-${transition}-${animating}`}
         className={cn(
           "absolute inset-0",
           animating && !reducedMotion ? enterClass(transition) : "opacity-100",
@@ -103,7 +99,7 @@ export function HeroSlideshow({
           src={current.src}
           alt={current.alt}
           fill
-          priority={index === 0}
+          priority={displayIndex === 0}
           sizes="100vw"
           className={cn("object-cover", current.position ?? "object-center")}
         />

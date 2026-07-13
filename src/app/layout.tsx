@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: [
     "CCTV installation Accra",
-    "security fencing Ghana",
-    "electric fencing Accra",
+    "security and electric fencing Ghana",
+    "perimeter fencing Accra",
     "video intercom Ghana",
     "remote gate control",
     "networking installation Accra",

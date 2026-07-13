@@ -16,7 +16,6 @@ export type ServiceIcon =
   | "network"
   | "gate"
   | "intercom"
-  | "electric"
   | "shield"
   | "wrench";
 
@@ -90,20 +89,38 @@ export const services: Service[] = [
   },
   {
     slug: "security-fencing",
-    name: "Security Fencing",
+    name: "Security & Electric Fencing",
     shortDescription:
-      "Strong perimeter protection for complete peace of mind.",
+      "Strong perimeter fencing with optional electric deterrents for real peace of mind.",
     longDescription:
-      "Define and defend your boundary with durable, professionally installed security fencing. We assess your site and recommend the right solution — from palisade and welded mesh to razor-topped barriers — built to withstand Ghana's climate and deter intruders.",
+      "We design and install perimeter fencing that fits your property, from palisade and welded mesh to razor-topped barriers. Need an extra layer? We add safe, standards-compliant electric fencing that deters intruders and can link to your alarms. Built for Ghana's weather, installed to last.",
     benefits: [
-      "Robust, weather-resistant materials",
-      "Custom heights and configurations",
-      "Professional site assessment",
-      "Long-lasting, low-maintenance finish",
+      "Palisade, mesh, and high-security options",
+      "Electric fencing with alarm integration",
+      "Weather-resistant materials and finishes",
+      "Free site assessment and clear quotes",
     ],
     icon: "fence",
-    image:
-      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80",
+    iconImage: "/images/icons/fence-live.jpg",
+    image: "/images/fencing/wall-electric-1.png",
+    gallery: [
+      {
+        src: "/images/fencing/wall-electric-1.png",
+        alt: "Concrete perimeter wall with multi-strand electric fencing against blue sky",
+      },
+      {
+        src: "/images/fencing/wall-electric-2.png",
+        alt: "Long security wall with arched panels and electric fence brackets",
+      },
+      {
+        src: "/images/fencing/grille-electric.png",
+        alt: "Residential perimeter with metal grilles and electric fencing on top",
+      },
+      {
+        src: "/images/fencing/install-tech.png",
+        alt: "Technician installing electric fence strands on a brick wall",
+      },
+    ],
     featured: true,
   },
   {
@@ -161,24 +178,6 @@ export const services: Service[] = [
     featured: true,
   },
   {
-    slug: "electric-fencing",
-    name: "Electric Fencing",
-    shortDescription:
-      "A powerful deterrent that alerts you the moment your perimeter is challenged.",
-    longDescription:
-      "Add an active layer of defence with professionally installed electric fencing. Our systems deliver a safe but effective deterrent, integrate with alarms and monitoring, and comply with recognised safety standards.",
-    benefits: [
-      "Strong intruder deterrent",
-      "Alarm & monitoring integration",
-      "Safe, standards-compliant design",
-      "Energiser battery backup",
-    ],
-    icon: "electric",
-    image:
-      "https://images.unsplash.com/photo-1516216628859-9bccecab13ca?auto=format&fit=crop&w=1200&q=80",
-    featured: true,
-  },
-  {
     slug: "smart-security-systems",
     name: "Smart Security Systems",
     shortDescription:
@@ -194,7 +193,7 @@ export const services: Service[] = [
     icon: "shield",
     image:
       "https://images.unsplash.com/photo-1563452619267-bc16ef6cecec?auto=format&fit=crop&w=1200&q=80",
-    featured: false,
+    featured: true,
   },
   {
     slug: "service-and-support",
