@@ -3,9 +3,7 @@ import { ImageResponse } from "next/og";
 export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
-/**
- * App favicon generated from the polished MJ mark.
- */
+/** Favicon from the redesigned MJ mark. */
 export default function Icon() {
   return new ImageResponse(
     (
@@ -20,22 +18,23 @@ export default function Icon() {
         }}
       >
         <svg
-          width="36"
-          height="48"
-          viewBox="0 0 72 96"
+          width="34"
+          height="46"
+          viewBox="0 0 80 108"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M4 2H60V56L50 66V94H4Z" fill="#0B0B0B" />
+          <path fill="#111111" d="M8 4H66V62L54 74V104H8Z" />
           <path
             fill="#FFFFFF"
-            d="M14 42V12H22L30.5 28L39 12H47V42H39V25.5L30.5 38L22 25.5V42Z"
+            d="M18 48V14H27L35.5 32L44 14H53V48H44V30L35.5 44L27 30V48Z"
           />
-          <path fill="#FFFFFF" d="M39 50H47V80H16V72.5H39Z" />
+          <path fill="#FFFFFF" d="M44 56H53V92H18V83H44Z" />
+          <path fill="#FFFFFF" d="M18 74H27V92H18Z" />
           <path
-            d="M61.25 2V55.4L51.25 65.4V94"
+            d="M67.6 4V61.2L55.6 73.2V104"
             fill="none"
             stroke="#E63946"
-            strokeWidth="2.5"
+            strokeWidth="2.75"
             strokeLinecap="square"
             strokeLinejoin="miter"
           />

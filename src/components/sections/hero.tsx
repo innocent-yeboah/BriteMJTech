@@ -11,21 +11,30 @@ const badges = [
 
 export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden bg-brand-950">
-      {/* Background image — REPLACE with client's own hero photography */}
+    <section className="relative isolate min-h-[min(88vh,760px)] overflow-hidden bg-brand-950">
+      {/* Client hero photography — technician installing CCTV on-site */}
       <Image
-        src="https://images.unsplash.com/photo-1544890225-2f3faec4cd60?auto=format&fit=crop&w=2000&q=80"
-        alt="Modern security control room with surveillance monitors"
+        src="/images/hero/cctv-install.png"
+        alt="Brite MJ Technologies technician installing a CCTV security camera on site"
         fill
         priority
         sizes="100vw"
-        className="object-cover object-center opacity-30"
+        className="object-cover object-[60%_center] sm:object-[65%_center] lg:object-[70%_center]"
       />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-brand-950 via-brand-950/95 to-brand-900/85" />
 
-      <Container className="relative py-20 md:py-28 lg:py-36">
-        <div className="max-w-3xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-brand-100 backdrop-blur">
+      {/* Readability overlays — keep copy clear over the busy street */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-r from-brand-950 via-brand-950/90 to-brand-950/25 md:via-brand-950/85 md:to-transparent"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-t from-brand-950/75 via-transparent to-brand-950/40"
+      />
+
+      <Container className="relative flex min-h-[min(88vh,760px)] items-center py-20 md:py-28">
+        <div className="max-w-2xl animate-fade-up">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-medium text-brand-100 backdrop-blur-sm">
             <span className="h-2 w-2 rounded-full bg-accent" />
             Trusted Security Partner in Accra, Ghana
           </span>

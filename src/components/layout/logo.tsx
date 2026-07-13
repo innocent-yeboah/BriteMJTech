@@ -1,11 +1,9 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Brite MJ Technologies logo — polished vector recreation of the official MJ mark.
- *
- * Preserves the client's signature stacked monogram and stepped red accent,
- * redrawn with Fortune 500 precision: optical balance, crisp geometry, and
- * a self-contained badge that reads on both light and dark surfaces.
+ * Brite MJ Technologies logo.
+ * Redesigned monogram inspired by the official MJ mark:
+ * stacked M/J, stepped right edge, red accent — refined for crisp SVG use.
  */
 export function Logo({
   className,
@@ -18,7 +16,7 @@ export function Logo({
 }) {
   return (
     <span className={cn("inline-flex items-center gap-3", className)}>
-      <MjMark className="h-11 w-auto shrink-0 drop-shadow-sm" />
+      <MjMark className="h-11 w-auto shrink-0" />
       {!markOnly ? (
         <span className="flex min-w-0 flex-col leading-none">
           <span
@@ -44,8 +42,13 @@ export function Logo({
 }
 
 /**
- * Official MJ monogram.
- * Black plate · white geometric M/J · brand-red stepped accent.
+ * Redesigned MJ mark — similar to the original, Fortune 500 polish.
+ *
+ * Construction (viewBox 0 0 80 108):
+ * - Solid black vertical plate with an inward step on the right
+ * - Bold geometric M (top) and J (bottom), stems optically aligned
+ * - Clear gap between letters; J bar extends under the M
+ * - Brand-red hairline tracing the stepped right edge
  */
 export function MjMark({
   className,
@@ -56,7 +59,7 @@ export function MjMark({
 }) {
   return (
     <svg
-      viewBox="0 0 72 96"
+      viewBox="0 0 80 108"
       className={className}
       role="img"
       aria-label={title}
@@ -64,24 +67,74 @@ export function MjMark({
     >
       <title>{title}</title>
 
-      {/* Mark plate with stepped right edge */}
-      <path d="M4 2H60V56L50 66V94H4Z" fill="#0B0B0B" />
-
-      {/* M */}
+      {/* Black plate — stepped right edge (signature silhouette) */}
       <path
-        fill="#FFFFFF"
-        d="M14 42V12H22L30.5 28L39 12H47V42H39V25.5L30.5 38L22 25.5V42Z"
+        fill="#111111"
+        d="
+          M 8 4
+          H 66
+          V 62
+          L 54 74
+          V 104
+          H 8
+          Z
+        "
       />
 
-      {/* J — stem under M's right leg; bar extends left */}
-      <path fill="#FFFFFF" d="M39 50H47V80H16V72.5H39Z" />
-
-      {/* Brand-red accent along the step */}
+      {/* ——— M ———
+          Equal stroke weight (~9 units). Peaks meet at optical center.
+          Right stem aligns with J stem below. */}
       <path
-        d="M61.25 2V55.4L51.25 65.4V94"
+        fill="#FFFFFF"
+        d="
+          M 18 48
+          V 14
+          H 27
+          L 35.5 32
+          L 44 14
+          H 53
+          V 48
+          H 44
+          V 30
+          L 35.5 44
+          L 27 30
+          V 48
+          Z
+        "
+      />
+
+      {/* ——— J ———
+          Stem continues the M's right column; bar reaches left under M.
+          Short left terminal for a finished block-J. */}
+      <path
+        fill="#FFFFFF"
+        d="
+          M 44 56
+          H 53
+          V 92
+          H 18
+          V 83
+          H 44
+          Z
+        "
+      />
+      <path
+        fill="#FFFFFF"
+        d="
+          M 18 74
+          H 27
+          V 92
+          H 18
+          Z
+        "
+      />
+
+      {/* Red accent — tracks the step exactly, slightly outside the plate */}
+      <path
+        d="M 67.6 4 V 61.2 L 55.6 73.2 V 104"
         fill="none"
         stroke="#E63946"
-        strokeWidth="2.5"
+        strokeWidth="2.75"
         strokeLinecap="square"
         strokeLinejoin="miter"
       />
