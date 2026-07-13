@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { ShieldCheck, Award, Clock, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { HeroSlideshow, type HeroSlide } from "@/components/sections/hero-slideshow";
 
 const badges = [
   { icon: Award, label: "10+ Years Experience" },
@@ -9,20 +9,36 @@ const badges = [
   { icon: Clock, label: "24/7 Support" },
 ];
 
+const heroSlides: HeroSlide[] = [
+  {
+    src: "/images/hero/cctv-install.png",
+    alt: "Brite MJ Technologies technician installing a CCTV security camera on site",
+    position:
+      "object-[60%_center] sm:object-[65%_center] lg:object-[70%_center]",
+  },
+  {
+    src: "/images/hero/team-install.png",
+    alt: "Brite MJ Technologies team installing security and networking systems",
+    position: "object-[55%_center] lg:object-center",
+  },
+  {
+    src: "/images/hero/building-cctv.png",
+    alt: "Technicians installing outdoor CCTV cameras on a commercial building",
+    position: "object-[35%_center] lg:object-[40%_center]",
+  },
+  {
+    src: "/images/hero/site-work.png",
+    alt: "Field technicians on a secured worksite with safety barriers",
+    position: "object-[45%_center] lg:object-center",
+  },
+];
+
 export function Hero() {
   return (
     <section className="relative isolate min-h-[min(88vh,760px)] overflow-hidden bg-brand-950">
-      {/* Client hero photography — technician installing CCTV on-site */}
-      <Image
-        src="/images/hero/cctv-install.png"
-        alt="Brite MJ Technologies technician installing a CCTV security camera on site"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-[60%_center] sm:object-[65%_center] lg:object-[70%_center]"
-      />
+      <HeroSlideshow slides={heroSlides} />
 
-      {/* Readability overlays — keep copy clear over the busy street */}
+      {/* Readability overlays — keep copy clear over photography */}
       <div
         aria-hidden="true"
         className="absolute inset-0 bg-gradient-to-r from-brand-950 via-brand-950/90 to-brand-950/25 md:via-brand-950/85 md:to-transparent"
