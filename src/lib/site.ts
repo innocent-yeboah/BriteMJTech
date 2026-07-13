@@ -62,8 +62,8 @@ export const mainNav = [
 ] as const;
 
 export const companyStats = [
-  { value: "10+", label: "Years of Experience" },
-  { value: "100+", label: "Projects Completed" },
-  { value: "24/7", label: "Support & Monitoring" },
-  { value: "100%", label: "Quality Guaranteed" },
+  { value: 10, suffix: "+", label: "Years of Experience", durationMs: 1400 },
+  { value: 100, suffix: "+", label: "Projects Completed", durationMs: 1800 },
+  { value: 24, suffix: "/7", label: "Support & Monitoring", durationMs: 1200 },
+  { value: 100, suffix: "%", label: "Quality Guaranteed", durationMs: 1600 },
 ] as const;

@@ -371,10 +371,10 @@ export const whyChooseUs: WhyChoosePillar[] = [
 ];
 
 export const trustBadges = [
-  "Free Site Inspection",
-  "Certified Installations",
-  "24/7 Support",
-  "Quality Guaranteed",
+  { kind: "inspection" as const, label: "Free Site Inspection" },
+  { kind: "certified" as const, label: "Certified Installations" },
+  { kind: "support" as const, label: "24/7 Support" },
+  { kind: "quality" as const, label: "Quality Guaranteed" },
 ];
 
 export const propertyTypes = [

@@ -1,4 +1,7 @@
+"use client";
+
 import { Container } from "@/components/ui/container";
+import { CountUp } from "@/components/ui/count-up";
 import { companyStats } from "@/lib/site";
 
 export function StatsBand() {
@@ -10,9 +13,13 @@ export function StatsBand() {
             <div key={stat.label} className="text-center">
               <dt className="sr-only">{stat.label}</dt>
               <dd>
-                <span className="block font-heading text-4xl font-extrabold text-accent md:text-5xl">
-                  {stat.value}
-                </span>
+                <CountUp
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  durationMs={stat.durationMs}
+                  startOnMount={false}
+                  className="block font-heading text-4xl font-extrabold text-accent md:text-5xl"
+                />
                 <span className="mt-2 block text-sm font-medium text-brand-100">
                   {stat.label}
                 </span>

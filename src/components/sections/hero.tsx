@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ShieldCheck, Award, Clock, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,27 +9,27 @@ import {
   type HeroSlide,
 } from "@/components/sections/hero-slideshow";
 import { CountUp } from "@/components/ui/count-up";
-import { cn } from "@/lib/utils";
+import { StatBadge } from "@/components/ui/stat-badge";
 
 const INTERVAL_MS = 6000;
 
 const badges = [
   {
-    icon: Award,
+    kind: "experience" as const,
     value: 10,
     suffix: "+",
     label: "Years Experience",
     durationMs: 1400,
   },
   {
-    icon: ShieldCheck,
+    kind: "projects" as const,
     value: 100,
     suffix: "+",
     label: "Projects Completed",
     durationMs: 1800,
   },
   {
-    icon: Clock,
+    kind: "support" as const,
     value: 24,
     suffix: "/7",
     label: "Support",
@@ -157,8 +157,8 @@ export function Hero() {
 
           <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-4">
             {badges.map((badge) => (
-              <li key={badge.label} className="flex items-center gap-2.5">
-                <badge.icon className="h-5 w-5 text-accent" aria-hidden="true" />
+              <li key={badge.label} className="flex items-center gap-3">
+                <StatBadge kind={badge.kind} />
                 <span className="text-sm font-semibold text-white drop-shadow-sm">
                   <CountUp
                     value={badge.value}
@@ -171,29 +171,6 @@ export function Hero() {
               </li>
             ))}
           </ul>
-
-          <div
-            className="mt-8 flex items-center gap-2"
-            role="tablist"
-            aria-label="Hero highlights"
-          >
-            {heroSlides.map((item, i) => (
-              <button
-                key={item.src}
-                type="button"
-                role="tab"
-                aria-selected={i === activeIndex}
-                aria-label={`Show: ${item.eyebrow}`}
-                onClick={() => setActiveIndex(i)}
-                className={cn(
-                  "h-1.5 rounded-full transition-all duration-300",
-                  i === activeIndex
-                    ? "w-8 bg-accent"
-                    : "w-3 bg-white/40 hover:bg-white/70",
-                )}
-              />
-            ))}
-          </div>
         </div>
       </Container>
     </section>
