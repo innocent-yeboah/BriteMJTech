@@ -52,7 +52,7 @@ export function ServiceIconTile({
   size = "md",
   className,
 }: {
-  service: Pick<Service, "name" | "icon" | "iconImage">;
+  service: Pick<Service, "name" | "icon" | "iconImage" | "iconImagePosition">;
   size?: "sm" | "md" | "lg";
   className?: string;
 }) {
@@ -84,7 +84,12 @@ export function ServiceIconTile({
           alt=""
           width={64}
           height={64}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full scale-110 object-cover"
+          style={
+            service.iconImagePosition
+              ? { objectPosition: service.iconImagePosition }
+              : undefined
+          }
           aria-hidden="true"
         />
         <span className="sr-only">{service.name} icon</span>

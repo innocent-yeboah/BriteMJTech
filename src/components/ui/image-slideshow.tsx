@@ -24,6 +24,10 @@ const TRANSITIONS: Transition[] = [
 export interface SlideshowImage {
   src: string;
   alt: string;
+  /** Cover fills the frame; contain keeps full diagrams visible. */
+  fit?: "cover" | "contain";
+  /** Optional object-position for cover crops. */
+  position?: string;
 }
 
 interface ImageSlideshowProps {
@@ -108,7 +112,6 @@ export function ImageSlideshow({
       aria-roledescription="carousel"
       aria-label={label}
     >
-      {/* Outgoing slide */}
       {animating && previous ? (
         <div
           className={cn(
@@ -117,17 +120,10 @@ export function ImageSlideshow({
           )}
           aria-hidden="true"
         >
-          <Image
-            src={previous.src}
-            alt=""
-            fill
-            sizes={sizes}
-            className="object-cover"
-          />
+          <SlideImage image={{ ...previous, alt: "" }} sizes={sizes} />
         </div>
       ) : null}
 
-      {/* Incoming / current slide */}
       <div
         key={`${index}-${transition}-${animating}`}
         className={cn(
@@ -135,26 +131,63 @@ export function ImageSlideshow({
           animating && !reducedMotion ? enterClass(transition) : "opacity-100",
         )}
       >
-        <Image
-          src={current.src}
-          alt={current.alt}
-          fill
+        <SlideImage
+          image={current}
           sizes={sizes}
           priority={priority && index === 0}
-          className="object-cover"
         />
       </div>
 
-      {/* Soft vignette for polish */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-950/35 via-transparent to-transparent"
-      />
+      {(current.fit ?? "cover") === "cover" ? (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-950/35 via-transparent to-transparent"
+        />
+      ) : null}
 
       <span className="sr-only" aria-live="polite">
         Photo {index + 1} of {images.length}
       </span>
     </div>
+  );
+}
+
+function SlideImage({
+  image,
+  sizes,
+  priority = false,
+}: {
+  image: SlideshowImage;
+  sizes: string;
+  priority?: boolean;
+}) {
+  const fit = image.fit ?? "cover";
+  const isSvg = image.src.endsWith(".svg");
+  const objectClass = cn(
+    fit === "contain" ? "object-contain bg-slate-50 p-4" : "object-cover",
+    image.position,
+  );
+
+  if (isSvg) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={image.src}
+        alt={image.alt}
+        className={cn("absolute inset-0 h-full w-full", objectClass)}
+      />
+    );
+  }
+
+  return (
+    <Image
+      src={image.src}
+      alt={image.alt}
+      fill
+      sizes={sizes}
+      priority={priority}
+      className={objectClass}
+    />
   );
 }
 

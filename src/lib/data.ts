@@ -28,9 +28,20 @@ export interface Service {
   icon: ServiceIcon;
   /** Optional custom icon image (replaces the Lucide glyph). */
   iconImage?: string;
+  /** CSS object-position for icon crop (e.g. "62% 48%"). */
+  iconImagePosition?: string;
   image: string;
+  /** Optional looping demo video for the service media panel. */
+  video?: string;
+  /** Poster image shown before / while the video loads. */
+  videoPoster?: string;
   /** Optional gallery for animated slideshows (e.g. CCTV section). */
-  gallery?: { src: string; alt: string }[];
+  gallery?: {
+    src: string;
+    alt: string;
+    fit?: "cover" | "contain";
+    position?: string;
+  }[];
   featured: boolean;
 }
 
@@ -137,8 +148,31 @@ export const services: Service[] = [
       "Scalable for future growth",
     ],
     icon: "network",
-    image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+    iconImage: "/images/icons/network-real.png",
+    iconImagePosition: "68% 52%",
+    image: "/images/networking/fiber-install.png",
+    gallery: [
+      {
+        src: "/images/networking/fiber-install.png",
+        alt: "Technician connecting a fibre optic cable to an active network switch",
+      },
+      {
+        src: "/images/networking/switch-cabling.png",
+        alt: "Organised yellow fibre and blue Ethernet cabling on a network switch",
+      },
+      {
+        src: "/images/networking/engineer-cabling.png",
+        alt: "Network engineer organising Ethernet cables in a server rack",
+      },
+      {
+        src: "/images/networking/engineer-laptop.png",
+        alt: "Network engineer configuring servers with a laptop in a data centre",
+      },
+      {
+        src: "/images/networking/cable-tech.png",
+        alt: "Technician terminating and securing network cable connectors on site",
+      },
+    ],
     featured: true,
   },
   {
@@ -155,8 +189,11 @@ export const services: Service[] = [
       "Battery backup during outages",
     ],
     icon: "gate",
-    image:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80",
+    iconImage: "/images/icons/gate-remote-icon.jpg",
+    iconImagePosition: "55% 45%",
+    image: "/videos/remote-gate-poster.jpg",
+    video: "/videos/remote-gate.mp4",
+    videoPoster: "/videos/remote-gate-poster.jpg",
     featured: true,
   },
   {
@@ -173,8 +210,31 @@ export const services: Service[] = [
       "Indoor & mobile answering",
     ],
     icon: "intercom",
-    image:
-      "https://images.unsplash.com/photo-1585909695284-32d2985ac9c0?auto=format&fit=crop&w=1200&q=80",
+    iconImage: "/images/icons/intercom-lock.jpg",
+    iconImagePosition: "50% 45%",
+    image: "/images/intercom/outdoor-call.png",
+    gallery: [
+      {
+        src: "/images/intercom/outdoor-call.png",
+        alt: "Visitor pressing the call button on an outdoor video intercom at a gate",
+        position: "object-[45%_40%]",
+      },
+      {
+        src: "/images/intercom/indoor-panel.png",
+        alt: "Indoor video intercom panel with live visitor feed beside entrance doors",
+        position: "object-[60%_45%]",
+      },
+      {
+        src: "/images/intercom/lobby-station.png",
+        alt: "Wall-mounted video intercom station showing a live call interface",
+        position: "object-[70%_center]",
+      },
+      {
+        src: "/images/intercom/biometric-unlock.png",
+        alt: "Fingerprint unlock on a secure access and intercom control panel",
+        position: "object-[55%_70%]",
+      },
+    ],
     featured: true,
   },
   {

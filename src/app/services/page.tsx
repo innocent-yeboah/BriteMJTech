@@ -9,6 +9,7 @@ import { CtaSection } from "@/components/sections/cta-section";
 import { ServiceIconTile } from "@/components/service-icon";
 import { BreadcrumbJsonLd } from "@/components/structured-data";
 import { ImageSlideshow } from "@/components/ui/image-slideshow";
+import { ServiceVideo } from "@/components/ui/service-video";
 import { services } from "@/lib/data";
 import { whatsappLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -80,10 +81,17 @@ export default function ServicesPage() {
                       "relative",
                       reversed && "lg:order-2",
                       !service.gallery?.length &&
+                        !service.video &&
                         "aspect-[4/3] overflow-hidden rounded-2xl shadow-card",
                     )}
                   >
-                    {service.gallery && service.gallery.length > 0 ? (
+                    {service.video ? (
+                      <ServiceVideo
+                        src={service.video}
+                        poster={service.videoPoster ?? service.image}
+                        label={`${service.name} demo video`}
+                      />
+                    ) : service.gallery && service.gallery.length > 0 ? (
                       <ImageSlideshow
                         images={service.gallery}
                         priority={index === 0}

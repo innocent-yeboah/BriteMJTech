@@ -1,9 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Brite MJ Technologies logo.
- * Redesigned monogram inspired by the official MJ mark:
- * stacked M/J, stepped right edge, red accent — refined for crisp SVG use.
+ * Brite MJ Technologies logo — stacked MJ monogram + wordmark.
  */
 export function Logo({
   className,
@@ -16,21 +14,22 @@ export function Logo({
 }) {
   return (
     <span className={cn("inline-flex items-center gap-3", className)}>
-      <MjMark className="h-11 w-auto shrink-0" />
+      <MjMark className="h-10 w-auto shrink-0 sm:h-11" />
       {!markOnly ? (
         <span className="flex min-w-0 flex-col leading-none">
           <span
             className={cn(
-              "font-heading text-[1.05rem] font-extrabold tracking-tight",
+              "font-heading text-[1.125rem] font-extrabold tracking-[-0.02em]",
               light ? "text-white" : "text-brand-950",
             )}
           >
-            Brite<span className="text-accent">MJ</span>
+            Brite{" "}
+            <span className="text-accent">MJ</span>
           </span>
           <span
             className={cn(
-              "mt-0.5 text-[10px] font-semibold uppercase tracking-[0.2em]",
-              light ? "text-brand-100/90" : "text-slate-500",
+              "mt-1 text-[9px] font-semibold uppercase tracking-[0.28em]",
+              light ? "text-brand-100/85" : "text-slate-500",
             )}
           >
             Technologies
@@ -42,13 +41,8 @@ export function Logo({
 }
 
 /**
- * Redesigned MJ mark — similar to the original, Fortune 500 polish.
- *
- * Construction (viewBox 0 0 80 108):
- * - Solid black vertical plate with an inward step on the right
- * - Bold geometric M (top) and J (bottom), stems optically aligned
- * - Clear gap between letters; J bar extends under the M
- * - Brand-red hairline tracing the stepped right edge
+ * MJ mark — geometric stacked monogram.
+ * Deep navy plate, white letterforms, brand-red edge accent.
  */
 export function MjMark({
   className,
@@ -59,7 +53,7 @@ export function MjMark({
 }) {
   return (
     <svg
-      viewBox="0 0 80 108"
+      viewBox="0 0 72 100"
       className={className}
       role="img"
       aria-label={title}
@@ -67,76 +61,36 @@ export function MjMark({
     >
       <title>{title}</title>
 
-      {/* Black plate — stepped right edge (signature silhouette) */}
+      {/* Navy plate with crisp stepped right edge */}
       <path
-        fill="#111111"
-        d="
-          M 8 4
-          H 66
-          V 62
-          L 54 74
-          V 104
-          H 8
-          Z
-        "
+        fill="#0A2540"
+        d="M6 2h50v54l-12 12v30H6Z"
       />
 
-      {/* ——— M ———
-          Equal stroke weight (~9 units). Peaks meet at optical center.
-          Right stem aligns with J stem below. */}
+      {/* Red accent bar — filled path for sharp edges at any size */}
+      <path
+        fill="#E63946"
+        d="M56 2h3.5v54.6L47.2 69.9V98H44V68.2L56 56.2Z"
+      />
+
+      {/* M — equal stems, clean center join */}
       <path
         fill="#FFFFFF"
         d="
-          M 18 48
-          V 14
-          H 27
-          L 35.5 32
-          L 44 14
-          H 53
-          V 48
-          H 44
-          V 30
-          L 35.5 44
-          L 27 30
-          V 48
-          Z
+          M16 44V12h8.2l7.3 16.8L38.8 12H47v32h-8.2V26.4L31.5 40.2 24.2 26.4V44Z
         "
       />
 
-      {/* ——— J ———
-          Stem continues the M's right column; bar reaches left under M.
-          Short left terminal for a finished block-J. */}
+      {/* J — stem aligns with M right column; bar finishes under the M */}
       <path
         fill="#FFFFFF"
         d="
-          M 44 56
-          H 53
-          V 92
-          H 18
-          V 83
-          H 44
-          Z
+          M38.8 52H47v34.5H16V78h22.8V52Z
         "
       />
       <path
         fill="#FFFFFF"
-        d="
-          M 18 74
-          H 27
-          V 92
-          H 18
-          Z
-        "
-      />
-
-      {/* Red accent — tracks the step exactly, slightly outside the plate */}
-      <path
-        d="M 67.6 4 V 61.2 L 55.6 73.2 V 104"
-        fill="none"
-        stroke="#E63946"
-        strokeWidth="2.75"
-        strokeLinecap="square"
-        strokeLinejoin="miter"
+        d="M16 68.5h8.2V86.5H16Z"
       />
     </svg>
   );
