@@ -9,7 +9,10 @@ type Transition = "fade" | "slide-left" | "zoom" | "blur";
 const TRANSITIONS: Transition[] = ["fade", "slide-left", "zoom", "blur"];
 
 export interface HeroSlide {
+  /** Still image fallback / poster */
   src: string;
+  /** Optional looping background video (hero crop) */
+  video?: string;
   alt: string;
   position?: string;
   eyebrow: string;
@@ -18,7 +21,8 @@ export interface HeroSlide {
 }
 
 /**
- * Full-bleed hero background. Parent owns the active index so copy stays synced.
+ * Full-bleed hero media plane — video when available, still image otherwise.
+ * Parent owns the active index so copy stays synced.
  */
 export function HeroSlideshow({
   slides,
@@ -78,12 +82,10 @@ export function HeroSlideshow({
             reducedMotion ? "opacity-0" : exitClass(transition),
           )}
         >
-          <Image
-            src={previous.src}
-            alt=""
-            fill
-            sizes="100vw"
-            className={cn("object-cover", previous.position ?? "object-center")}
+          <HeroMedia
+            slide={previous}
+            reducedMotion={reducedMotion}
+            active={false}
           />
         </div>
       ) : null}
@@ -95,16 +97,74 @@ export function HeroSlideshow({
           animating && !reducedMotion ? enterClass(transition) : "opacity-100",
         )}
       >
-        <Image
-          src={current.src}
-          alt={current.alt}
-          fill
+        <HeroMedia
+          slide={current}
+          reducedMotion={reducedMotion}
+          active
           priority={displayIndex === 0}
-          sizes="100vw"
-          className={cn("object-cover", current.position ?? "object-center")}
         />
       </div>
     </div>
+  );
+}
+
+function HeroMedia({
+  slide,
+  reducedMotion,
+  active,
+  priority = false,
+}: {
+  slide: HeroSlide;
+  reducedMotion: boolean;
+  active: boolean;
+  priority?: boolean;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const node = videoRef.current;
+    if (!node || !slide.video) return;
+    if (reducedMotion || !active) {
+      node.pause();
+      return;
+    }
+    node.currentTime = 0;
+    void node.play().catch(() => {
+      /* Autoplay blocked — poster remains visible. */
+    });
+  }, [active, reducedMotion, slide.video]);
+
+  const objectClass = cn("object-cover", slide.position ?? "object-center");
+
+  if (slide.video && !reducedMotion) {
+    return (
+      <>
+        <video
+          ref={videoRef}
+          className={cn("absolute inset-0 h-full w-full", objectClass)}
+          src={slide.video}
+          poster={slide.src}
+          muted
+          loop
+          playsInline
+          preload={active || priority ? "auto" : "metadata"}
+          autoPlay={active}
+        />
+        {/* Soft film grade so text stays readable without washing out the shot */}
+        <div className="absolute inset-0 bg-brand-950/20 mix-blend-multiply" />
+      </>
+    );
+  }
+
+  return (
+    <Image
+      src={slide.src}
+      alt={slide.alt}
+      fill
+      priority={priority}
+      sizes="100vw"
+      className={objectClass}
+    />
   );
 }
 

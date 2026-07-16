@@ -10,8 +10,9 @@ import {
 } from "@/components/sections/hero-slideshow";
 import { CountUp } from "@/components/ui/count-up";
 import { StatBadge } from "@/components/ui/stat-badge";
+import { Logo } from "@/components/layout/logo";
 
-const INTERVAL_MS = 6000;
+const INTERVAL_MS = 8000;
 
 const badges = [
   {
@@ -37,55 +38,46 @@ const badges = [
   },
 ];
 
+/** Cropped landscape hero clips from the services-page demo videos. */
 const heroSlides: HeroSlide[] = [
   {
-    src: "/images/hero/cctv-install.png",
-    alt: "Brite MJ Technologies technician installing a CCTV security camera on site",
-    position:
-      "object-[60%_center] sm:object-[65%_center] lg:object-[70%_center]",
-    eyebrow: "CCTV installation across Accra",
+    src: "/videos/hero/cctv-hero.jpg",
+    video: "/videos/hero/cctv-hero.mp4",
+    alt: "CCTV surveillance monitoring in a professional office installation",
+    position: "object-center",
+    eyebrow: "CCTV Camera Installation",
     headline: [
-      { text: "Keep an eye on" },
-      { text: "what matters most.", accent: true },
+      { text: "See everything." },
+      { text: "Miss nothing.", accent: true },
     ],
     description:
-      "We install clear, reliable cameras so you can check in from your phone whenever you need to. Day or night, you’re covered.",
+      "Crystal-clear cameras for homes and businesses across Accra — live on your phone, day or night.",
   },
   {
-    src: "/images/hero/team-install.png",
-    alt: "Brite MJ Technologies team installing security and networking systems",
-    position: "object-[55%_center] lg:object-center",
-    eyebrow: "People who show up and get it done",
+    src: "/videos/hero/gate-hero.jpg",
+    video: "/videos/hero/gate-hero.mp4",
+    alt: "Automated remote gate control opening for a vehicle",
+    position: "object-center",
+    eyebrow: "Remote Gate Control",
     headline: [
-      { text: "From the first visit" },
-      { text: "to the final handover.", accent: true },
+      { text: "Open the gate." },
+      { text: "Keep control.", accent: true },
     ],
     description:
-      "We walk your property with you, recommend what actually fits, then install and support it. No pressure, no guesswork.",
+      "Smartphone and remote access so authorised people get in easily — and everyone else stays out.",
   },
   {
-    src: "/images/hero/building-cctv.png",
-    alt: "Technicians installing outdoor CCTV cameras on a commercial building",
-    position: "object-[35%_center] lg:object-[40%_center]",
-    eyebrow: "Homes, shops, offices, and schools",
+    src: "/videos/hero/smart-hero.jpg",
+    video: "/videos/hero/smart-hero.mp4",
+    alt: "Smart security system with app-controlled protection",
+    position: "object-center",
+    eyebrow: "Smart Security Systems",
     headline: [
-      { text: "Security that fits" },
-      { text: "the way you work.", accent: true },
+      { text: "One system." },
+      { text: "Total peace of mind.", accent: true },
     ],
     description:
-      "One camera or a full building setup, we size it to your space and your budget. You get a system that works for you, not the other way around.",
-  },
-  {
-    src: "/images/hero/site-work.png",
-    alt: "Field technicians on a secured worksite with safety barriers",
-    position: "object-[45%_center] lg:object-center",
-    eyebrow: "Built for real sites in Ghana",
-    headline: [
-      { text: "Strong fencing." },
-      { text: "Smart access. Real peace of mind.", accent: true },
-    ],
-    description:
-      "We put up the barriers, gates, and networks that keep your site safe through the heat, the rain, and the long days on the job.",
+      "Cameras, access, and alerts working together — designed, installed, and supported by Brite MJ.",
   },
 ];
 
@@ -104,34 +96,36 @@ export function Hero() {
 
   return (
     <section
-      className="relative isolate min-h-[min(88vh,760px)] overflow-hidden bg-brand-950"
+      className="relative isolate min-h-[min(92vh,820px)] overflow-hidden bg-brand-950"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       <HeroSlideshow slides={heroSlides} activeIndex={activeIndex} />
 
-      <div aria-hidden="true" className="absolute inset-0 bg-brand-950/25" />
+      {/* Readable left wash — keeps photography/video dominant on the right */}
       <div
         aria-hidden="true"
-        className="absolute inset-y-0 left-0 w-full max-w-3xl bg-gradient-to-r from-brand-950/70 via-brand-950/45 to-transparent md:from-brand-950/55 md:via-brand-950/25"
+        className="absolute inset-y-0 left-0 w-full max-w-4xl bg-gradient-to-r from-brand-950/85 via-brand-950/50 to-transparent md:from-brand-950/75 md:via-brand-950/35"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-brand-950/40 to-transparent"
+        className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-brand-950/55 to-transparent"
       />
 
-      <Container className="relative flex min-h-[min(88vh,760px)] items-center py-20 md:py-28">
+      <Container className="relative flex min-h-[min(92vh,820px)] items-center py-24 md:py-28">
         <div className="max-w-2xl">
           <div key={activeIndex} className="animate-fade-up">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/25 px-4 py-1.5 text-sm font-medium text-white backdrop-blur-sm">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-accent" />
-              {slide.eyebrow}
-            </span>
+            <Logo light className="mb-8 h-11 sm:h-12" />
 
-            <h1 className="mt-6 font-heading text-4xl font-extrabold leading-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:text-5xl lg:text-6xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-accent">
+              {slide.eyebrow}
+            </p>
+
+            <h1 className="mt-4 font-heading text-4xl font-extrabold leading-[1.08] text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] sm:text-5xl lg:text-6xl">
               {slide.headline.map((part, i) => (
                 <span key={`${part.text}-${i}`}>
-                  {i > 0 ? " " : null}
+                  {i > 0 ? <br className="hidden sm:block" /> : null}
+                  {i > 0 ? <span className="sm:hidden"> </span> : null}
                   {part.accent ? (
                     <span className="text-accent">{part.text}</span>
                   ) : (
@@ -141,7 +135,7 @@ export function Hero() {
               ))}
             </h1>
 
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/95 drop-shadow-[0_1px_8px_rgba(0,0,0,0.4)]">
+            <p className="mt-5 max-w-lg text-lg leading-relaxed text-white/92 drop-shadow-[0_1px_10px_rgba(0,0,0,0.45)]">
               {slide.description}
             </p>
           </div>
