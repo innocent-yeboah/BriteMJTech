@@ -134,7 +134,13 @@ function HeroMedia({
     });
   }, [active, reducedMotion, slide.video]);
 
-  const objectClass = cn("object-cover", slide.position ?? "object-center");
+  const objectClass = cn(
+    "object-cover",
+    // Zoom in on portrait phones so landscape clips fill the frame
+    "scale-[1.5] sm:scale-125 md:scale-110 lg:scale-100",
+    "origin-center transition-transform duration-700",
+    slide.position ?? "object-center",
+  );
 
   if (slide.video && !reducedMotion) {
     return (

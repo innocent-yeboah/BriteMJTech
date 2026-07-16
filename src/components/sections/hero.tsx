@@ -8,35 +8,9 @@ import {
   HeroSlideshow,
   type HeroSlide,
 } from "@/components/sections/hero-slideshow";
-import { CountUp } from "@/components/ui/count-up";
-import { StatBadge } from "@/components/ui/stat-badge";
 import { Logo } from "@/components/layout/logo";
 
 const INTERVAL_MS = 8000;
-
-const badges = [
-  {
-    kind: "experience" as const,
-    value: 10,
-    suffix: "+",
-    label: "Years Experience",
-    durationMs: 1400,
-  },
-  {
-    kind: "projects" as const,
-    value: 100,
-    suffix: "+",
-    label: "Projects Completed",
-    durationMs: 1800,
-  },
-  {
-    kind: "support" as const,
-    value: 24,
-    suffix: "/7",
-    label: "Support",
-    durationMs: 1200,
-  },
-];
 
 /** Cropped landscape hero clips from the services-page demo videos. */
 const heroSlides: HeroSlide[] = [
@@ -44,7 +18,7 @@ const heroSlides: HeroSlide[] = [
     src: "/videos/hero/cctv-hero.jpg",
     video: "/videos/hero/cctv-hero.mp4",
     alt: "CCTV surveillance monitoring in a professional office installation",
-    position: "object-center",
+    position: "object-[center_40%]",
     eyebrow: "CCTV Camera Installation",
     headline: [
       { text: "See everything." },
@@ -57,7 +31,7 @@ const heroSlides: HeroSlide[] = [
     src: "/videos/hero/gate-hero.jpg",
     video: "/videos/hero/gate-hero.mp4",
     alt: "Automated remote gate control opening for a vehicle",
-    position: "object-center",
+    position: "object-[center_45%]",
     eyebrow: "Remote Gate Control",
     headline: [
       { text: "Open the gate." },
@@ -70,7 +44,7 @@ const heroSlides: HeroSlide[] = [
     src: "/videos/hero/smart-hero.jpg",
     video: "/videos/hero/smart-hero.mp4",
     alt: "Smart security system with app-controlled protection",
-    position: "object-center",
+    position: "object-[center_42%]",
     eyebrow: "Smart Security Systems",
     headline: [
       { text: "One system." },
@@ -148,23 +122,6 @@ export function Hero() {
               Explore Services
             </Button>
           </div>
-
-          <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-4">
-            {badges.map((badge) => (
-              <li key={badge.label} className="flex items-center gap-3">
-                <StatBadge kind={badge.kind} />
-                <span className="text-sm font-semibold text-white drop-shadow-sm">
-                  <CountUp
-                    value={badge.value}
-                    suffix={badge.suffix}
-                    durationMs={badge.durationMs}
-                    className="text-base font-bold text-accent"
-                  />{" "}
-                  {badge.label}
-                </span>
-              </li>
-            ))}
-          </ul>
         </div>
       </Container>
     </section>
