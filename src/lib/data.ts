@@ -419,27 +419,27 @@ export interface WhyChoosePillar {
 export const whyChooseUs: WhyChoosePillar[] = [
   {
     icon: "experience",
-    title: "Experience",
+    title: "We start with a free site visit",
     description:
-      "Years of expert installations across homes, businesses, and institutions in Accra.",
+      "Before any quote, we walk the property with you — entry points, lighting, power, and how you actually use the space — so the recommendation fits Accra homes and workplaces, not a one-size template.",
   },
   {
     icon: "quality",
-    title: "Quality",
+    title: "Installed by our own crew",
     description:
-      "Certified products and professional standards on every single project we deliver.",
+      "Cabling, mounting, gate motors, and network setup are handled by Brite MJ technicians. You get one team accountable from the first visit to handover — based out of Spintex.",
   },
   {
     icon: "support",
-    title: "Support",
+    title: "You stay in control after handover",
     description:
-      "24/7 customer service and rapid response when your security matters most.",
+      "We set up phone viewing, remotes, and access the way you need them, then leave clear instructions. When something needs adjusting, you reach us on 0203412477 or 0546847109.",
   },
   {
     icon: "trust",
-    title: "Trust",
+    title: "Built for Ghana conditions",
     description:
-      "Trusted by families, companies, and institutions across the Greater Accra region.",
+      "Outdoor cameras, fencing, and gate systems specified for heat, rain, and power interruptions — so your security holds up through the seasons, not just on installation day.",
   },
 ];
 
