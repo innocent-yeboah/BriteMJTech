@@ -12,6 +12,7 @@ import {
   Calendar,
   BarChart3,
   Settings,
+  Shield,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -95,6 +96,7 @@ const navigation: NavItem[] = [
   },
   { name: "Reports", href: "/admin/reports", icon: BarChart3 },
   { name: "Settings", href: "/admin/settings", icon: Settings },
+  { name: "Access Control", href: "/admin/settings/users", icon: Shield },
 ];
 
 export function AdminSidebar({ open, onClose, collapsed, onToggleCollapse }: SidebarProps) {

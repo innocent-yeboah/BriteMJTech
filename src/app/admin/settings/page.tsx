@@ -1,9 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { Building2, User, Bell, Shield, Database } from "lucide-react";
+import { useEffect, useState, Suspense } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Building2, Bell, Shield, Database, Users, KeyRound } from "lucide-react";
 import { PageHeader } from "@/components/admin/ui/page-header";
-import { Input, Textarea, Select, Button, Checkbox } from "@/components/admin/ui/form-fields";
+import { Input, Textarea, Button, Checkbox } from "@/components/admin/ui/form-fields";
+import { createClient } from "@/lib/supabase/client";
+import type { UserRole } from "@/types/database";
 
 interface CompanySettings {
   company_name: string;
@@ -23,9 +27,22 @@ interface NotificationSettings {
   email_invoice_paid: boolean;
 }
 
-export default function SettingsPage() {
-  const [activeTab, setActiveTab] = useState("company");
+function SettingsContent() {
+  const searchParams = useSearchParams();
+  const initialTab = searchParams.get("tab") || "company";
+
+  const [activeTab, setActiveTab] = useState(initialTab);
   const [saving, setSaving] = useState(false);
+  const [role, setRole] = useState<UserRole | null>(null);
+  const [securityMessage, setSecurityMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
 
   const [company, setCompany] = useState<CompanySettings>({
     company_name: "Brite MJ Technologies",
@@ -45,10 +62,57 @@ export default function SettingsPage() {
     email_invoice_paid: true,
   });
 
+  useEffect(() => {
+    const loadRole = async () => {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) return;
+      const { data } = await supabase
+        .from("users")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+      if (data?.role) setRole(data.role as UserRole);
+    };
+    void loadRole();
+  }, []);
+
+  useEffect(() => {
+    setActiveTab(initialTab);
+  }, [initialTab]);
+
   const handleSave = async () => {
     setSaving(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 600));
     setSaving(false);
+  };
+
+  const handlePasswordUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSecurityMessage(null);
+    setSaving(true);
+
+    try {
+      const res = await fetch("/api/admin/security/password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(passwordForm),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || "Failed to update password");
+
+      setSecurityMessage({ type: "success", text: "Password updated successfully." });
+      setPasswordForm({ currentPassword: "", newPassword: "", confirmPassword: "" });
+    } catch (err) {
+      setSecurityMessage({
+        type: "error",
+        text: err instanceof Error ? err.message : "Failed to update password",
+      });
+    } finally {
+      setSaving(false);
+    }
   };
 
   const tabs = [
@@ -62,7 +126,7 @@ export default function SettingsPage() {
     <div>
       <PageHeader
         title="Settings"
-        description="Manage system configuration and preferences"
+        description="Manage system configuration and security"
       />
 
       <div className="flex flex-col gap-6 lg:flex-row">
@@ -138,7 +202,7 @@ export default function SettingsPage() {
                 </div>
               </div>
               <div className="mt-6 flex justify-end">
-                <Button onClick={handleSave} loading={saving}>
+                <Button onClick={() => void handleSave()} loading={saving}>
                   Save Changes
                 </Button>
               </div>
@@ -191,7 +255,7 @@ export default function SettingsPage() {
                 />
               </div>
               <div className="mt-6 flex justify-end">
-                <Button onClick={handleSave} loading={saving}>
+                <Button onClick={() => void handleSave()} loading={saving}>
                   Save Preferences
                 </Button>
               </div>
@@ -200,40 +264,100 @@ export default function SettingsPage() {
 
           {activeTab === "security" && (
             <div className="space-y-6">
-              <div className="rounded-xl border border-slate-200 bg-white p-6">
-                <h3 className="mb-6 text-lg font-semibold text-slate-900">Password</h3>
+              {role === "admin" ? (
+                <div className="rounded-xl border border-brand-200 bg-brand-50 p-6">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <h3 className="text-lg font-semibold text-brand-950">System access control</h3>
+                      <p className="mt-1 text-sm text-brand-800/80">
+                        Create users, assign roles (admin/manager/staff/technician), enable or
+                        disable accounts, and reset passwords.
+                      </p>
+                    </div>
+                    <Link href="/admin/settings/users">
+                      <Button icon={<Users className="h-4 w-4" />}>Manage users</Button>
+                    </Link>
+                  </div>
+                </div>
+              ) : null}
+
+              <form
+                onSubmit={handlePasswordUpdate}
+                className="rounded-xl border border-slate-200 bg-white p-6"
+              >
+                <h3 className="mb-2 text-lg font-semibold text-slate-900">Change password</h3>
+                <p className="mb-6 text-sm text-slate-500">
+                  Update your sign-in password. Use at least 8 characters.
+                </p>
+
+                {securityMessage ? (
+                  <div
+                    className={`mb-4 rounded-lg px-4 py-3 text-sm ${
+                      securityMessage.type === "success"
+                        ? "bg-green-50 text-green-700"
+                        : "bg-red-50 text-red-700"
+                    }`}
+                  >
+                    {securityMessage.text}
+                  </div>
+                ) : null}
+
                 <div className="max-w-md space-y-4">
-                  <Input label="Current Password" type="password" placeholder="••••••••" />
-                  <Input label="New Password" type="password" placeholder="••••••••" />
-                  <Input label="Confirm New Password" type="password" placeholder="••••••••" />
+                  <Input
+                    label="Current password"
+                    type="password"
+                    value={passwordForm.currentPassword}
+                    onChange={(e) =>
+                      setPasswordForm({ ...passwordForm, currentPassword: e.target.value })
+                    }
+                    required
+                  />
+                  <Input
+                    label="New password"
+                    type="password"
+                    value={passwordForm.newPassword}
+                    onChange={(e) =>
+                      setPasswordForm({ ...passwordForm, newPassword: e.target.value })
+                    }
+                    required
+                  />
+                  <Input
+                    label="Confirm new password"
+                    type="password"
+                    value={passwordForm.confirmPassword}
+                    onChange={(e) =>
+                      setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })
+                    }
+                    required
+                  />
                 </div>
                 <div className="mt-6 flex justify-end">
-                  <Button>Update Password</Button>
+                  <Button type="submit" loading={saving} icon={<KeyRound className="h-4 w-4" />}>
+                    Update password
+                  </Button>
                 </div>
-              </div>
+              </form>
 
               <div className="rounded-xl border border-slate-200 bg-white p-6">
-                <h3 className="mb-4 text-lg font-semibold text-slate-900">Two-Factor Authentication</h3>
-                <p className="mb-4 text-sm text-slate-600">
-                  Add an extra layer of security to your account by enabling two-factor authentication.
-                </p>
-                <Button variant="secondary">Enable 2FA</Button>
-              </div>
-
-              <div className="rounded-xl border border-slate-200 bg-white p-6">
-                <h3 className="mb-4 text-lg font-semibold text-slate-900">Active Sessions</h3>
-                <p className="mb-4 text-sm text-slate-600">
-                  Manage your active sessions across devices.
-                </p>
-                <div className="rounded-lg border border-slate-200 p-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium text-slate-900">Current Session</p>
-                      <p className="text-sm text-slate-500">Windows • Chrome • Accra, Ghana</p>
-                    </div>
-                    <span className="rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-700">
-                      Active
-                    </span>
+                <h3 className="mb-4 text-lg font-semibold text-slate-900">Role permissions</h3>
+                <div className="space-y-3 text-sm">
+                  <div className="rounded-lg bg-slate-50 p-3">
+                    <p className="font-medium text-slate-900">Admin</p>
+                    <p className="text-slate-600">
+                      Full access including user management and system security.
+                    </p>
+                  </div>
+                  <div className="rounded-lg bg-slate-50 p-3">
+                    <p className="font-medium text-slate-900">Manager</p>
+                    <p className="text-slate-600">
+                      Manage leads, projects, inventory, invoices, expenses, and reports.
+                    </p>
+                  </div>
+                  <div className="rounded-lg bg-slate-50 p-3">
+                    <p className="font-medium text-slate-900">Staff / Technician</p>
+                    <p className="text-slate-600">
+                      View assigned work and update tasks; limited write access.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -260,7 +384,7 @@ export default function SettingsPage() {
               <div className="rounded-xl border border-slate-200 bg-white p-6">
                 <h3 className="mb-4 text-lg font-semibold text-slate-900">Automatic Backups</h3>
                 <p className="mb-4 text-sm text-slate-600">
-                  Your data is automatically backed up by Supabase. Last backup was less than an hour ago.
+                  Your data is automatically backed up by Supabase.
                 </p>
                 <div className="flex items-center gap-3 rounded-lg bg-green-50 p-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100">
@@ -277,5 +401,13 @@ export default function SettingsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SettingsPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center text-slate-500">Loading settings...</div>}>
+      <SettingsContent />
+    </Suspense>
   );
 }
