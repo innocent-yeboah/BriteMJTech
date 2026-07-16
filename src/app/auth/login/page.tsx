@@ -20,6 +20,8 @@ function LoginForm() {
   const [error, setError] = useState(
     errorParam === "account_inactive"
       ? "Your account is inactive. Please contact an administrator."
+      : errorParam === "config"
+      ? "Server configuration is incomplete. Add Supabase env vars in Vercel."
       : ""
   );
 
@@ -59,7 +61,7 @@ function LoginForm() {
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
           <Link href="/" className="inline-flex items-center justify-center">
-            <Logo variant="light" className="h-10" />
+            <Logo light className="h-10" />
           </Link>
           <h1 className="mt-6 text-2xl font-bold text-white">Admin Dashboard</h1>
           <p className="mt-2 text-sm text-white/60">

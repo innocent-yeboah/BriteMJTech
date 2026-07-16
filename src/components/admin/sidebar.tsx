@@ -123,7 +123,7 @@ export function AdminSidebar({ open, onClose, collapsed, onToggleCollapse }: Sid
       <div className="flex h-16 items-center justify-between border-b border-white/10 px-4">
         {!collapsed && (
           <Link href="/admin" className="flex items-center gap-2">
-            <Logo variant="light" className="h-8" />
+            <Logo light className="h-8" />
           </Link>
         )}
         {collapsed && (
@@ -174,7 +174,7 @@ export function AdminSidebar({ open, onClose, collapsed, onToggleCollapse }: Sid
                         </>
                       )}
                     </button>
-                    {!collapsed && isExpanded && (
+                    {!collapsed && isExpanded && item.children && (
                       <ul className="mt-1 space-y-1 pl-10">
                         {item.children.map((child) => (
                           <li key={child.href}>

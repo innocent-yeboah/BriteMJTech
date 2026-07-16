@@ -43,7 +43,7 @@ interface DataTableProps<T> {
 
 type SortDirection = "asc" | "desc" | null;
 
-export function DataTable<T extends Record<string, unknown>>({
+export function DataTable<T extends object>({
   data,
   columns,
   keyField,
@@ -88,7 +88,10 @@ export function DataTable<T extends Record<string, unknown>>({
       if (aVal === bVal) return 0;
       if (aVal === null || aVal === undefined) return 1;
       if (bVal === null || bVal === undefined) return -1;
-      const comparison = aVal < bVal ? -1 : 1;
+      const comparison = String(aVal).localeCompare(String(bVal), undefined, {
+        numeric: true,
+        sensitivity: "base",
+      });
       return sortDirection === "asc" ? comparison : -comparison;
     });
   }, [filteredData, sortKey, sortDirection]);
@@ -289,7 +292,7 @@ export function DataTable<T extends Record<string, unknown>>({
                     >
                       {column.render
                         ? column.render(row)
-                        : (row[column.key as keyof T] as React.ReactNode) ?? "—"}
+                        : String(row[column.key as keyof T] ?? "—")}
                     </td>
                   ))}
                   {actions && (
