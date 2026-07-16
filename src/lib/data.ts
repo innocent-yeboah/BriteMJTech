@@ -35,6 +35,10 @@ export interface Service {
   video?: string;
   /** Poster image shown before / while the video loads. */
   videoPoster?: string;
+  /** Keep portrait videos fully visible inside the landscape media panel. */
+  videoFit?: "cover" | "contain";
+  /** Hide sound controls when the source has no audio track. */
+  videoHasAudio?: boolean;
   /** Optional gallery for animated slideshows (e.g. CCTV section). */
   gallery?: {
     src: string;
@@ -61,7 +65,10 @@ export const services: Service[] = [
     ],
     icon: "cctv",
     iconImage: "/images/icons/cctv-real.jpg",
-    image: "/images/cctv/cameras-pole.png",
+    image: "/videos/cctv-office.jpg",
+    video: "/videos/cctv-office.mp4",
+    videoPoster: "/videos/cctv-office.jpg",
+    videoFit: "contain",
     gallery: [
       {
         src: "/images/cctv/install-1.png",
@@ -251,8 +258,13 @@ export const services: Service[] = [
       "Future-ready smart devices",
     ],
     icon: "shield",
-    image:
-      "https://images.unsplash.com/photo-1563452619267-bc16ef6cecec?auto=format&fit=crop&w=1200&q=80",
+    iconImage: "/images/icons/smart-security-lock.jpg",
+    iconImagePosition: "50% 48%",
+    image: "/videos/smart-security.jpg",
+    video: "/videos/smart-security.mp4",
+    videoPoster: "/videos/smart-security.jpg",
+    videoFit: "contain",
+    videoHasAudio: false,
     featured: true,
   },
   {
@@ -269,8 +281,9 @@ export const services: Service[] = [
       "Certified, professional technicians",
     ],
     icon: "wrench",
-    image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1200&q=80",
+    iconImage: "/images/icons/service-support.jpg",
+    iconImagePosition: "58% 42%",
+    image: "/images/support/service-support.png",
     featured: false,
   },
 ];

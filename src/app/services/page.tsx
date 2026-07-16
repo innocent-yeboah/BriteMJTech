@@ -90,6 +90,8 @@ export default function ServicesPage() {
                         src={service.video}
                         poster={service.videoPoster ?? service.image}
                         label={`${service.name} demo video`}
+                        fit={service.videoFit}
+                        showSoundControl={service.videoHasAudio !== false}
                       />
                     ) : service.gallery && service.gallery.length > 0 ? (
                       <ImageSlideshow
