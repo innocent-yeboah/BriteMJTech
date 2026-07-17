@@ -153,10 +153,19 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container py-5 text-center text-xs text-brand-100/70 sm:text-left">
+        <div className="container flex flex-col gap-2 py-5 text-center text-xs text-brand-100/70 sm:flex-row sm:items-center sm:justify-between sm:text-left">
           <p>
             &copy; {year} {siteConfig.name}. All rights reserved.
           </p>
+          <a
+            href="https://buildwithinnocent.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-brand-100/70 transition-colors hover:text-accent"
+          >
+            Built by Build With Innocent — Digital Business Systems for African
+            Enterprises
+          </a>
         </div>
       </div>
     </footer>
