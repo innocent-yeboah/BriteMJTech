@@ -314,8 +314,7 @@ export const projects: Project[] = [
       "Full HD CCTV coverage with video intercom and automated gate control for a family home.",
     category: "residential",
     location: "East Legon, Accra",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/projects/gated-residence.jpg",
     completedYear: "2025",
   },
   {
@@ -325,8 +324,7 @@ export const projects: Project[] = [
       "Electric fencing, palisade barrier, and 16-camera surveillance for a logistics warehouse.",
     category: "commercial",
     location: "Tema Industrial Area",
-    image:
-      "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/projects/warehouse-perimeter.jpg",
     completedYear: "2025",
   },
   {
@@ -347,8 +345,7 @@ export const projects: Project[] = [
       "4K camera upgrade with cloud recording and remote monitoring for a busy retail shop.",
     category: "commercial",
     location: "Osu, Accra",
-    image:
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/projects/retail-store-surveillance.jpg",
     completedYear: "2024",
   },
   {
@@ -369,8 +366,7 @@ export const projects: Project[] = [
       "High-security fencing, integrated alarms, and 24/7 monitored surveillance system.",
     category: "institutional",
     location: "Accra Central",
-    image:
-      "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/projects/government-security-network.jpg",
     completedYear: "2023",
   },
 ];

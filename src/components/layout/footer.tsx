@@ -137,6 +137,8 @@ export function Footer() {
                   Mon–Fri: 8am–6pm
                   <br />
                   Sat: 9am–4pm
+                  <br />
+                  Sun: emergency only
                 </span>
               </li>
             </ul>

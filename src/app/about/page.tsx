@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Target, Eye, Check, Building2, Users, Award } from "lucide-react";
+import { Target, Eye, Check } from "lucide-react";
 import { PageHero } from "@/components/sections/page-hero";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -23,10 +23,23 @@ const values = [
   "Solutions tailored to your property and budget",
 ];
 
+/** Real environments help visitors recognise the communities we protect. */
 const clientTypes = [
-  { icon: Building2, label: "Homes & Residences" },
-  { icon: Users, label: "Businesses & Offices" },
-  { icon: Award, label: "Schools & Institutions" },
+  {
+    image: "/images/about/homes-residences.jpg",
+    label: "Homes & Residences",
+    alt: "Modern family residence protected by Brite MJ security systems",
+  },
+  {
+    image: "/images/about/businesses-offices.jpg",
+    label: "Businesses & Offices",
+    alt: "Professional office environment protected by Brite MJ security systems",
+  },
+  {
+    image: "/images/about/schools-institutions.jpg",
+    label: "Schools & Institutions",
+    alt: "Classroom representing schools and institutions served by Brite MJ",
+  },
 ];
 
 export default function AboutPage() {
@@ -52,13 +65,12 @@ export default function AboutPage() {
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-card">
-              {/* REPLACE with a real photo of the Brite MJ team or completed work */}
               <Image
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
-                alt="The Brite MJ Technologies team collaborating"
+                src="/images/hero/team-install.png"
+                alt="Brite MJ Technologies technicians installing security systems on site in Accra"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
+                className="object-cover object-[55%_center]"
               />
             </div>
             <div>
@@ -136,15 +148,27 @@ export default function AboutPage() {
           />
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             {clientTypes.map((client) => (
-              <div
+              <article
                 key={client.label}
-                className="flex flex-col items-center rounded-2xl border border-slate-100 bg-white p-8 text-center shadow-card"
+                className="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-card"
               >
-                <client.icon className="h-10 w-10 text-accent" />
-                <p className="mt-4 font-heading text-lg font-bold text-brand-950">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={client.image}
+                    alt={client.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-t from-brand-950/35 via-transparent to-transparent"
+                  />
+                </div>
+                <p className="px-6 py-5 text-center font-heading text-lg font-bold text-brand-950">
                   {client.label}
                 </p>
-              </div>
+              </article>
             ))}
           </div>
           <p className="mx-auto mt-8 max-w-2xl text-center text-slate-600">
