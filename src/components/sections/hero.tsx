@@ -1,18 +1,51 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  ClipboardCheck,
+  Headphones,
+} from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import {
   HeroSlideshow,
   type HeroSlide,
 } from "@/components/sections/hero-slideshow";
-import { Logo } from "@/components/layout/logo";
 
 const INTERVAL_MS = 8000;
 
-/** Cropped landscape hero clips from the services-page demo videos. */
+const leadHooks = [
+  {
+    label: "Ready when you are",
+    question:
+      "Are you ready to finally secure your property and protect what matters most?",
+    copy:
+      "You have thought about security for a while. You have seen the news, heard the stories, and maybe felt that uneasy feeling late at night. You are ready to protect your family, your business, and your peace of mind. We are here to help you take that next step.",
+  },
+  {
+    label: "A better way forward",
+    question:
+      "Are you frustrated that you still do not have proper security in place?",
+    copy:
+      "You have worried about it and told yourself you would get to it. Living without the right protection can feel uncertain, but choosing a solution does not need to be stressful. We will help you understand the options and choose what genuinely fits your property.",
+  },
+  {
+    label: "A clear process",
+    question: "What if getting security was easier than you thought?",
+    copy:
+      "We do not just sell equipment. We assess your property, understand your needs, recommend the right systems, install them professionally, and support you long after installation. The process is straightforward, transparent, and built around you.",
+  },
+] as const;
+
+const trustIndicators = [
+  { label: "Free Site Inspection", icon: ClipboardCheck },
+  { label: "Certified Installations", icon: BadgeCheck },
+  { label: "24/7 Support", icon: Headphones },
+] as const;
+
+/** Cropped landscape clips drawn from real service demonstrations. */
 const heroSlides: HeroSlide[] = [
   {
     src: "/videos/hero/cctv-hero.jpg",
@@ -25,7 +58,7 @@ const heroSlides: HeroSlide[] = [
       { text: "Miss nothing.", accent: true },
     ],
     description:
-      "Crystal-clear cameras for homes and businesses across Accra — live on your phone, day or night.",
+      "Crystal-clear cameras for homes and businesses across Accra, live on your phone day or night.",
   },
   {
     src: "/videos/hero/gate-hero.jpg",
@@ -38,7 +71,7 @@ const heroSlides: HeroSlide[] = [
       { text: "Keep control.", accent: true },
     ],
     description:
-      "Smartphone and remote access so authorised people get in easily — and everyone else stays out.",
+      "Smartphone and remote access so authorised people get in easily while everyone else stays out.",
   },
   {
     src: "/videos/hero/smart-hero.jpg",
@@ -51,14 +84,13 @@ const heroSlides: HeroSlide[] = [
       { text: "Total peace of mind.", accent: true },
     ],
     description:
-      "Cameras, access, and alerts working together — designed, installed, and supported by Brite MJ.",
+      "Cameras, access, and alerts working together, designed, installed, and supported by Brite MJ.",
   },
 ];
 
 export function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const slide = heroSlides[activeIndex] ?? heroSlides[0];
 
   useEffect(() => {
     if (paused || heroSlides.length < 2) return;
@@ -70,58 +102,84 @@ export function Hero() {
 
   return (
     <section
-      className="relative isolate min-h-[min(92vh,820px)] overflow-hidden bg-brand-950"
+      className="relative isolate overflow-hidden bg-brand-950"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       <HeroSlideshow slides={heroSlides} activeIndex={activeIndex} />
 
-      {/* Readable left wash — keeps photography/video dominant on the right */}
       <div
         aria-hidden="true"
-        className="absolute inset-y-0 left-0 w-full max-w-4xl bg-gradient-to-r from-brand-950/85 via-brand-950/50 to-transparent md:from-brand-950/75 md:via-brand-950/35"
+        className="absolute inset-0 bg-brand-950/75"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-brand-950/55 to-transparent"
+        className="absolute inset-0 bg-gradient-to-b from-brand-950/45 via-brand-950/65 to-brand-950/90"
       />
 
-      <Container className="relative flex min-h-[min(92vh,820px)] items-center py-24 md:py-28">
-        <div className="max-w-2xl">
-          <div key={activeIndex} className="animate-fade-up">
-            <Logo light className="mb-8 h-11 sm:h-12" />
-
+      <Container className="relative py-20 sm:py-24 lg:py-28">
+        <div className="mx-auto max-w-6xl text-center">
+          <div className="animate-fade-up">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-              {slide.eyebrow}
+              Welcome to Brite MJ Technologies
             </p>
-
-            <h1 className="mt-4 font-heading text-4xl font-extrabold leading-[1.08] text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] sm:text-5xl lg:text-6xl">
-              {slide.headline.map((part, i) => (
-                <span key={`${part.text}-${i}`}>
-                  {i > 0 ? <br className="hidden sm:block" /> : null}
-                  {i > 0 ? <span className="sm:hidden"> </span> : null}
-                  {part.accent ? (
-                    <span className="text-accent">{part.text}</span>
-                  ) : (
-                    part.text
-                  )}
-                </span>
-              ))}
+            <h1 className="mx-auto mt-4 max-w-4xl font-heading text-4xl font-extrabold leading-[1.08] text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] sm:text-5xl lg:text-6xl">
+              Smart Security Systems for Home and Business
             </h1>
-
-            <p className="mt-5 max-w-lg text-lg leading-relaxed text-white/92 drop-shadow-[0_1px_10px_rgba(0,0,0,0.45)]">
-              {slide.description}
+            <p className="mx-auto mt-5 max-w-3xl font-heading text-xl font-semibold leading-relaxed text-accent sm:text-2xl">
+              You have been thinking about security. Let us make it happen.
+            </p>
+            <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+              Smart security systems for your home, business, and peace of mind.
             </p>
           </div>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button href="/quote" variant="accent" size="lg">
+          <div className="mt-10 grid gap-4 text-left md:grid-cols-3">
+            {leadHooks.map((hook, index) => (
+              <article
+                key={hook.label}
+                className="rounded-2xl border border-white/15 bg-white/95 p-6 shadow-2xl backdrop-blur-sm sm:p-7"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-800 font-heading text-sm font-bold text-white">
+                    {index + 1}
+                  </span>
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-accent">
+                    {hook.label}
+                  </p>
+                </div>
+                <h2 className="mt-5 font-heading text-xl font-bold leading-snug text-brand-950">
+                  {hook.question}
+                </h2>
+                <p className="mt-3 text-sm leading-7 text-slate-700">
+                  {hook.copy}
+                </p>
+              </article>
+            ))}
+          </div>
+
+          <p className="mx-auto mt-9 max-w-2xl text-lg leading-relaxed text-white">
+            Contact us today for a free site inspection. No pressure. Just a
+            conversation.
+          </p>
+
+          <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+            <Button href="/quote" variant="primary" size="lg">
               Get a Free Quote <ArrowRight className="h-5 w-5" />
             </Button>
             <Button href="/services" variant="white" size="lg">
-              Explore Services
+              Explore Our Services
             </Button>
           </div>
+
+          <ul className="mt-8 flex flex-col items-center justify-center gap-3 text-sm font-semibold text-white/90 sm:flex-row sm:gap-8">
+            {trustIndicators.map(({ label, icon: Icon }) => (
+              <li key={label} className="flex items-center gap-2">
+                <Icon className="h-5 w-5 text-accent" aria-hidden="true" />
+                {label}
+              </li>
+            ))}
+          </ul>
         </div>
       </Container>
     </section>
