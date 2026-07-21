@@ -31,6 +31,8 @@ export function Footer() {
               <a
                 href={siteConfig.social.facebook}
                 aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-accent"
               >
                 <Facebook className="h-4 w-4" />
@@ -38,17 +40,38 @@ export function Footer() {
               <a
                 href={siteConfig.social.instagram}
                 aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-accent"
               >
                 <Instagram className="h-4 w-4" />
               </a>
               <a
-                href={siteConfig.social.linkedin}
-                aria-label="LinkedIn"
+                href={siteConfig.social.tiktok}
+                aria-label="TikTok"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-accent"
               >
-                <Linkedin className="h-4 w-4" />
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  className="h-4 w-4 fill-current"
+                >
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 0 0-.79-.05A6.34 6.34 0 0 0 3.15 15.2a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.77a8.2 8.2 0 0 0 4.76 1.52V6.84a4.85 4.85 0 0 1-1-.15Z" />
+                </svg>
               </a>
+              {siteConfig.social.linkedin !== "#" ? (
+                <a
+                  href={siteConfig.social.linkedin}
+                  aria-label="LinkedIn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-accent"
+                >
+                  <Linkedin className="h-4 w-4" />
+                </a>
+              ) : null}
             </div>
           </div>
 

@@ -33,8 +33,9 @@ export const siteConfig = {
     { day: "Sunday", time: "Emergency only" },
   ],
   social: {
-    facebook: "#",
-    instagram: "#",
+    facebook: "https://www.facebook.com/profile.php?id=61589157173544",
+    instagram: "https://www.instagram.com/britemjtech/",
+    tiktok: "https://www.tiktok.com/@britemjtechnology",
     linkedin: "#",
     x: "#",
   },
