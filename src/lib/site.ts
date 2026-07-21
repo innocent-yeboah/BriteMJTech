@@ -36,7 +36,7 @@ export const siteConfig = {
     facebook: "https://www.facebook.com/profile.php?id=61589157173544",
     instagram: "https://www.instagram.com/britemjtech/",
     tiktok: "https://www.tiktok.com/@britemjtechnology",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/brite-m-j-tech",
     x: "#",
   },
 } as const;
