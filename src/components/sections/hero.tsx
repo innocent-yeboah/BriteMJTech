@@ -45,46 +45,20 @@ const trustIndicators = [
   { label: "24/7 Support", icon: Headphones },
 ] as const;
 
-/** Cropped landscape clips drawn from real service demonstrations. */
+/** On-site installation footage for the homepage hero. */
 const heroSlides: HeroSlide[] = [
   {
-    src: "/videos/hero/cctv-hero.jpg",
-    video: "/videos/hero/cctv-hero.mp4",
-    alt: "CCTV surveillance monitoring in a professional office installation",
-    position: "object-[center_40%]",
-    eyebrow: "CCTV Camera Installation",
+    src: "/videos/hero/hero-main.jpg",
+    video: "/videos/hero/hero-main.mp4",
+    alt: "Brite MJ Technologies technician installing security fencing on site",
+    position: "object-center",
+    eyebrow: "Security & Smart Systems",
     headline: [
-      { text: "See everything." },
-      { text: "Miss nothing.", accent: true },
+      { text: "Protect what matters." },
+      { text: "Professionally installed.", accent: true },
     ],
     description:
-      "Crystal-clear cameras for homes and businesses across Accra, live on your phone day or night.",
-  },
-  {
-    src: "/videos/hero/gate-hero.jpg",
-    video: "/videos/hero/gate-hero.mp4",
-    alt: "Automated remote gate control opening for a vehicle",
-    position: "object-[center_45%]",
-    eyebrow: "Remote Gate Control",
-    headline: [
-      { text: "Open the gate." },
-      { text: "Keep control.", accent: true },
-    ],
-    description:
-      "Smartphone and remote access so authorised people get in easily while everyone else stays out.",
-  },
-  {
-    src: "/videos/hero/smart-hero.jpg",
-    video: "/videos/hero/smart-hero.mp4",
-    alt: "Smart security system with app-controlled protection",
-    position: "object-[center_42%]",
-    eyebrow: "Smart Security Systems",
-    headline: [
-      { text: "One system." },
-      { text: "Total peace of mind.", accent: true },
-    ],
-    description:
-      "Cameras, access, and alerts working together, designed, installed, and supported by Brite MJ.",
+      "CCTV, fencing, access control, and smart systems for homes and businesses across Accra.",
   },
 ];
 
