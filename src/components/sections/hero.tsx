@@ -84,11 +84,11 @@ export function Hero() {
 
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-brand-950/75"
+        className="absolute inset-0 bg-brand-950/35"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-b from-brand-950/45 via-brand-950/65 to-brand-950/90"
+        className="absolute inset-0 bg-gradient-to-b from-brand-950/25 via-brand-950/40 to-brand-950/70"
       />
 
       <Container className="relative py-20 sm:py-24 lg:py-28">
@@ -97,13 +97,13 @@ export function Hero() {
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-accent">
               Welcome to Brite MJ Technologies
             </p>
-            <h1 className="mx-auto mt-4 max-w-4xl font-heading text-4xl font-extrabold leading-[1.08] text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] sm:text-5xl lg:text-6xl">
+            <h1 className="mx-auto mt-4 max-w-4xl font-heading text-4xl font-extrabold leading-[1.08] text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.75)] sm:text-5xl lg:text-6xl">
               Smart Security Systems for Home and Business
             </h1>
-            <p className="mx-auto mt-5 max-w-3xl font-heading text-xl font-semibold leading-relaxed text-accent sm:text-2xl">
+            <p className="mx-auto mt-5 max-w-3xl font-heading text-xl font-semibold leading-relaxed text-accent drop-shadow-[0_1px_10px_rgba(0,0,0,0.65)] sm:text-2xl">
               You have been thinking about security. Let us make it happen.
             </p>
-            <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+            <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.65)] sm:text-lg">
               Smart security systems for your home, business, and peace of mind.
             </p>
           </div>

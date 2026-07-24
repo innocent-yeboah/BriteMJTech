@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { ParticleCanvas } from "@/components/effects/particle-canvas";
 import { OrganizationJsonLd } from "@/components/structured-data";
 import { siteConfig } from "@/lib/site";
 
@@ -62,8 +63,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: [{ url: "/images/logo/mj-mark.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/images/logo/mj-mark.svg" }],
+    icon: [{ url: "/images/logo/mj-mark.png", type: "image/png" }],
+    apple: [{ url: "/images/logo/mj-mark.png" }],
   },
 };
 
@@ -81,18 +82,21 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${montserrat.variable} ${playfair.variable}`}
     >
-      <body className="flex min-h-screen flex-col">
+      <body className="relative flex min-h-screen flex-col">
+        <ParticleCanvas />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand-950 focus:px-4 focus:py-2 focus:text-white"
         >
           Skip to content
         </a>
-        <Navbar />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <div className="relative z-10 flex min-h-screen flex-col">
+          <Navbar />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </div>
         <WhatsAppButton />
         <OrganizationJsonLd />
       </body>

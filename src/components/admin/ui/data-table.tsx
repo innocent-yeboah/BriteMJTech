@@ -395,17 +395,21 @@ export function ActionMenuItem({
   icon: Icon,
   children,
   variant = "default",
+  disabled = false,
 }: {
   onClick: () => void;
   icon?: React.ElementType;
   children: React.ReactNode;
   variant?: "default" | "danger";
+  disabled?: boolean;
 }) {
   return (
     <button
+      type="button"
       onClick={onClick}
+      disabled={disabled}
       className={cn(
-        "flex w-full items-center gap-2 px-3 py-2 text-sm",
+        "flex w-full items-center gap-2 px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50",
         variant === "danger"
           ? "text-red-600 hover:bg-red-50"
           : "text-slate-700 hover:bg-slate-50"

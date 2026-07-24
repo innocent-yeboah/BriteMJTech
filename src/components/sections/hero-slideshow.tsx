@@ -157,7 +157,7 @@ function HeroMedia({
           autoPlay={active}
         />
         {/* Soft film grade so text stays readable without washing out the shot */}
-        <div className="absolute inset-0 bg-brand-950/20 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-brand-950/10" />
       </>
     );
   }
