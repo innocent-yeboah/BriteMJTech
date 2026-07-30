@@ -8,13 +8,20 @@ import { StatsBand } from "@/components/sections/stats-band";
 import { WhyChooseUs } from "@/components/sections/why-choose-us";
 import { CtaSection } from "@/components/sections/cta-section";
 import { BreadcrumbJsonLd } from "@/components/structured-data";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About Us",
+export const metadata: Metadata = createPageMetadata({
+  title: "About Brite MJ Technologies",
   description:
-    "Learn about Brite MJ Technologies — a trusted security and smart systems company in Accra, Ghana, dedicated to protecting homes, businesses, and institutions.",
-  alternates: { canonical: "/about" },
-};
+    "Learn about Brite MJ Technologies — a trusted security and smart systems company based at Spintex, Accra, protecting homes, businesses, and institutions.",
+  path: "/about",
+  keywords: [
+    "security company Accra",
+    "Brite MJ Technologies about",
+    "Spintex CCTV installers",
+  ],
+  image: "/images/hero/team-install.png",
+});
 
 const values = [
   "Certified products and professional installation standards",

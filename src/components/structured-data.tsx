@@ -1,25 +1,45 @@
 import { siteConfig } from "@/lib/site";
 import { services } from "@/lib/data";
 
+function JsonLd({ data }: { data: Record<string, unknown> }) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
 /**
- * Schema.org LocalBusiness structured data for rich search results.
- * Rendered once in the root layout.
+ * Primary organization + local security business schema for Accra search.
  */
 export function OrganizationJsonLd() {
-  const jsonLd = {
+  const socialProfiles = Object.values(siteConfig.social).filter(
+    (url) => typeof url === "string" && url.startsWith("http"),
+  );
+
+  const organization = {
     "@context": "https://schema.org",
-    "@type": "SecurityService",
+    "@type": ["Organization", "LocalBusiness", "HomeAndConstructionBusiness"],
     "@id": `${siteConfig.url}/#organization`,
     name: siteConfig.name,
+    alternateName: siteConfig.shortName,
     description: siteConfig.description,
     url: siteConfig.url,
+    logo: `${siteConfig.url}/images/logo/mj-mark.png`,
+    image: `${siteConfig.url}/images/og/default.jpg`,
     telephone: siteConfig.contact.phone,
     email: siteConfig.contact.email,
     slogan: siteConfig.tagline,
-    areaServed: {
-      "@type": "City",
-      name: "Accra",
+    foundingLocation: {
+      "@type": "Place",
+      name: "Accra, Ghana",
     },
+    areaServed: [
+      { "@type": "City", name: "Accra" },
+      { "@type": "AdministrativeArea", name: "Greater Accra" },
+      { "@type": "Country", name: "Ghana" },
+    ],
     address: {
       "@type": "PostalAddress",
       streetAddress: siteConfig.address.street,
@@ -27,6 +47,13 @@ export function OrganizationJsonLd() {
       addressRegion: siteConfig.address.region,
       addressCountry: "GH",
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      // Approximate Spintex corridor — refine when exact coords are confirmed.
+      latitude: 5.637,
+      longitude: -0.092,
+    },
+    sameAs: socialProfiles,
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -41,21 +68,51 @@ export function OrganizationJsonLd() {
         closes: "16:00",
       },
     ],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: siteConfig.contact.phone,
+        contactType: "sales",
+        areaServed: "GH",
+        availableLanguage: ["English"],
+      },
+      {
+        "@type": "ContactPoint",
+        telephone: siteConfig.contact.phoneAlt,
+        contactType: "customer support",
+        areaServed: "GH",
+        availableLanguage: ["English"],
+      },
+    ],
     makesOffer: services.map((service) => ({
       "@type": "Offer",
+      url: `${siteConfig.url}/services#${service.slug}`,
       itemOffered: {
         "@type": "Service",
         name: service.name,
         description: service.shortDescription,
+        provider: { "@id": `${siteConfig.url}/#organization` },
+        areaServed: "Accra",
       },
     })),
   };
 
+  const website = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteConfig.url}/#website`,
+    url: siteConfig.url,
+    name: siteConfig.name,
+    description: siteConfig.description,
+    publisher: { "@id": `${siteConfig.url}/#organization` },
+    inLanguage: "en-GH",
+  };
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
+    <>
+      <JsonLd data={organization} />
+      <JsonLd data={website} />
+    </>
   );
 }
 
@@ -71,13 +128,51 @@ export function BreadcrumbJsonLd({
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: `${siteConfig.url}${item.url}`,
+      item: item.url.startsWith("http")
+        ? item.url
+        : `${siteConfig.url}${item.url}`,
     })),
   };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
-  );
+
+  return <JsonLd data={jsonLd} />;
+}
+
+/** Service catalog schema for the services page. */
+export function ServicesJsonLd() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Brite MJ Technologies Security Services",
+    itemListElement: services.map((service, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `${siteConfig.url}/services#${service.slug}`,
+      name: service.name,
+      description: service.shortDescription,
+    })),
+  };
+
+  return <JsonLd data={jsonLd} />;
+}
+
+/** FAQ schema helper for conversion-focused pages. */
+export function FaqJsonLd({
+  items,
+}: {
+  items: { question: string; answer: string }[];
+}) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
+  return <JsonLd data={jsonLd} />;
 }

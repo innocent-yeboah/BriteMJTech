@@ -5,13 +5,19 @@ import { Container } from "@/components/ui/container";
 import { ContactForm } from "@/components/forms/contact-form";
 import { BreadcrumbJsonLd } from "@/components/structured-data";
 import { siteConfig, telLink, whatsappLink } from "@/lib/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Contact Us",
   description:
-    "Get in touch with Brite MJ Technologies in Accra, Ghana. Call, WhatsApp, or send a message to book your free site inspection and quote.",
-  alternates: { canonical: "/contact" },
-};
+    "Contact Brite MJ Technologies in Accra for a free site inspection, security advice, or support. Call, WhatsApp, or send a message today.",
+  path: "/contact",
+  keywords: [
+    "contact security company Accra",
+    "Brite MJ phone number",
+    "Spintex security contact",
+  ],
+});
 
 const mapQuery = encodeURIComponent("Spintex Shell Signboard, Accra, Ghana");
 

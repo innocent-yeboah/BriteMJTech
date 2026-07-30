@@ -1,25 +1,35 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { Check, ArrowRight, MessageCircle } from "lucide-react";
 import { PageHero } from "@/components/sections/page-hero";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CtaSection } from "@/components/sections/cta-section";
 import { ServiceIconTile } from "@/components/service-icon";
-import { BreadcrumbJsonLd } from "@/components/structured-data";
+import {
+  BreadcrumbJsonLd,
+  ServicesJsonLd,
+} from "@/components/structured-data";
 import { ImageSlideshow } from "@/components/ui/image-slideshow";
 import { ServiceVideo } from "@/components/ui/service-video";
 import { services } from "@/lib/data";
 import { whatsappLink } from "@/lib/site";
+import { createPageMetadata } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { Check, ArrowRight, MessageCircle } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Our Security Solutions",
+export const metadata: Metadata = createPageMetadata({
+  title: "Security Services in Accra",
   description:
-    "Explore Brite MJ Technologies' full range of security services: CCTV installation, security and electric fencing, networking, remote gate control, video intercom, and smart systems in Accra, Ghana.",
-  alternates: { canonical: "/services" },
-};
+    "Professional CCTV installation, security and electric fencing, networking, remote gate control, video intercom, and smart security systems across Accra, Ghana.",
+  path: "/services",
+  keywords: [
+    "CCTV services Accra",
+    "electric fence installation Ghana",
+    "gate automation Accra",
+  ],
+  image: "/images/hero/cctv-install.png",
+});
 
 export default function ServicesPage() {
   return (
@@ -30,6 +40,7 @@ export default function ServicesPage() {
           { name: "Services", url: "/services" },
         ]}
       />
+      <ServicesJsonLd />
       <PageHero
         title="Our Security Solutions"
         subtitle="Comprehensive, professionally installed security and smart systems — tailored to your property and backed by 24/7 support."

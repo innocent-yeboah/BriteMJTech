@@ -1,23 +1,29 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site";
+import { publicRoutes } from "@/lib/seo";
 
+/** Keep sitemap stable and crawlable for Google Search Console. */
+export const dynamic = "force-static";
+export const revalidate = 3600;
+
+/**
+ * XML sitemap for Google / Bing — public marketing pages only.
+ * Admin, auth, and API routes are intentionally excluded.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = siteConfig.url;
+  const base = (siteConfig.url || "https://britemjtechnologies.com").replace(
+    /\/$/,
+    "",
+  );
   const now = new Date();
 
-  const routes = [
-    { path: "/", priority: 1, freq: "weekly" as const },
-    { path: "/services", priority: 0.9, freq: "monthly" as const },
-    { path: "/about", priority: 0.7, freq: "monthly" as const },
-    { path: "/projects", priority: 0.8, freq: "monthly" as const },
-    { path: "/contact", priority: 0.8, freq: "monthly" as const },
-    { path: "/quote", priority: 0.9, freq: "monthly" as const },
-  ];
-
-  return routes.map((route) => ({
-    url: `${base}${route.path}`,
-    lastModified: now,
-    changeFrequency: route.freq,
-    priority: route.priority,
-  }));
+  return publicRoutes.map((route) => {
+    const path = route.path === "/" ? "" : route.path;
+    return {
+      url: `${base}${path}`,
+      lastModified: now,
+      changeFrequency: route.changeFrequency,
+      priority: route.priority,
+    };
+  });
 }

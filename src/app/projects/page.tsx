@@ -6,13 +6,20 @@ import { CtaSection } from "@/components/sections/cta-section";
 import { ProjectsGallery } from "@/components/projects/projects-gallery";
 import { BreadcrumbJsonLd } from "@/components/structured-data";
 import { projects } from "@/lib/data";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Our Projects",
+export const metadata: Metadata = createPageMetadata({
+  title: "Security Projects Across Accra",
   description:
-    "Explore completed security projects by Brite MJ Technologies across Accra — residential, commercial, and institutional CCTV, fencing, and smart systems installations.",
-  alternates: { canonical: "/projects" },
-};
+    "Completed residential, commercial, and institutional security projects by Brite MJ Technologies — CCTV, fencing, access control, and smart systems.",
+  path: "/projects",
+  keywords: [
+    "security projects Accra",
+    "CCTV installation portfolio Ghana",
+    "completed fencing projects Accra",
+  ],
+  image: "/images/projects/gated-residence.jpg",
+});
 
 export default function ProjectsPage() {
   return (

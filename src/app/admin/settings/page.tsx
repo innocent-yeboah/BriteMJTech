@@ -3,7 +3,7 @@
 import { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Building2, Bell, Shield, Database, Users, KeyRound } from "lucide-react";
+import { Building2, Bell, Shield, Database, Users, KeyRound, Mail } from "lucide-react";
 import { PageHeader } from "@/components/admin/ui/page-header";
 import { Input, Textarea, Button, Checkbox } from "@/components/admin/ui/form-fields";
 import { createClient } from "@/lib/supabase/client";
@@ -61,6 +61,17 @@ function SettingsContent() {
     email_low_stock: true,
     email_invoice_paid: true,
   });
+  const [emailTestMessage, setEmailTestMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
+  const [emailTesting, setEmailTesting] = useState(false);
+  const [emailConfig, setEmailConfig] = useState<{
+    configured: boolean;
+    from: string;
+    inbox: string;
+    domain: string;
+  } | null>(null);
 
   useEffect(() => {
     const loadRole = async () => {
@@ -80,8 +91,46 @@ function SettingsContent() {
   }, []);
 
   useEffect(() => {
+    if (role !== "admin") return;
+    const loadEmailConfig = async () => {
+      try {
+        const res = await fetch("/api/admin/email/test");
+        const json = await res.json();
+        if (res.ok) setEmailConfig(json.data);
+      } catch {
+        // Non-blocking — settings page still works without email diagnostics.
+      }
+    };
+    void loadEmailConfig();
+  }, [role]);
+
+  useEffect(() => {
     setActiveTab(initialTab);
   }, [initialTab]);
+
+  const handleTestEmail = async () => {
+    setEmailTesting(true);
+    setEmailTestMessage(null);
+    try {
+      const res = await fetch("/api/admin/email/test", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
+      const json = await res.json();
+      setEmailTestMessage({
+        type: json.ok ? "success" : "error",
+        text: json.message || (json.ok ? "Test email sent." : "Failed to send test email."),
+      });
+    } catch {
+      setEmailTestMessage({
+        type: "error",
+        text: "Could not reach the email test endpoint.",
+      });
+    } finally {
+      setEmailTesting(false);
+    }
+  };
 
   const handleSave = async () => {
     setSaving(true);
@@ -210,55 +259,125 @@ function SettingsContent() {
           )}
 
           {activeTab === "notifications" && (
-            <div className="rounded-xl border border-slate-200 bg-white p-6">
-              <h3 className="mb-6 text-lg font-semibold text-slate-900">Email Notifications</h3>
-              <div className="space-y-4">
-                <Checkbox
-                  label="New Lead Notifications"
-                  description="Receive an email when a new lead is submitted"
-                  checked={notifications.email_new_lead}
-                  onChange={(e) =>
-                    setNotifications({ ...notifications, email_new_lead: e.target.checked })
-                  }
-                />
-                <Checkbox
-                  label="Lead Status Changes"
-                  description="Get notified when a lead status is updated"
-                  checked={notifications.email_lead_status}
-                  onChange={(e) =>
-                    setNotifications({ ...notifications, email_lead_status: e.target.checked })
-                  }
-                />
-                <Checkbox
-                  label="Project Updates"
-                  description="Receive updates on project progress"
-                  checked={notifications.email_project_update}
-                  onChange={(e) =>
-                    setNotifications({ ...notifications, email_project_update: e.target.checked })
-                  }
-                />
-                <Checkbox
-                  label="Low Stock Alerts"
-                  description="Get notified when inventory items are running low"
-                  checked={notifications.email_low_stock}
-                  onChange={(e) =>
-                    setNotifications({ ...notifications, email_low_stock: e.target.checked })
-                  }
-                />
-                <Checkbox
-                  label="Invoice Payment Received"
-                  description="Receive notification when an invoice is paid"
-                  checked={notifications.email_invoice_paid}
-                  onChange={(e) =>
-                    setNotifications({ ...notifications, email_invoice_paid: e.target.checked })
-                  }
-                />
+            <div className="space-y-6">
+              <div className="rounded-xl border border-slate-200 bg-white p-6">
+                <h3 className="mb-6 text-lg font-semibold text-slate-900">
+                  Email Notifications
+                </h3>
+                <div className="space-y-4">
+                  <Checkbox
+                    label="New Lead Notifications"
+                    description="Receive an email when a new lead is submitted"
+                    checked={notifications.email_new_lead}
+                    onChange={(e) =>
+                      setNotifications({
+                        ...notifications,
+                        email_new_lead: e.target.checked,
+                      })
+                    }
+                  />
+                  <Checkbox
+                    label="Lead Status Changes"
+                    description="Get notified when a lead status is updated"
+                    checked={notifications.email_lead_status}
+                    onChange={(e) =>
+                      setNotifications({
+                        ...notifications,
+                        email_lead_status: e.target.checked,
+                      })
+                    }
+                  />
+                  <Checkbox
+                    label="Project Updates"
+                    description="Receive updates on project progress"
+                    checked={notifications.email_project_update}
+                    onChange={(e) =>
+                      setNotifications({
+                        ...notifications,
+                        email_project_update: e.target.checked,
+                      })
+                    }
+                  />
+                  <Checkbox
+                    label="Low Stock Alerts"
+                    description="Get notified when inventory items are running low"
+                    checked={notifications.email_low_stock}
+                    onChange={(e) =>
+                      setNotifications({
+                        ...notifications,
+                        email_low_stock: e.target.checked,
+                      })
+                    }
+                  />
+                  <Checkbox
+                    label="Invoice Payment Received"
+                    description="Receive notification when an invoice is paid"
+                    checked={notifications.email_invoice_paid}
+                    onChange={(e) =>
+                      setNotifications({
+                        ...notifications,
+                        email_invoice_paid: e.target.checked,
+                      })
+                    }
+                  />
+                </div>
+                <div className="mt-6 flex justify-end">
+                  <Button onClick={() => void handleSave()} loading={saving}>
+                    Save Preferences
+                  </Button>
+                </div>
               </div>
-              <div className="mt-6 flex justify-end">
-                <Button onClick={() => void handleSave()} loading={saving}>
-                  Save Preferences
-                </Button>
-              </div>
+
+              {role === "admin" ? (
+                <div className="rounded-xl border border-brand-200 bg-brand-50 p-6">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <h3 className="text-lg font-semibold text-brand-950">
+                        Resend delivery check
+                      </h3>
+                      <p className="mt-1 text-sm text-brand-800/80">
+                        Domain <strong>britemjtechnologies.com</strong> should send from{" "}
+                        <code className="rounded bg-white/70 px-1.5 py-0.5 text-xs">
+                          {emailConfig?.from || "noreply@britemjtechnologies.com"}
+                        </code>
+                        . Internal alerts go to{" "}
+                        <code className="rounded bg-white/70 px-1.5 py-0.5 text-xs">
+                          {emailConfig?.inbox || "LEADS_NOTIFICATION_EMAIL"}
+                        </code>
+                        .
+                      </p>
+                      {emailConfig ? (
+                        <p className="mt-2 text-sm text-brand-800">
+                          Status:{" "}
+                          <strong>
+                            {emailConfig.configured
+                              ? "Configured"
+                              : "Missing API key / from address"}
+                          </strong>
+                        </p>
+                      ) : null}
+                      {emailTestMessage ? (
+                        <p
+                          className={`mt-3 text-sm ${
+                            emailTestMessage.type === "success"
+                              ? "text-green-700"
+                              : "text-red-700"
+                          }`}
+                        >
+                          {emailTestMessage.text}
+                        </p>
+                      ) : null}
+                    </div>
+                    <Button
+                      icon={<Mail className="h-4 w-4" />}
+                      onClick={() => void handleTestEmail()}
+                      loading={emailTesting}
+                    >
+                      Send test email
+                    </Button>
+                  </div>
+                </div>
+              ) : null}
             </div>
           )}
 

@@ -4,13 +4,19 @@ import { PageHero } from "@/components/sections/page-hero";
 import { Container } from "@/components/ui/container";
 import { QuoteForm } from "@/components/forms/quote-form";
 import { BreadcrumbJsonLd } from "@/components/structured-data";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Get a Free Quote",
+export const metadata: Metadata = createPageMetadata({
+  title: "Get a Free Security Quote",
   description:
-    "Request a free, no-obligation security quote from Brite MJ Technologies. Tell us about your property and book a free site inspection in Accra, Ghana.",
-  alternates: { canonical: "/quote" },
-};
+    "Request a free, no-obligation security quote from Brite MJ Technologies. Tell us about your property and we will recommend the right system.",
+  path: "/quote",
+  keywords: [
+    "free CCTV quote Accra",
+    "security quote Ghana",
+    "book site inspection Accra",
+  ],
+});
 
 const assurances = [
   { icon: ShieldCheck, text: "Free, no-obligation quote" },

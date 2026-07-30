@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+
+export const metadata: Metadata = {
+  title: "Page Not Found",
+  description:
+    "The page you are looking for could not be found. Return home or contact Brite MJ Technologies for help.",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (

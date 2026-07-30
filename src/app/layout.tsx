@@ -33,6 +33,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  applicationName: siteConfig.name,
   keywords: [
     "CCTV installation Accra",
     "security and electric fencing Ghana",
@@ -42,9 +43,20 @@ export const metadata: Metadata = {
     "networking installation Accra",
     "smart security systems Ghana",
     "Brite MJ Technologies",
+    "Spintex security company",
   ],
-  authors: [{ name: siteConfig.name }],
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
+  publisher: siteConfig.name,
+  category: "security",
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
+  },
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_GH",
@@ -52,20 +64,38 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} | Security & Smart Systems in Accra`,
     description: siteConfig.description,
+    images: [
+      {
+        url: "/images/og/default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Brite MJ Technologies security installation team in Accra",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
+    title: `${siteConfig.name} | Security & Smart Systems in Accra`,
     description: siteConfig.description,
+    images: ["/images/og/default.jpg"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   icons: {
     icon: [{ url: "/images/logo/mj-mark.png", type: "image/png" }],
     apple: [{ url: "/images/logo/mj-mark.png" }],
+    shortcut: ["/images/logo/mj-mark.png"],
   },
+  manifest: "/manifest.webmanifest",
 };
 
 export const viewport: Viewport = {
@@ -79,7 +109,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
-      lang="en"
+      lang="en-GH"
       className={`${inter.variable} ${montserrat.variable} ${playfair.variable}`}
     >
       <body className="relative flex min-h-screen flex-col">

@@ -6,6 +6,8 @@ import {
   sendLeadNotification,
   sendLeadConfirmation,
   sendEnquiryNotification,
+  sendNewsletterNotification,
+  sendNewsletterConfirmation,
 } from "@/lib/email";
 import {
   contactSchema,
@@ -218,6 +220,12 @@ export async function submitNewsletter(
         console.error("[submitNewsletter] insert failed:", error.message);
       }
     }
+
+    await Promise.allSettled([
+      sendNewsletterNotification(parsed.data.email),
+      sendNewsletterConfirmation(parsed.data.email),
+    ]);
+
     return { ok: true, message: "You're subscribed. Welcome aboard!" };
   } catch (error) {
     console.error("[submitNewsletter] error:", error);

@@ -13,7 +13,7 @@ export const siteConfig = {
   tagline: "Smart Solutions. Stronger Security. Better Connections.",
   description:
     "Brite MJ Technologies designs and installs advanced CCTV surveillance, security fencing, networking, and smart access systems for homes, businesses, and institutions across Accra, Ghana.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://britemjtech.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://britemjtechnologies.com",
   address: {
     street: "Spintex — Shell Signboard",
     city: "Accra",

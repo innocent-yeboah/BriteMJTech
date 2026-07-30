@@ -3,13 +3,14 @@ import { CheckCircle2, PhoneCall, CalendarClock, FileCheck } from "lucide-react"
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { siteConfig, telLink, whatsappLink } from "@/lib/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Thank You",
   description: "Your quote request has been received by Brite MJ Technologies.",
-  robots: { index: false, follow: false },
-  alternates: { canonical: "/quote/thank-you" },
-};
+  path: "/quote/thank-you",
+  noIndex: true,
+});
 
 const steps = [
   {
