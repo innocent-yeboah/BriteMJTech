@@ -1,6 +1,7 @@
 import { ArrowRight, Phone } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { siteConfig, telLink } from "@/lib/site";
 
 export function CtaSection({
@@ -15,7 +16,7 @@ export function CtaSection({
   return (
     <section className="section bg-brand-gradient">
       <Container>
-        <div className="mx-auto max-w-3xl text-center">
+        <ScrollReveal variant="scale" className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl text-white md:text-4xl lg:text-[2.75rem] lg:leading-tight">
             {title}
           </h2>
@@ -30,7 +31,7 @@ export function CtaSection({
               <Phone className="h-5 w-5" /> Call {siteConfig.contact.phone}
             </Button>
           </div>
-        </div>
+        </ScrollReveal>
       </Container>
     </section>
   );

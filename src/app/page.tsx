@@ -5,6 +5,7 @@ import { StatsBand } from "@/components/sections/stats-band";
 import { WhyChooseUs } from "@/components/sections/why-choose-us";
 import { Testimonials } from "@/components/sections/testimonials";
 import { CtaSection } from "@/components/sections/cta-section";
+import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -23,11 +24,21 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <ServicesOverview />
-      <StatsBand />
-      <WhyChooseUs />
-      <Testimonials />
-      <CtaSection />
+      <ScrollReveal>
+        <ServicesOverview />
+      </ScrollReveal>
+      <ScrollReveal delayMs={60}>
+        <StatsBand />
+      </ScrollReveal>
+      <ScrollReveal variant="left">
+        <WhyChooseUs />
+      </ScrollReveal>
+      <ScrollReveal>
+        <Testimonials />
+      </ScrollReveal>
+      <ScrollReveal variant="scale" delayMs={40}>
+        <CtaSection />
+      </ScrollReveal>
     </>
   );
 }

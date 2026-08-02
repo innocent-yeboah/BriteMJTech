@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { whyChooseUs } from "@/lib/data";
 import { siteConfig } from "@/lib/site";
 
@@ -19,7 +20,7 @@ export function WhyChooseUs() {
 
       <Container className="relative py-16 md:py-24">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="relative lg:col-span-5">
+          <ScrollReveal variant="left" className="relative lg:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden sm:aspect-[5/6]">
               <Image
                 src="/images/hero/team-install.png"
@@ -41,9 +42,9 @@ export function WhyChooseUs() {
                 </p>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
-          <div className="lg:col-span-7">
+          <ScrollReveal variant="right" delayMs={80} className="lg:col-span-7">
             <p className="eyebrow">Why Brite MJ</p>
             <h2 className="mt-3 max-w-xl font-heading text-3xl font-extrabold text-brand-950 md:text-4xl lg:text-[2.6rem] lg:leading-tight">
               We show up, explain clearly, and leave you with a system that works.
@@ -55,8 +56,10 @@ export function WhyChooseUs() {
 
             <ol className="mt-10 divide-y divide-slate-200 border-y border-slate-200">
               {whyChooseUs.map((pillar, index) => (
-                <li
+                <ScrollReveal
+                  as="li"
                   key={pillar.title}
+                  delayMs={120 + index * 80}
                   className="grid gap-3 py-6 sm:grid-cols-[3.5rem_1fr] sm:gap-6"
                 >
                   <span className="font-heading text-3xl font-extrabold tabular-nums text-accent">
@@ -70,7 +73,7 @@ export function WhyChooseUs() {
                       {pillar.description}
                     </p>
                   </div>
-                </li>
+                </ScrollReveal>
               ))}
             </ol>
 
@@ -86,7 +89,7 @@ export function WhyChooseUs() {
                 Or call {siteConfig.contact.phone}
               </a>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </Container>
     </section>

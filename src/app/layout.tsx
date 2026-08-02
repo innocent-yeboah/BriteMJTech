@@ -7,6 +7,7 @@ import { WhatsAppButton } from "@/components/whatsapp-button";
 import { ParticleCanvas } from "@/components/effects/particle-canvas";
 import { OrganizationJsonLd } from "@/components/structured-data";
 import { CookieBanner } from "@/components/cookies/cookie-banner";
+import { ScrollProgress } from "@/components/effects/scroll-progress";
 import { siteConfig } from "@/lib/site";
 
 const inter = Inter({
@@ -130,6 +131,7 @@ export default function RootLayout({
         </div>
         <WhatsAppButton />
         <CookieBanner />
+        <ScrollProgress />
         <OrganizationJsonLd />
       </body>
     </html>

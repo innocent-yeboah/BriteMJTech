@@ -2,6 +2,7 @@
 
 import { Container } from "@/components/ui/container";
 import { CountUp } from "@/components/ui/count-up";
+import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { companyStats } from "@/lib/site";
 
 export function StatsBand() {
@@ -9,8 +10,12 @@ export function StatsBand() {
     <section className="bg-brand-950 py-12">
       <Container>
         <dl className="grid grid-cols-2 gap-8 lg:grid-cols-4">
-          {companyStats.map((stat) => (
-            <div key={stat.label} className="text-center">
+          {companyStats.map((stat, index) => (
+            <ScrollReveal
+              key={stat.label}
+              delayMs={index * 80}
+              className="text-center"
+            >
               <dt className="sr-only">{stat.label}</dt>
               <dd>
                 <CountUp
@@ -24,7 +29,7 @@ export function StatsBand() {
                   {stat.label}
                 </span>
               </dd>
-            </div>
+            </ScrollReveal>
           ))}
         </dl>
       </Container>
