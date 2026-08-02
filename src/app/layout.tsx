@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { ParticleCanvas } from "@/components/effects/particle-canvas";
 import { OrganizationJsonLd } from "@/components/structured-data";
+import { CookieBanner } from "@/components/cookies/cookie-banner";
 import { siteConfig } from "@/lib/site";
 
 const inter = Inter({
@@ -128,6 +129,7 @@ export default function RootLayout({
           <Footer />
         </div>
         <WhatsAppButton />
+        <CookieBanner />
         <OrganizationJsonLd />
       </body>
     </html>

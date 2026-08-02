@@ -262,9 +262,15 @@ export default function PrivacyPolicyPage() {
                 Our site uses essential cookies and similar technologies needed
                 for security, session management (for staff login), and basic
                 site operation. We do not currently run third-party advertising
-                trackers on this website. If we add analytics or marketing
-                cookies later, we will update this policy and, where required,
-                provide a consent choice.
+                trackers on this website.
+              </p>
+              <p>
+                When you first visit, you can choose <strong>Accept all</strong>{" "}
+                or <strong>Essential only</strong> via our cookie banner. Your
+                choice is stored in your browser (local storage). You can change
+                it anytime using <strong>Cookie settings</strong> in the footer.
+                If we add analytics or marketing tools later, they will only run
+                when you have accepted those categories.
               </p>
             </>
           ),

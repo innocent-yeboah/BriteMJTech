@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Logo } from "@/components/layout/logo";
 import { NewsletterForm } from "@/components/forms/newsletter-form";
+import { CookieSettingsButton } from "@/components/cookies/cookie-settings-button";
 import { mainNav, siteConfig, telLink } from "@/lib/site";
 import { services } from "@/lib/data";
 
@@ -188,6 +189,7 @@ export function Footer() {
             <Link href="/terms" className="transition-colors hover:text-accent">
               Terms of Service
             </Link>
+            <CookieSettingsButton className="transition-colors hover:text-accent" />
             <a
               href="https://buildwithinnocent.com"
               target="_blank"
