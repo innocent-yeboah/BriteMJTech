@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState, useCallback, Suspense } from "react";
+import { useEffect, useState, useCallback, Suspense, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
 import { Eye, Pencil, Trash2, Phone, Mail, Calendar } from "lucide-react";
 import { PageHeader, AddButton } from "@/components/admin/ui/page-header";
 import { DataTable, ActionMenu, ActionMenuItem, type Column } from "@/components/admin/ui/data-table";
@@ -11,6 +10,8 @@ import { ConfirmModal } from "@/components/admin/ui/modal";
 import { Select } from "@/components/admin/ui/form-fields";
 import { createClient } from "@/lib/supabase/client";
 import { formatDate, formatPhoneGH, LEAD_STATUS_CONFIG, SERVICES_LIST } from "@/lib/admin/constants";
+import { LEAD_PIPELINE, OPEN_LEAD_STATUSES } from "@/lib/admin/lead-pipeline";
+import { cn } from "@/lib/utils";
 import type { Lead, LeadStatus } from "@/types/database";
 
 function LeadsContent() {
@@ -18,6 +19,7 @@ function LeadsContent() {
   const statusFilter = searchParams.get("status") as LeadStatus | null;
 
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [allLeads, setAllLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleteModal, setDeleteModal] = useState<{ open: boolean; lead: Lead | null }>({
     open: false,
@@ -35,24 +37,28 @@ function LeadsContent() {
   const fetchLeads = useCallback(async () => {
     setLoading(true);
     try {
-      let query = supabase
+      const { data, error } = await supabase
         .from("leads")
-        .select("*")
+        .select("*, assigned_user:users!leads_assigned_to_fkey(id, full_name, email)")
         .order("created_at", { ascending: false });
 
-      if (filters.status) {
-        query = query.eq("status", filters.status);
+      if (error) throw error;
+      const rows = (data as Lead[]) ?? [];
+      setAllLeads(rows);
+
+      let filtered = rows;
+      if (filters.status === "open") {
+        filtered = rows.filter((l) => OPEN_LEAD_STATUSES.includes(l.status));
+      } else if (filters.status) {
+        filtered = rows.filter((l) => l.status === filters.status);
       }
       if (filters.priority) {
-        query = query.eq("priority", filters.priority);
+        filtered = filtered.filter((l) => l.priority === filters.priority);
       }
       if (filters.source) {
-        query = query.eq("source", filters.source);
+        filtered = filtered.filter((l) => l.source === filters.source);
       }
-
-      const { data, error } = await query;
-      if (error) throw error;
-      setLeads((data as Lead[]) ?? []);
+      setLeads(filtered);
     } catch (error) {
       console.error("Failed to fetch leads:", error);
     } finally {
@@ -61,8 +67,18 @@ function LeadsContent() {
   }, [supabase, filters]);
 
   useEffect(() => {
-    fetchLeads();
+    void fetchLeads();
   }, [fetchLeads]);
+
+  const stageCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: allLeads.length, open: 0 };
+    for (const status of LEAD_PIPELINE) counts[status] = 0;
+    for (const lead of allLeads) {
+      counts[lead.status] = (counts[lead.status] ?? 0) + 1;
+      if (OPEN_LEAD_STATUSES.includes(lead.status)) counts.open += 1;
+    }
+    return counts;
+  }, [allLeads]);
 
   const handleDelete = async () => {
     if (!deleteModal.lead) return;
@@ -71,6 +87,7 @@ function LeadsContent() {
       const { error } = await supabase.from("leads").delete().eq("id", deleteModal.lead.id);
       if (error) throw error;
       setLeads((prev) => prev.filter((l) => l.id !== deleteModal.lead!.id));
+      setAllLeads((prev) => prev.filter((l) => l.id !== deleteModal.lead!.id));
       setDeleteModal({ open: false, lead: null });
     } catch (error) {
       console.error("Failed to delete lead:", error);
@@ -130,6 +147,15 @@ function LeadsContent() {
       render: (lead) => <StatusBadge status={lead.status} />,
     },
     {
+      key: "assigned_to",
+      header: "Owner",
+      render: (lead) => (
+        <span className="text-sm text-slate-600">
+          {lead.assigned_user?.full_name || lead.assigned_user?.email || "—"}
+        </span>
+      ),
+    },
+    {
       key: "priority",
       header: "Priority",
       sortable: true,
@@ -148,11 +174,21 @@ function LeadsContent() {
     },
   ];
 
+  const pipelineTabs: { key: string; label: string }[] = [
+    { key: "", label: "All" },
+    { key: "open", label: "Open" },
+    ...LEAD_PIPELINE.map((status) => ({
+      key: status,
+      label: LEAD_STATUS_CONFIG[status].label,
+    })),
+  ];
+
   const filterComponent = (
     <div className="flex flex-wrap gap-4">
       <Select
         options={[
           { value: "", label: "All Statuses" },
+          { value: "open", label: "Open pipeline" },
           ...Object.entries(LEAD_STATUS_CONFIG).map(([value, config]) => ({
             value,
             label: config.label,
@@ -160,7 +196,7 @@ function LeadsContent() {
         ]}
         value={filters.status}
         onChange={(e) => setFilters((f) => ({ ...f, status: e.target.value }))}
-        className="w-40"
+        className="w-44"
       />
       <Select
         options={[
@@ -195,9 +231,39 @@ function LeadsContent() {
     <div>
       <PageHeader
         title="Leads"
-        description="Manage and track potential customers"
+        description="Manage the pipeline from new enquiry through to won or lost"
         actions={<AddButton href="/admin/leads/new">Add Lead</AddButton>}
       />
+
+      <div className="mb-4 flex gap-1 overflow-x-auto rounded-xl border border-slate-200 bg-white p-1">
+        {pipelineTabs.map((tab) => {
+          const countKey = tab.key === "" ? "all" : tab.key;
+          const active = filters.status === tab.key;
+          return (
+            <button
+              key={tab.key || "all"}
+              type="button"
+              onClick={() => setFilters((f) => ({ ...f, status: tab.key }))}
+              className={cn(
+                "flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                active
+                  ? "bg-brand-700 text-white"
+                  : "text-slate-600 hover:bg-slate-50",
+              )}
+            >
+              {tab.label}
+              <span
+                className={cn(
+                  "rounded-full px-1.5 py-0.5 text-xs tabular-nums",
+                  active ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500",
+                )}
+              >
+                {stageCounts[countKey] ?? 0}
+              </span>
+            </button>
+          );
+        })}
+      </div>
 
       <DataTable
         data={leads}
