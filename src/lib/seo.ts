@@ -146,4 +146,22 @@ export const publicRoutes = [
     changeFrequency: "monthly" as const,
     image: "/images/og/default.jpg",
   },
+  {
+    path: "/privacy",
+    title: "Privacy Policy",
+    description:
+      "How Brite MJ Technologies collects, uses, stores, and protects personal information from website visitors and customers.",
+    priority: 0.3,
+    changeFrequency: "yearly" as const,
+    image: "/images/og/default.jpg",
+  },
+  {
+    path: "/terms",
+    title: "Terms of Service",
+    description:
+      "Terms governing use of the Brite MJ Technologies website and related service enquiries.",
+    priority: 0.3,
+    changeFrequency: "yearly" as const,
+    image: "/images/og/default.jpg",
+  },
 ] as const;

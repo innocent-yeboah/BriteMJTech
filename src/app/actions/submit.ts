@@ -1,6 +1,5 @@
 "use server";
 
-import { headers } from "next/headers";
 import { createAdminClient } from "@/lib/supabase/admin";
 import {
   sendLeadNotification,
@@ -14,36 +13,12 @@ import {
   quoteSchema,
   newsletterSchema,
 } from "@/lib/validations";
+import { checkFormRateLimit } from "@/lib/rate-limit";
 
 export interface ActionResult {
   ok: boolean;
   message: string;
   errors?: Record<string, string[]>;
-}
-
-/**
- * Very small in-memory rate limiter. For a single-instance deployment this
- * curbs abusive form spam. For multi-region/serverless scale, back this with
- * Upstash Redis or Supabase. Keyed by client IP.
- */
-const rateBucket = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT = 6;
-const RATE_WINDOW_MS = 60_000;
-
-function checkRateLimit(): boolean {
-  const ip =
-    headers().get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    headers().get("x-real-ip") ||
-    "unknown";
-  const now = Date.now();
-  const entry = rateBucket.get(ip);
-  if (!entry || now > entry.resetAt) {
-    rateBucket.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
-    return true;
-  }
-  if (entry.count >= RATE_LIMIT) return false;
-  entry.count += 1;
-  return true;
 }
 
 function phoneFallbackMessage(): string {
@@ -58,7 +33,7 @@ function phoneFallbackMessage(): string {
 export async function submitQuote(
   raw: Record<string, unknown>,
 ): Promise<ActionResult> {
-  if (!checkRateLimit()) {
+  if (!(await checkFormRateLimit("quote"))) {
     return {
       ok: false,
       message:
@@ -146,7 +121,7 @@ export async function submitQuote(
 export async function submitEnquiry(
   raw: Record<string, unknown>,
 ): Promise<ActionResult> {
-  if (!checkRateLimit()) {
+  if (!(await checkFormRateLimit("enquiry"))) {
     return {
       ok: false,
       message:
@@ -225,7 +200,7 @@ export async function submitEnquiry(
 export async function submitNewsletter(
   raw: Record<string, unknown>,
 ): Promise<ActionResult> {
-  if (!checkRateLimit()) {
+  if (!(await checkFormRateLimit("newsletter"))) {
     return {
       ok: false,
       message:

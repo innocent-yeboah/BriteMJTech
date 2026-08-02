@@ -174,19 +174,29 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container flex flex-col gap-2 py-5 text-center text-xs text-brand-100/70 sm:flex-row sm:items-center sm:justify-between sm:text-left">
+        <div className="container flex flex-col gap-3 py-5 text-center text-xs text-brand-100/70 sm:flex-row sm:items-center sm:justify-between sm:text-left">
           <p>
             &copy; {year} {siteConfig.name}. All rights reserved.
           </p>
-          <a
-            href="https://buildwithinnocent.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-brand-100/70 transition-colors hover:text-accent"
-          >
-            Built by Build With Innocent — Digital Business Systems for African
-            Enterprises
-          </a>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:justify-end">
+            <Link
+              href="/privacy"
+              className="transition-colors hover:text-accent"
+            >
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="transition-colors hover:text-accent">
+              Terms of Service
+            </Link>
+            <a
+              href="https://buildwithinnocent.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-accent"
+            >
+              Built by Build With Innocent
+            </a>
+          </div>
         </div>
       </div>
     </footer>

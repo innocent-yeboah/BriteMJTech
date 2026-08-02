@@ -168,7 +168,11 @@ export function ContactForm() {
         )}
       </Button>
       <p className="text-center text-xs text-slate-500">
-        We respect your privacy. Your details are only used to respond to your
+        We respect your{" "}
+        <a href="/privacy" className="underline underline-offset-2 hover:text-brand-800">
+          privacy
+        </a>
+        . Your details are only used to respond to your
         enquiry.
       </p>
     </form>
