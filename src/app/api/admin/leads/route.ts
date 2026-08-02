@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { requireStaff } from "@/lib/admin/auth";
 import { leadSchema } from "@/lib/validations/admin";
 
 export async function GET(request: NextRequest) {
-  const supabase = createClient();
-  const { searchParams } = new URL(request.url);
+  const auth = await requireStaff();
+  if (!auth.ok) {
+    return NextResponse.json({ error: auth.error }, { status: auth.status });
+  }
 
+  const { searchParams } = new URL(request.url);
   const status = searchParams.get("status");
   const priority = searchParams.get("priority");
   const source = searchParams.get("source");
@@ -14,9 +17,11 @@ export async function GET(request: NextRequest) {
   const offset = (page - 1) * limit;
 
   try {
-    let query = supabase
+    let query = auth.supabase
       .from("leads")
-      .select("*, assigned_user:users!leads_assigned_to_fkey(id, full_name, email)", { count: "exact" })
+      .select("*, assigned_user:users!leads_assigned_to_fkey(id, full_name, email)", {
+        count: "exact",
+      })
       .order("created_at", { ascending: false })
       .range(offset, offset + limit - 1);
 
@@ -44,20 +49,21 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const supabase = createClient();
+  const auth = await requireStaff();
+  if (!auth.ok) {
+    return NextResponse.json({ error: auth.error }, { status: auth.status });
+  }
 
   try {
     const body = await request.json();
     const validated = leadSchema.parse(body);
 
-    const { data: { user } } = await supabase.auth.getUser();
-
-    const { data, error } = await supabase
+    const { data, error } = await auth.supabase
       .from("leads")
       .insert({
         ...validated,
         email: validated.email || null,
-        created_by: user?.id,
+        created_by: auth.profile.id,
       })
       .select()
       .single();

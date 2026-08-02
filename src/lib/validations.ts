@@ -21,8 +21,8 @@ export const contactSchema = z.object({
     .trim()
     .min(10, "Please tell us a little more (at least 10 characters).")
     .max(2000),
-  // Honeypot — must stay empty. Bots tend to fill every field.
-  company: z.string().max(0).optional().or(z.literal("")),
+  // Honeypot — bots fill this; humans leave it empty. Parsed then discarded.
+  company: z.string().optional().default(""),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
@@ -46,15 +46,15 @@ export const quoteSchema = z.object({
   // Step 4 — inspection scheduling
   inspectionDate: z.string().trim().optional().or(z.literal("")),
   inspectionTime: z.string().trim().optional().or(z.literal("")),
-  // Honeypot
-  company: z.string().max(0).optional().or(z.literal("")),
+  // Honeypot — bots fill this; humans leave it empty. Parsed then discarded.
+  company: z.string().optional().default(""),
 });
 
 export type QuoteInput = z.infer<typeof quoteSchema>;
 
 export const newsletterSchema = z.object({
   email: z.string().trim().email("Please enter a valid email address.").max(160),
-  company: z.string().max(0).optional().or(z.literal("")),
+  company: z.string().optional().default(""),
 });
 
 export type NewsletterInput = z.infer<typeof newsletterSchema>;

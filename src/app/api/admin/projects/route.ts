@@ -1,17 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { requireStaff } from "@/lib/admin/auth";
 import { projectSchema } from "@/lib/validations/admin";
 
 export async function GET(request: NextRequest) {
-  const supabase = createClient();
-  const { searchParams } = new URL(request.url);
+  const auth = await requireStaff();
+  if (!auth.ok) {
+    return NextResponse.json({ error: auth.error }, { status: auth.status });
+  }
 
+  const { searchParams } = new URL(request.url);
   const status = searchParams.get("status");
   const type = searchParams.get("type");
   const priority = searchParams.get("priority");
 
   try {
-    let query = supabase
+    let query = auth.supabase
       .from("projects")
       .select("*, tasks:project_tasks(count)")
       .order("created_at", { ascending: false });
@@ -32,13 +35,16 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const supabase = createClient();
+  const auth = await requireStaff();
+  if (!auth.ok) {
+    return NextResponse.json({ error: auth.error }, { status: auth.status });
+  }
 
   try {
     const body = await request.json();
     const validated = projectSchema.parse(body);
 
-    const { data, error } = await supabase
+    const { data, error } = await auth.supabase
       .from("projects")
       .insert({
         ...validated,

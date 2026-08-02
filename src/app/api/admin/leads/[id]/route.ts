@@ -1,15 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { requireStaff } from "@/lib/admin/auth";
 import { leadSchema } from "@/lib/validations/admin";
 
 export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  _request: NextRequest,
+  { params }: { params: { id: string } },
 ) {
-  const supabase = createClient();
+  const auth = await requireStaff();
+  if (!auth.ok) {
+    return NextResponse.json({ error: auth.error }, { status: auth.status });
+  }
 
   try {
-    const { data, error } = await supabase
+    const { data, error } = await auth.supabase
       .from("leads")
       .select("*, assigned_user:users!leads_assigned_to_fkey(id, full_name, email)")
       .eq("id", params.id)
@@ -29,15 +32,18 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
-  const supabase = createClient();
+  const auth = await requireStaff();
+  if (!auth.ok) {
+    return NextResponse.json({ error: auth.error }, { status: auth.status });
+  }
 
   try {
     const body = await request.json();
     const validated = leadSchema.partial().parse(body);
 
-    const { data, error } = await supabase
+    const { data, error } = await auth.supabase
       .from("leads")
       .update({
         ...validated,
@@ -60,13 +66,16 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  _request: NextRequest,
+  { params }: { params: { id: string } },
 ) {
-  const supabase = createClient();
+  const auth = await requireStaff();
+  if (!auth.ok) {
+    return NextResponse.json({ error: auth.error }, { status: auth.status });
+  }
 
   try {
-    const { error } = await supabase.from("leads").delete().eq("id", params.id);
+    const { error } = await auth.supabase.from("leads").delete().eq("id", params.id);
 
     if (error) throw error;
 

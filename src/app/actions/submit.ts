@@ -46,6 +46,14 @@ function checkRateLimit(): boolean {
   return true;
 }
 
+function phoneFallbackMessage(): string {
+  return (
+    "Something went wrong on our side. Please call us on " +
+    (process.env.NEXT_PUBLIC_COMPANY_PHONE || "0203412477") +
+    " and we'll help right away."
+  );
+}
+
 /** Handle a full quote / lead request (multi-step form). */
 export async function submitQuote(
   raw: Record<string, unknown>,
@@ -53,7 +61,8 @@ export async function submitQuote(
   if (!checkRateLimit()) {
     return {
       ok: false,
-      message: "You've sent a few requests very quickly. Please try again in a minute.",
+      message:
+        "You've sent a few requests very quickly. Please try again in a minute.",
     };
   }
 
@@ -67,7 +76,7 @@ export async function submitQuote(
   }
 
   // Honeypot triggered — silently accept without doing anything.
-  if (parsed.data.company) {
+  if (parsed.data.company.trim()) {
     return { ok: true, message: "Thank you." };
   }
 
@@ -75,6 +84,8 @@ export async function submitQuote(
 
   try {
     const supabase = createAdminClient();
+    let stored = false;
+
     if (supabase) {
       const { error } = await supabase.from("leads").insert({
         name: data.name,
@@ -82,6 +93,7 @@ export async function submitQuote(
         phone: data.phone,
         service_interest: data.services,
         property_type: data.propertyType,
+        property_size: data.propertySize || null,
         message: data.message || null,
         source: "website",
         status: data.inspectionDate ? "inspection_scheduled" : "new",
@@ -90,10 +102,12 @@ export async function submitQuote(
       });
       if (error) {
         console.error("[submitQuote] Supabase insert failed:", error.message);
+        return { ok: false, message: phoneFallbackMessage() };
       }
+      stored = true;
     }
 
-    await Promise.allSettled([
+    const emailResults = await Promise.allSettled([
       sendLeadNotification({
         name: data.name,
         email: data.email,
@@ -109,6 +123,14 @@ export async function submitQuote(
       sendLeadConfirmation({ name: data.name, email: data.email }),
     ]);
 
+    const notified = emailResults.some(
+      (r) => r.status === "fulfilled",
+    );
+
+    if (!stored && !notified) {
+      return { ok: false, message: phoneFallbackMessage() };
+    }
+
     return {
       ok: true,
       message:
@@ -116,13 +138,7 @@ export async function submitQuote(
     };
   } catch (error) {
     console.error("[submitQuote] Unexpected error:", error);
-    return {
-      ok: false,
-      message:
-        "Something went wrong on our side. Please call us on " +
-        (process.env.NEXT_PUBLIC_COMPANY_PHONE || "0203412477") +
-        " and we'll help right away.",
-    };
+    return { ok: false, message: phoneFallbackMessage() };
   }
 }
 
@@ -133,7 +149,8 @@ export async function submitEnquiry(
   if (!checkRateLimit()) {
     return {
       ok: false,
-      message: "You've sent a few messages very quickly. Please try again in a minute.",
+      message:
+        "You've sent a few messages very quickly. Please try again in a minute.",
     };
   }
 
@@ -146,7 +163,7 @@ export async function submitEnquiry(
     };
   }
 
-  if (parsed.data.company) {
+  if (parsed.data.company.trim()) {
     return { ok: true, message: "Thank you." };
   }
 
@@ -154,6 +171,8 @@ export async function submitEnquiry(
 
   try {
     const supabase = createAdminClient();
+    let stored = false;
+
     if (supabase) {
       const { error } = await supabase.from("enquiries").insert({
         name: data.name,
@@ -165,10 +184,12 @@ export async function submitEnquiry(
       });
       if (error) {
         console.error("[submitEnquiry] Supabase insert failed:", error.message);
+        return { ok: false, message: phoneFallbackMessage() };
       }
+      stored = true;
     }
 
-    await Promise.allSettled([
+    const emailResults = await Promise.allSettled([
       sendEnquiryNotification({
         name: data.name,
         email: data.email,
@@ -178,6 +199,12 @@ export async function submitEnquiry(
       }),
       sendLeadConfirmation({ name: data.name, email: data.email }),
     ]);
+
+    const notified = emailResults.some((r) => r.status === "fulfilled");
+
+    if (!stored && !notified) {
+      return { ok: false, message: phoneFallbackMessage() };
+    }
 
     return {
       ok: true,
@@ -198,16 +225,26 @@ export async function submitEnquiry(
 export async function submitNewsletter(
   raw: Record<string, unknown>,
 ): Promise<ActionResult> {
+  if (!checkRateLimit()) {
+    return {
+      ok: false,
+      message:
+        "You've sent a few requests very quickly. Please try again in a minute.",
+    };
+  }
+
   const parsed = newsletterSchema.safeParse(raw);
   if (!parsed.success) {
     return { ok: false, message: "Please enter a valid email address." };
   }
-  if (parsed.data.company) {
+  if (parsed.data.company.trim()) {
     return { ok: true, message: "Thank you." };
   }
 
   try {
     const supabase = createAdminClient();
+    let stored = false;
+
     if (supabase) {
       const { error } = await supabase.from("enquiries").insert({
         name: "Newsletter Subscriber",
@@ -218,13 +255,21 @@ export async function submitNewsletter(
       });
       if (error) {
         console.error("[submitNewsletter] insert failed:", error.message);
+        return { ok: false, message: "Please try again in a moment." };
       }
+      stored = true;
     }
 
-    await Promise.allSettled([
+    const emailResults = await Promise.allSettled([
       sendNewsletterNotification(parsed.data.email),
       sendNewsletterConfirmation(parsed.data.email),
     ]);
+
+    const notified = emailResults.some((r) => r.status === "fulfilled");
+
+    if (!stored && !notified) {
+      return { ok: false, message: "Please try again in a moment." };
+    }
 
     return { ok: true, message: "You're subscribed. Welcome aboard!" };
   } catch (error) {

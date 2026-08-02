@@ -47,11 +47,20 @@ function shell(title: string, body: string): string {
   </div>`;
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function row(label: string, value?: string | null): string {
   if (!value) return "";
   return `<tr>
-    <td style="padding:8px 12px;background:#f0f4f9;font-weight:600;border-radius:6px 0 0 6px;white-space:nowrap;vertical-align:top;">${label}</td>
-    <td style="padding:8px 12px;">${value}</td>
+    <td style="padding:8px 12px;background:#f0f4f9;font-weight:600;border-radius:6px 0 0 6px;white-space:nowrap;vertical-align:top;">${escapeHtml(label)}</td>
+    <td style="padding:8px 12px;">${escapeHtml(value)}</td>
   </tr>`;
 }
 
@@ -116,6 +125,7 @@ interface LeadEmailData {
 
 /** Notify the Brite MJ team about a new lead / quote request. */
 export async function sendLeadNotification(data: LeadEmailData): Promise<void> {
+  const safeName = escapeHtml(data.name);
   const body = `
     <p>A new lead has been submitted through the website.</p>
     <table style="width:100%;border-collapse:separate;border-spacing:0 6px;font-size:14px;">
@@ -130,13 +140,13 @@ export async function sendLeadNotification(data: LeadEmailData): Promise<void> {
       ${row("Message", data.message)}
     </table>
     <p style="margin-top:20px;">
-      <a href="mailto:${data.email}" style="background:${brandBlue};color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;">Reply to ${data.name}</a>
+      <a href="mailto:${encodeURIComponent(data.email).replace(/%40/g, "@")}" style="background:${brandBlue};color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;">Reply to ${safeName}</a>
     </p>`;
 
   await sendEmail({
     to: internalInbox,
     replyTo: data.email,
-    subject: `New Lead: ${data.name} — ${data.services?.[0] ?? "Enquiry"}`,
+    subject: `New Lead: ${data.name.replace(/[\r\n]+/g, " ")} — ${(data.services?.[0] ?? "Enquiry").replace(/[\r\n]+/g, " ")}`,
     html: shell("New Website Lead", body),
   });
 }
@@ -146,7 +156,7 @@ export async function sendLeadConfirmation(data: {
   name: string;
   email: string;
 }): Promise<void> {
-  const firstName = data.name.split(" ")[0] || "there";
+  const firstName = escapeHtml(data.name.split(" ")[0] || "there");
   const body = `
     <p>Hi ${firstName},</p>
     <p>Thank you for reaching out to <strong>Brite MJ Technologies</strong>. We've received your request and a member of our team will contact you shortly to arrange your <strong>free site inspection</strong> and a tailored quote.</p>
@@ -178,6 +188,7 @@ interface EnquiryEmailData {
 export async function sendEnquiryNotification(
   data: EnquiryEmailData,
 ): Promise<void> {
+  const safeName = escapeHtml(data.name);
   const body = `
     <p>A new enquiry has been submitted through the contact form.</p>
     <table style="width:100%;border-collapse:separate;border-spacing:0 6px;font-size:14px;">
@@ -188,13 +199,13 @@ export async function sendEnquiryNotification(
       ${row("Message", data.message)}
     </table>
     <p style="margin-top:20px;">
-      <a href="mailto:${data.email}" style="background:${brandBlue};color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;">Reply to ${data.name}</a>
+      <a href="mailto:${encodeURIComponent(data.email).replace(/%40/g, "@")}" style="background:${brandBlue};color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;">Reply to ${safeName}</a>
     </p>`;
 
   await sendEmail({
     to: internalInbox,
     replyTo: data.email,
-    subject: `New Enquiry: ${data.subject || data.name}`,
+    subject: `New Enquiry: ${(data.subject || data.name).replace(/[\r\n]+/g, " ")}`,
     html: shell("New Contact Enquiry", body),
   });
 }

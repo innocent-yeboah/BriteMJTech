@@ -7,10 +7,20 @@ import { Eye, EyeOff, LogIn, AlertCircle } from "lucide-react";
 import { Logo } from "@/components/layout/logo";
 import { createClient } from "@/lib/supabase/client";
 
+/** Only allow same-origin admin paths — blocks open redirects. */
+function safeAdminRedirect(value: string | null): string {
+  if (!value) return "/admin";
+  if (!value.startsWith("/") || value.startsWith("//") || value.includes("://")) {
+    return "/admin";
+  }
+  if (!value.startsWith("/admin")) return "/admin";
+  return value;
+}
+
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/admin";
+  const redirect = safeAdminRedirect(searchParams.get("redirect"));
   const errorParam = searchParams.get("error");
 
   const [email, setEmail] = useState("");
