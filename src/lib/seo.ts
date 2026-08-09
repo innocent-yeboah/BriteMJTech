@@ -111,6 +111,15 @@ export const publicRoutes = [
     image: "/images/hero/cctv-install.png",
   },
   {
+    path: "/products",
+    title: "Security Products for Installation in Accra",
+    description:
+      "Cameras, NVRs, electric fencing, networking gear, gate motors, video intercoms, and smart access products used in Brite MJ Technologies installations across Accra.",
+    priority: 0.9,
+    changeFrequency: "weekly" as const,
+    image: "/images/cctv/nvr-system.png",
+  },
+  {
     path: "/projects",
     title: "Security Projects Across Accra",
     description:

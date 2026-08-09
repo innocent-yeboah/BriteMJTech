@@ -456,3 +456,345 @@ export const propertyTypes = [
   "Government Facility",
   "Other",
 ] as const;
+
+/** Product categories used in installation and service work. */
+export type ProductCategory =
+  | "cctv"
+  | "fencing"
+  | "networking"
+  | "gate-control"
+  | "intercom"
+  | "smart-security"
+  | "accessories";
+
+export interface Product {
+  slug: string;
+  name: string;
+  category: ProductCategory;
+  shortDescription: string;
+  uses: string[];
+  image: string;
+  imagePosition?: string;
+  /** Related marketing service slug for deep links. */
+  serviceSlug?: string;
+  featured?: boolean;
+}
+
+export const productCategories: {
+  id: ProductCategory | "all";
+  label: string;
+  description: string;
+}[] = [
+  {
+    id: "all",
+    label: "All products",
+    description: "Hardware we install across Accra homes and businesses.",
+  },
+  {
+    id: "cctv",
+    label: "CCTV & Recording",
+    description: "Cameras, NVRs, and monitoring gear for clear day/night coverage.",
+  },
+  {
+    id: "fencing",
+    label: "Electric Fencing",
+    description: "Energizers, conductors, and perimeter hardware for secure boundaries.",
+  },
+  {
+    id: "networking",
+    label: "Networking",
+    description: "Switches, cabling, and connectivity that keep systems online.",
+  },
+  {
+    id: "gate-control",
+    label: "Gate Control",
+    description: "Motors, remotes, and access hardware for driveway automation.",
+  },
+  {
+    id: "intercom",
+    label: "Video Intercom",
+    description: "Outdoor stations, indoor panels, and visitor entry systems.",
+  },
+  {
+    id: "smart-security",
+    label: "Smart Security",
+    description: "Integrated locks, sensors, and connected security components.",
+  },
+  {
+    id: "accessories",
+    label: "Accessories",
+    description: "Mounts, power, and cabling that finish a reliable install.",
+  },
+];
+
+export const products: Product[] = [
+  {
+    slug: "hd-bullet-cameras",
+    name: "HD Bullet CCTV Cameras",
+    category: "cctv",
+    shortDescription:
+      "Weather-ready outdoor cameras for perimeter walls, poles, and entry points.",
+    uses: [
+      "Day/night perimeter monitoring",
+      "Driveway and gate coverage",
+      "Warehouse and yard surveillance",
+    ],
+    image: "/images/cctv/cameras-pole.png",
+    serviceSlug: "cctv-camera-installation",
+    featured: true,
+  },
+  {
+    slug: "dome-indoor-cameras",
+    name: "Indoor Dome Cameras",
+    category: "cctv",
+    shortDescription:
+      "Discreet indoor cameras for offices, shops, and reception areas.",
+    uses: [
+      "Retail floor monitoring",
+      "Office and lobby coverage",
+      "Cash desk and corridor views",
+    ],
+    image: "/images/cctv/indoor-cameras.png",
+    serviceSlug: "cctv-camera-installation",
+  },
+  {
+    slug: "nvr-recording-systems",
+    name: "NVR Recording Systems",
+    category: "cctv",
+    shortDescription:
+      "Local network video recorders for multi-camera storage and playback.",
+    uses: [
+      "Multi-zone recording",
+      "Playback for incident review",
+      "Remote mobile viewing setup",
+    ],
+    image: "/images/cctv/nvr-system.png",
+    serviceSlug: "cctv-camera-installation",
+    featured: true,
+  },
+  {
+    slug: "surevision-cameras",
+    name: "SureVision Camera Kits",
+    category: "cctv",
+    shortDescription:
+      "Reliable camera packages we specify for homes and small businesses.",
+    uses: [
+      "Residential starter systems",
+      "Shop front monitoring",
+      "Expandable multi-camera setups",
+    ],
+    image: "/images/cctv/surevision-camera.png",
+    serviceSlug: "cctv-camera-installation",
+  },
+  {
+    slug: "wall-mounted-electric-fence",
+    name: "Wall-Mounted Electric Fence Systems",
+    category: "fencing",
+    shortDescription:
+      "Perimeter conductors and brackets installed on boundary walls.",
+    uses: [
+      "Residential compound security",
+      "Commercial yard protection",
+      "Deterrent + alarm signalling",
+    ],
+    image: "/images/fencing/wall-electric-1.png",
+    serviceSlug: "security-fencing",
+    featured: true,
+  },
+  {
+    slug: "grille-electric-fencing",
+    name: "Grille & Roof Electric Fencing",
+    category: "fencing",
+    shortDescription:
+      "Electric fencing for roofs, windows, and vulnerable climb points.",
+    uses: [
+      "Roof access deterrence",
+      "Window and grille protection",
+      "Multi-storey property hardening",
+    ],
+    image: "/images/fencing/grille-electric.png",
+    serviceSlug: "security-fencing",
+  },
+  {
+    slug: "fence-energizer-kits",
+    name: "Fence Energizer Kits",
+    category: "fencing",
+    shortDescription:
+      "Power units and control hardware that drive electric fence lines safely.",
+    uses: [
+      "High-voltage pulse control",
+      "Fault monitoring readiness",
+      "Residential and commercial zones",
+    ],
+    image: "/images/fencing/wall-electric-2.png",
+    serviceSlug: "security-fencing",
+  },
+  {
+    slug: "network-switches",
+    name: "Network Switches & Patching",
+    category: "networking",
+    shortDescription:
+      "Structured switching for CCTV, access control, and office data.",
+    uses: [
+      "PoE camera backbones",
+      "Office LAN expansion",
+      "Clean rack and cabinet installs",
+    ],
+    image: "/images/networking/switch-cabling.png",
+    serviceSlug: "networking",
+    featured: true,
+  },
+  {
+    slug: "fiber-and-structured-cabling",
+    name: "Fiber & Structured Cabling",
+    category: "networking",
+    shortDescription:
+      "Fiber and copper runs that keep cameras and networks stable over distance.",
+    uses: [
+      "Long-run CCTV backhaul",
+      "Building backbone links",
+      "Reliable low-latency data paths",
+    ],
+    image: "/images/networking/fiber-install.png",
+    serviceSlug: "networking",
+  },
+  {
+    slug: "network-termination-kits",
+    name: "Termination & Testing Kits",
+    category: "networking",
+    shortDescription:
+      "Professional termination hardware used on every certified network install.",
+    uses: [
+      "RJ45 and fiber terminations",
+      "Link testing before handover",
+      "Neat cabinet finishes",
+    ],
+    image: "/images/networking/cable-tech.png",
+    serviceSlug: "networking",
+  },
+  {
+    slug: "gate-motors-and-remotes",
+    name: "Gate Motors & Remotes",
+    category: "gate-control",
+    shortDescription:
+      "Automation kits for swing and sliding gates with handheld remotes.",
+    uses: [
+      "Residential driveway automation",
+      "Estate and compound gates",
+      "Secure remote open/close",
+    ],
+    image: "/images/icons/gate-remote-icon.jpg",
+    imagePosition: "center",
+    serviceSlug: "remote-gate-control",
+    featured: true,
+  },
+  {
+    slug: "outdoor-intercom-stations",
+    name: "Outdoor Video Intercom Stations",
+    category: "intercom",
+    shortDescription:
+      "Weather-resistant call panels for gates, lobbies, and main entrances.",
+    uses: [
+      "Visitor identification",
+      "Two-way audio/video calls",
+      "Door release integration",
+    ],
+    image: "/images/intercom/outdoor-call.png",
+    serviceSlug: "video-intercom",
+    featured: true,
+  },
+  {
+    slug: "indoor-intercom-panels",
+    name: "Indoor Intercom Monitors",
+    category: "intercom",
+    shortDescription:
+      "Indoor screens and handsets for answering and opening access points.",
+    uses: [
+      "Home and office answering",
+      "Multi-unit apartment lobbies",
+      "Remote unlock when verified",
+    ],
+    image: "/images/intercom/indoor-panel.png",
+    serviceSlug: "video-intercom",
+  },
+  {
+    slug: "lobby-intercom-stations",
+    name: "Lobby Entry Stations",
+    category: "intercom",
+    shortDescription:
+      "Multi-tenant lobby stations for apartments, offices, and hostels.",
+    uses: [
+      "Directory-based calling",
+      "Shared building access",
+      "Visitor logging readiness",
+    ],
+    image: "/images/intercom/lobby-station.png",
+    serviceSlug: "video-intercom",
+  },
+  {
+    slug: "biometric-access-readers",
+    name: "Biometric Access Readers",
+    category: "smart-security",
+    shortDescription:
+      "Fingerprint and credential readers for staff and restricted zones.",
+    uses: [
+      "Office door access",
+      "Server room protection",
+      "Staff attendance-ready setups",
+    ],
+    image: "/images/intercom/biometric-unlock.png",
+    serviceSlug: "smart-security-systems",
+    featured: true,
+  },
+  {
+    slug: "smart-security-locks",
+    name: "Smart Security Locks",
+    category: "smart-security",
+    shortDescription:
+      "Connected lock hardware for doors that need stronger control.",
+    uses: [
+      "Main door hardening",
+      "App-assisted access where specified",
+      "Integrated alarm readiness",
+    ],
+    image: "/images/icons/smart-security-lock.jpg",
+    serviceSlug: "smart-security-systems",
+  },
+  {
+    slug: "camera-mounts-and-brackets",
+    name: "Camera Mounts & Brackets",
+    category: "accessories",
+    shortDescription:
+      "Poles, wall arms, and brackets that keep cameras stable and correctly aimed.",
+    uses: [
+      "Pole and wall mounting",
+      "Corner and eaves installs",
+      "Clean cable management",
+    ],
+    image: "/images/cctv/install-2.png",
+    serviceSlug: "cctv-camera-installation",
+  },
+  {
+    slug: "power-and-backup-kits",
+    name: "Power & Backup Kits",
+    category: "accessories",
+    shortDescription:
+      "Power supplies and backup options that keep systems running through outages.",
+    uses: [
+      "Camera and NVR power",
+      "Fence energizer supply",
+      "Short outage continuity",
+    ],
+    image: "/images/support/service-support.png",
+    serviceSlug: "service-and-support",
+  },
+];
+
+export function getProductsByCategory(category: ProductCategory | "all") {
+  if (category === "all") return products;
+  return products.filter((product) => product.category === category);
+}
+
+export function getProduct(slug: string) {
+  return products.find((product) => product.slug === slug);
+}

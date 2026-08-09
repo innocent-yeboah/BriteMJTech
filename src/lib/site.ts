@@ -57,6 +57,7 @@ export function telLink(phone: string = siteConfig.contact.phone): string {
 export const mainNav = [
   { title: "Home", href: "/" },
   { title: "Services", href: "/services" },
+  { title: "Products", href: "/products" },
   { title: "About", href: "/about" },
   { title: "Projects", href: "/projects" },
   { title: "Contact", href: "/contact" },

@@ -406,9 +406,27 @@ function SettingsContent() {
               >
                 <h3 className="mb-2 text-lg font-semibold text-slate-900">Change password</h3>
                 <p className="mb-6 text-sm text-slate-500">
-                  Update your sign-in password. Use at least 8 characters.
+                  Update your sign-in password. Use at least 10 characters with
+                  upper/lowercase, a number, and a symbol. Compromised passwords
+                  from known breaches are blocked.
                 </p>
 
+                <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+                  <p className="font-medium">Supabase Auth leaked-password protection</p>
+                  <p className="mt-1">
+                    App-side Have I Been Pwned checks are already enforced here. Also turn on{" "}
+                    <strong>Prevent use of leaked passwords</strong> in Supabase (Pro plan) so
+                    Auth rejects weak passwords on every path:
+                  </p>
+                  <a
+                    href="https://supabase.com/dashboard/project/tnakosplvgsbyhaycgsr/auth/providers?provider=Email"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-block font-medium text-brand-700 underline"
+                  >
+                    Open Auth → Email providers
+                  </a>
+                </div>
                 {securityMessage ? (
                   <div
                     className={`mb-4 rounded-lg px-4 py-3 text-sm ${

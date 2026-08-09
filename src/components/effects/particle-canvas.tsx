@@ -50,6 +50,10 @@ export function ParticleCanvas({
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+    const isNarrow = window.matchMedia("(max-width: 768px)").matches;
+    // Skip continuous animation on phones/tablets for Lighthouse + battery.
+    const staticOnly = reducedMotion || isCoarsePointer || isNarrow;
 
     let width = 0;
     let height = 0;
@@ -62,6 +66,7 @@ export function ParticleCanvas({
     const radiusSq = interactRadius * interactRadius;
     const forceSign = mode === "attract" ? 1 : -1;
     const linkDistance = 110;
+    const densityScale = isNarrow ? 0.45 : 1;
 
     const resize = () => {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -74,8 +79,8 @@ export function ParticleCanvas({
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       const count = Math.max(
-        48,
-        Math.min(220, Math.floor(width * height * density)),
+        24,
+        Math.min(140, Math.floor(width * height * density * densityScale)),
       );
       const cols = Math.ceil(Math.sqrt(count * (width / Math.max(height, 1))));
       const rows = Math.ceil(count / cols);
@@ -115,7 +120,7 @@ export function ParticleCanvas({
 
     const onVisibility = () => {
       running = document.visibilityState === "visible";
-      if (running && !reducedMotion) {
+      if (running && !staticOnly) {
         frame = window.requestAnimationFrame(tick);
       }
     };
@@ -131,7 +136,7 @@ export function ParticleCanvas({
     };
 
     const tick = () => {
-      if (!running || reducedMotion) return;
+      if (!running || staticOnly) return;
 
       ctx.clearRect(0, 0, width, height);
 
@@ -198,7 +203,7 @@ export function ParticleCanvas({
     document.documentElement.addEventListener("mouseleave", onMouseLeave);
     document.addEventListener("visibilitychange", onVisibility);
 
-    if (reducedMotion) {
+    if (staticOnly) {
       drawStatic();
     } else {
       frame = window.requestAnimationFrame(tick);

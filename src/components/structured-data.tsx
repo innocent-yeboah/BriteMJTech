@@ -1,5 +1,5 @@
 import { siteConfig } from "@/lib/site";
-import { services } from "@/lib/data";
+import { products, services } from "@/lib/data";
 
 function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
@@ -149,6 +149,24 @@ export function ServicesJsonLd() {
       url: `${siteConfig.url}/services#${service.slug}`,
       name: service.name,
       description: service.shortDescription,
+    })),
+  };
+
+  return <JsonLd data={jsonLd} />;
+}
+
+/** Product catalog schema for installation hardware. */
+export function ProductsJsonLd() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Brite MJ Technologies Installation Products",
+    itemListElement: products.map((product, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `${siteConfig.url}/products#${product.category}`,
+      name: product.name,
+      description: product.shortDescription,
     })),
   };
 
