@@ -84,11 +84,11 @@ export function Hero() {
 
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-brand-950/35"
+        className="absolute inset-0 bg-gradient-to-b from-brand-950/20 via-transparent to-brand-950/55"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-b from-brand-950/25 via-brand-950/40 to-brand-950/70"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-950/50 to-transparent"
       />
 
       <Container className="relative py-20 sm:py-24 lg:py-28">
@@ -112,7 +112,7 @@ export function Hero() {
             {leadHooks.map((hook, index) => (
               <article
                 key={hook.label}
-                className="rounded-2xl border border-white/15 bg-white/95 p-6 shadow-2xl backdrop-blur-sm sm:p-7"
+                className="rounded-2xl border border-white/20 bg-white/80 p-6 shadow-2xl backdrop-blur-[2px] sm:p-7"
               >
                 <div className="flex items-center gap-3">
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-800 font-heading text-sm font-bold text-white">

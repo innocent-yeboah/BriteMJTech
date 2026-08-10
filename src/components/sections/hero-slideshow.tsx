@@ -136,29 +136,26 @@ function HeroMedia({
 
   const objectClass = cn(
     "object-cover",
-    // Zoom in on portrait phones so landscape clips fill the frame
-    "scale-[1.5] sm:scale-125 md:scale-110 lg:scale-100",
+    // Mild crop on small screens so the install shot fills the frame without hiding too much
+    "scale-110 sm:scale-105 md:scale-100",
     "origin-center transition-transform duration-700",
+    "brightness-[1.08] contrast-[1.05] saturate-[1.05]",
     slide.position ?? "object-center",
   );
 
   if (slide.video && !reducedMotion) {
     return (
-      <>
-        <video
-          ref={videoRef}
-          className={cn("absolute inset-0 h-full w-full", objectClass)}
-          src={slide.video}
-          poster={slide.src}
-          muted
-          loop
-          playsInline
-          preload={active || priority ? "auto" : "metadata"}
-          autoPlay={active}
-        />
-        {/* Soft film grade so text stays readable without washing out the shot */}
-        <div className="absolute inset-0 bg-brand-950/10" />
-      </>
+      <video
+        ref={videoRef}
+        className={cn("absolute inset-0 h-full w-full", objectClass)}
+        src={slide.video}
+        poster={slide.src}
+        muted
+        loop
+        playsInline
+        preload="auto"
+        autoPlay={active}
+      />
     );
   }
 

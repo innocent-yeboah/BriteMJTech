@@ -4,28 +4,31 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
-import { ParticleCanvas } from "@/components/effects/particle-canvas";
+import { DeferredEffects } from "@/components/effects/deferred-effects";
 import { OrganizationJsonLd } from "@/components/structured-data";
 import { CookieBanner } from "@/components/cookies/cookie-banner";
-import { ScrollProgress } from "@/components/effects/scroll-progress";
 import { siteConfig } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  preload: true,
 });
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
   display: "swap",
+  preload: true,
 });
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
   display: "swap",
+  preload: false,
+  weight: ["700"],
 });
 
 export const metadata: Metadata = {
@@ -115,7 +118,6 @@ export default function RootLayout({
       className={`${inter.variable} ${montserrat.variable} ${playfair.variable}`}
     >
       <body className="relative flex min-h-screen flex-col">
-        <ParticleCanvas />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand-950 focus:px-4 focus:py-2 focus:text-white"
@@ -131,7 +133,7 @@ export default function RootLayout({
         </div>
         <WhatsAppButton />
         <CookieBanner />
-        <ScrollProgress />
+        <DeferredEffects />
         <OrganizationJsonLd />
       </body>
     </html>
