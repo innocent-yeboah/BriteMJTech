@@ -45,12 +45,12 @@ const trustIndicators = [
   { label: "24/7 Support", icon: Headphones },
 ] as const;
 
-/** On-site installation footage for the homepage hero. */
+/** CCTV installation footage (same clip as Services → CCTV Camera Installation). */
 const heroSlides: HeroSlide[] = [
   {
-    src: "/videos/hero/hero-main.jpg",
-    video: "/videos/hero/hero-main.mp4",
-    alt: "Brite MJ Technologies technician installing security fencing on site",
+    src: "/videos/cctv-office.jpg",
+    video: "/videos/cctv-office.mp4",
+    alt: "Brite MJ Technologies CCTV camera installation for office and business security",
     position: "object-center",
     eyebrow: "Security & Smart Systems",
     headline: [
