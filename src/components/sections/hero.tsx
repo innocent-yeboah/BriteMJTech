@@ -1,12 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  ArrowRight,
-  BadgeCheck,
-  ClipboardCheck,
-  Headphones,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,12 +32,6 @@ const leadHooks = [
     copy:
       "We do not just sell equipment. We assess your property, understand your needs, recommend the right systems, install them professionally, and support you long after installation. The process is straightforward, transparent, and built around you.",
   },
-] as const;
-
-const trustIndicators = [
-  { label: "Free Site Inspection", icon: ClipboardCheck },
-  { label: "Certified Installations", icon: BadgeCheck },
-  { label: "24/7 Support", icon: Headphones },
 ] as const;
 
 /** CCTV installation footage (same clip as Services → CCTV Camera Installation). */
@@ -145,15 +134,6 @@ export function Hero() {
               Explore Our Services
             </Button>
           </div>
-
-          <ul className="mt-8 flex flex-col items-center justify-center gap-3 text-sm font-semibold text-white/90 sm:flex-row sm:gap-8">
-            {trustIndicators.map(({ label, icon: Icon }) => (
-              <li key={label} className="flex items-center gap-2">
-                <Icon className="h-5 w-5 text-accent" aria-hidden="true" />
-                {label}
-              </li>
-            ))}
-          </ul>
         </div>
       </Container>
     </section>

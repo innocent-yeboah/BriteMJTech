@@ -65,11 +65,19 @@ export const services: Service[] = [
     ],
     icon: "cctv",
     iconImage: "/images/icons/cctv-real.jpg",
-    image: "/videos/cctv-office.jpg",
+    image: "/images/cctv/hikvision-street-view.jpg",
     video: "/videos/cctv-office.mp4",
     videoPoster: "/videos/cctv-office.jpg",
     videoFit: "contain",
     gallery: [
+      {
+        src: "/images/cctv/hikvision-street-view.jpg",
+        alt: "Hikvision bullet CCTV camera installed under a roof eave overlooking the street",
+      },
+      {
+        src: "/images/cctv/hikvision-wall-closeup.jpg",
+        alt: "Close-up of a professionally mounted Hikvision CCTV camera with junction box",
+      },
       {
         src: "/images/cctv/install-1.png",
         alt: "Technician installing a CCTV camera with a power drill",
@@ -157,8 +165,20 @@ export const services: Service[] = [
     icon: "network",
     iconImage: "/images/icons/network-real.png",
     iconImagePosition: "68% 52%",
-    image: "/images/networking/fiber-install.png",
+    image: "/images/networking/rack-install-monitor.png",
     gallery: [
+      {
+        src: "/images/networking/rack-install-monitor.png",
+        alt: "Technician installing wall-mounted network racks above a multi-camera monitoring screen",
+      },
+      {
+        src: "/images/networking/cctv-monitor-wall.png",
+        alt: "Large dual-monitor CCTV and network monitoring wall with UPS backup",
+      },
+      {
+        src: "/images/networking/starlink-install.png",
+        alt: "Starlink satellite dish installed on a balcony railing for high-speed internet",
+      },
       {
         src: "/images/networking/fiber-install.png",
         alt: "Technician connecting a fibre optic cable to an active network switch",
@@ -198,9 +218,27 @@ export const services: Service[] = [
     icon: "gate",
     iconImage: "/images/icons/gate-remote-icon.jpg",
     iconImagePosition: "55% 45%",
-    image: "/videos/remote-gate-poster.jpg",
+    image: "/images/gate/remote-swing-gate.png",
     video: "/videos/remote-gate.mp4",
     videoPoster: "/videos/remote-gate-poster.jpg",
+    gallery: [
+      {
+        src: "/images/gate/remote-swing-gate.png",
+        alt: "Hand operating a remote control to open a wooden swing driveway gate",
+      },
+      {
+        src: "/images/gate/sliding-wood-motor.png",
+        alt: "Automated sliding wooden gate with ground-mounted motor and track",
+      },
+      {
+        src: "/images/gate/ornamental-swing-actuators.png",
+        alt: "Black ornamental double-swing gate with linear actuator arms on stone pillars",
+      },
+      {
+        src: "/images/gate/beninca-sliding-motor.png",
+        alt: "Close-up of a Beninca sliding gate motor and gear rack installation",
+      },
+    ],
     featured: true,
   },
   {
@@ -539,7 +577,22 @@ export const products: Product[] = [
       "Driveway and gate coverage",
       "Warehouse and yard surveillance",
     ],
-    image: "/images/cctv/cameras-pole.png",
+    image: "/images/cctv/hikvision-wall-closeup.jpg",
+    serviceSlug: "cctv-camera-installation",
+    featured: true,
+  },
+  {
+    slug: "hikvision-outdoor-bullet",
+    name: "Hikvision Outdoor Bullet Cameras",
+    category: "cctv",
+    shortDescription:
+      "Professionally mounted Hikvision bullet cameras with clean conduit and junction-box installs.",
+    uses: [
+      "Residential street and gate views",
+      "Shop and office entry monitoring",
+      "Weather-ready outdoor coverage",
+    ],
+    image: "/images/cctv/hikvision-street-view.jpg",
     serviceSlug: "cctv-camera-installation",
     featured: true,
   },
@@ -673,6 +726,54 @@ export const products: Product[] = [
     serviceSlug: "networking",
   },
   {
+    slug: "network-rack-installation",
+    name: "Network Rack Installation",
+    category: "networking",
+    shortDescription:
+      "Wall-mounted racks, switches, and organised cabling for reliable site networks.",
+    uses: [
+      "Server and switch cabinets",
+      "PoE backbones for cameras",
+      "Clean, labelled cable management",
+    ],
+    image: "/images/networking/rack-install-monitor.png",
+    imagePosition: "center",
+    serviceSlug: "networking",
+    featured: true,
+  },
+  {
+    slug: "monitoring-control-rooms",
+    name: "Monitoring & Control Rooms",
+    category: "networking",
+    shortDescription:
+      "Multi-screen monitoring walls with UPS backup for 24/7 network visibility.",
+    uses: [
+      "CCTV and network oversight",
+      "Multi-channel video walls",
+      "Backup power for continuous uptime",
+    ],
+    image: "/images/networking/cctv-monitor-wall.png",
+    imagePosition: "center",
+    serviceSlug: "networking",
+    featured: true,
+  },
+  {
+    slug: "starlink-satellite-internet",
+    name: "Starlink Satellite Internet",
+    category: "networking",
+    shortDescription:
+      "High-speed satellite connectivity for homes and sites where fibre is limited.",
+    uses: [
+      "Remote and suburban coverage",
+      "Fast backup or primary internet",
+      "Professional dish mounting",
+    ],
+    image: "/images/networking/starlink-install.png",
+    imagePosition: "center",
+    serviceSlug: "networking",
+    featured: true,
+  },
+  {
     slug: "gate-motors-and-remotes",
     name: "Gate Motors & Remotes",
     category: "gate-control",
@@ -683,7 +784,55 @@ export const products: Product[] = [
       "Estate and compound gates",
       "Secure remote open/close",
     ],
-    image: "/images/icons/gate-remote-icon.jpg",
+    image: "/images/gate/beninca-sliding-motor.png",
+    imagePosition: "center",
+    serviceSlug: "remote-gate-control",
+    featured: true,
+  },
+  {
+    slug: "sliding-gate-automation",
+    name: "Sliding Gate Automation",
+    category: "gate-control",
+    shortDescription:
+      "Track-mounted motors for wooden and metal sliding driveway gates.",
+    uses: [
+      "Residential sliding gates",
+      "Compound and estate entrances",
+      "Quiet, reliable open and close",
+    ],
+    image: "/images/gate/sliding-wood-motor.png",
+    imagePosition: "center",
+    serviceSlug: "remote-gate-control",
+    featured: true,
+  },
+  {
+    slug: "swing-gate-actuators",
+    name: "Swing Gate Actuators",
+    category: "gate-control",
+    shortDescription:
+      "Linear actuator arms for ornamental and double-swing gate leaves.",
+    uses: [
+      "Double-swing driveway gates",
+      "Stone pillar installations",
+      "Smooth automated entry",
+    ],
+    image: "/images/gate/ornamental-swing-actuators.png",
+    imagePosition: "center",
+    serviceSlug: "remote-gate-control",
+    featured: true,
+  },
+  {
+    slug: "handheld-gate-remotes",
+    name: "Handheld Gate Remotes",
+    category: "gate-control",
+    shortDescription:
+      "Secure remotes and smartphone options to open your gate from the car or couch.",
+    uses: [
+      "One-touch gate open/close",
+      "Multi-user remote kits",
+      "Works with swing and sliding motors",
+    ],
+    image: "/images/gate/remote-swing-gate.png",
     imagePosition: "center",
     serviceSlug: "remote-gate-control",
     featured: true,
@@ -797,4 +946,9 @@ export function getProductsByCategory(category: ProductCategory | "all") {
 
 export function getProduct(slug: string) {
   return products.find((product) => product.slug === slug);
+}
+
+/** Products installed as part of a given service. */
+export function getProductsForService(serviceSlug: string) {
+  return products.filter((product) => product.serviceSlug === serviceSlug);
 }

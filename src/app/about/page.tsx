@@ -20,7 +20,7 @@ export const metadata: Metadata = createPageMetadata({
     "Brite MJ Technologies about",
     "Spintex CCTV installers",
   ],
-  image: "/images/hero/team-install.png",
+  image: "/images/hero/team-install.jpg",
 });
 
 const values = [
@@ -73,7 +73,7 @@ export default function AboutPage() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-card">
               <Image
-                src="/images/hero/team-install.png"
+                src="/images/hero/team-install.jpg"
                 alt="Brite MJ Technologies technicians installing security systems on site in Accra"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"

@@ -46,7 +46,7 @@ function SettingsContent() {
 
   const [company, setCompany] = useState<CompanySettings>({
     company_name: "Brite MJ Technologies",
-    company_email: "britemjtechnology@gmail.com",
+    company_email: "info@britemjtechnologies.com",
     company_phone: "0203412477",
     company_address: "Spintex-Shell Signboard, Accra, Ghana",
     tax_id: "",
@@ -69,6 +69,7 @@ function SettingsContent() {
   const [emailConfig, setEmailConfig] = useState<{
     configured: boolean;
     from: string;
+    replyTo: string;
     inbox: string;
     domain: string;
   } | null>(null);
@@ -339,6 +340,10 @@ function SettingsContent() {
                         Domain <strong>britemjtechnologies.com</strong> should send from{" "}
                         <code className="rounded bg-white/70 px-1.5 py-0.5 text-xs">
                           {emailConfig?.from || "noreply@britemjtechnologies.com"}
+                        </code>
+                        , reply via{" "}
+                        <code className="rounded bg-white/70 px-1.5 py-0.5 text-xs">
+                          {emailConfig?.replyTo || "info@britemjtechnologies.com"}
                         </code>
                         . Internal alerts go to{" "}
                         <code className="rounded bg-white/70 px-1.5 py-0.5 text-xs">

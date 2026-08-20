@@ -148,6 +148,31 @@ export function ImageSlideshow({
       <span className="sr-only" aria-live="polite">
         Photo {index + 1} of {images.length}
       </span>
+
+      {images.length > 1 ? (
+        <div
+          className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5"
+          role="tablist"
+          aria-label="Slideshow photos"
+        >
+          {images.map((image, i) => (
+            <button
+              key={image.src}
+              type="button"
+              role="tab"
+              aria-selected={i === index}
+              aria-label={`Show photo ${i + 1}`}
+              className={cn(
+                "h-2 rounded-full transition-all",
+                i === index
+                  ? "w-5 bg-white"
+                  : "w-2 bg-white/55 hover:bg-white/80",
+              )}
+              onClick={() => goTo(i)}
+            />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }

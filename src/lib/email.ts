@@ -13,10 +13,16 @@ const resendApiKey = process.env.RESEND_API_KEY;
 const fromEmail =
   process.env.RESEND_FROM_EMAIL ||
   "Brite MJ Technologies <noreply@britemjtechnologies.com>";
+/** Public branded inbox used as Reply-To on outbound mail. */
+const replyToEmail =
+  process.env.RESEND_REPLY_TO ||
+  process.env.COMPANY_EMAIL ||
+  "info@britemjtechnologies.com";
+/** Where new lead/enquiry alerts are delivered. */
 const internalInbox =
   process.env.LEADS_NOTIFICATION_EMAIL ||
   process.env.COMPANY_EMAIL ||
-  siteConfig.contact.email;
+  "leads@britemjtechnologies.com";
 
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
@@ -79,7 +85,7 @@ async function sendEmail(options: {
     const { data, error } = await resend.emails.send({
       from: fromEmail,
       to: options.to,
-      replyTo: options.replyTo,
+      replyTo: options.replyTo || replyToEmail,
       subject: options.subject,
       html: options.html,
     });
@@ -105,6 +111,7 @@ export function getEmailConfigSummary() {
   return {
     configured: isEmailConfigured(),
     from: fromEmail,
+    replyTo: replyToEmail,
     inbox: internalInbox,
     domain: "britemjtechnologies.com",
   };
@@ -170,7 +177,7 @@ export async function sendLeadConfirmation(data: {
 
   await sendEmail({
     to: data.email,
-    replyTo: internalInbox,
+    replyTo: replyToEmail,
     subject: "We've received your request — Brite MJ Technologies",
     html: shell("Thank you for contacting us", body),
   });
@@ -239,7 +246,7 @@ export async function sendNewsletterConfirmation(email: string): Promise<void> {
 
   await sendEmail({
     to: email,
-    replyTo: internalInbox,
+    replyTo: replyToEmail,
     subject: "You're subscribed — Brite MJ Technologies",
     html: shell("Welcome to the list", body),
   });

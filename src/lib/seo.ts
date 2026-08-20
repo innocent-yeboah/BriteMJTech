@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site";
+import { services } from "@/lib/data";
 
 const defaultOgImage = {
   url: "/images/og/default.jpg",
@@ -91,7 +92,7 @@ export function createPageMetadata({
   };
 }
 
-export const publicRoutes = [
+const staticPublicRoutes = [
   {
     path: "/",
     title: "Smart Security Systems for Home and Business",
@@ -111,15 +112,6 @@ export const publicRoutes = [
     image: "/images/hero/cctv-install.png",
   },
   {
-    path: "/products",
-    title: "Security Products for Installation in Accra",
-    description:
-      "Cameras, NVRs, electric fencing, networking gear, gate motors, video intercoms, and smart access products used in Brite MJ Technologies installations across Accra.",
-    priority: 0.9,
-    changeFrequency: "weekly" as const,
-    image: "/images/cctv/nvr-system.png",
-  },
-  {
     path: "/projects",
     title: "Security Projects Across Accra",
     description:
@@ -135,7 +127,7 @@ export const publicRoutes = [
       "Learn about Brite MJ Technologies — a trusted security and smart systems company based at Spintex, Accra, protecting homes, businesses, and institutions.",
     priority: 0.75,
     changeFrequency: "monthly" as const,
-    image: "/images/hero/team-install.png",
+    image: "/images/hero/team-install.jpg",
   },
   {
     path: "/contact",
@@ -174,3 +166,14 @@ export const publicRoutes = [
     image: "/images/og/default.jpg",
   },
 ] as const;
+
+const serviceRoutes = services.map((service) => ({
+  path: `/services/${service.slug}`,
+  title: `${service.name} in Accra`,
+  description: service.longDescription,
+  priority: 0.9,
+  changeFrequency: "weekly" as const,
+  image: service.image,
+}));
+
+export const publicRoutes = [...staticPublicRoutes, ...serviceRoutes];

@@ -6,14 +6,6 @@ import dynamic from "next/dynamic";
  * Client-only ambient effects deferred from the initial JS bundle so the
  * first paint of marketing pages stays responsive.
  */
-const ParticleCanvas = dynamic(
-  () =>
-    import("@/components/effects/particle-canvas").then(
-      (mod) => mod.ParticleCanvas,
-    ),
-  { ssr: false },
-);
-
 const ScrollProgress = dynamic(
   () =>
     import("@/components/effects/scroll-progress").then(
@@ -23,10 +15,5 @@ const ScrollProgress = dynamic(
 );
 
 export function DeferredEffects() {
-  return (
-    <>
-      <ParticleCanvas />
-      <ScrollProgress />
-    </>
-  );
+  return <ScrollProgress />;
 }

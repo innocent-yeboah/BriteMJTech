@@ -1,22 +1,18 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/sections/page-hero";
 import { Container } from "@/components/ui/container";
-import { Button } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { Button } from "@/components/ui/button";
 import { CtaSection } from "@/components/sections/cta-section";
-import { ServiceIconTile } from "@/components/service-icon";
 import {
   BreadcrumbJsonLd,
   ServicesJsonLd,
 } from "@/components/structured-data";
-import { ImageSlideshow } from "@/components/ui/image-slideshow";
-import { ServiceVideo } from "@/components/ui/service-video";
-import { services } from "@/lib/data";
-import { whatsappLink } from "@/lib/site";
+import { getProductsForService, services } from "@/lib/data";
 import { createPageMetadata } from "@/lib/seo";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { Check, ArrowRight, MessageCircle } from "lucide-react";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Security Services in Accra",
@@ -43,122 +39,66 @@ export default function ServicesPage() {
       <ServicesJsonLd />
       <PageHero
         title="Our Security Solutions"
-        subtitle="Comprehensive, professionally installed security and smart systems — tailored to your property and backed by 24/7 support."
+        subtitle="Comprehensive, professionally installed security and smart systems — each with the products we install for that service."
         breadcrumb={[
           { name: "Home", href: "/" },
           { name: "Services", href: "/services" },
         ]}
       />
 
-      {/* Quick category grid */}
       <section className="section bg-surface">
         <Container>
           <SectionHeading
             eyebrow="Full Service Range"
-            title="Everything You Need, Under One Roof"
-            description="Select a service to jump to details, or request a free quote for a combined solution."
+            title="Choose a Service"
+            description="Open any service to see how we install it and which products we typically use."
           />
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map((service) => (
-              <a
-                key={service.slug}
-                href={`#${service.slug}`}
-                className="group flex items-center gap-3 rounded-xl border border-slate-100 bg-white p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-card"
-              >
-                <ServiceIconTile service={service} size="sm" />
-                <span className="text-sm font-semibold text-brand-950">
-                  {service.name}
-                </span>
-              </a>
-            ))}
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service) => {
+              const productCount = getProductsForService(service.slug).length;
+              return (
+                <Link
+                  key={service.slug}
+                  href={`/services/${service.slug}`}
+                  className="group overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-card"
+                >
+                  <div className="relative aspect-[16/10] bg-slate-100">
+                    <Image
+                      src={service.image}
+                      alt={service.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <h2 className="text-xl font-semibold text-brand-950">
+                      {service.name}
+                    </h2>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                      {service.shortDescription}
+                    </p>
+                    <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-accent">
+                      {productCount > 0
+                        ? `${productCount} installation products`
+                        : "View service details"}
+                    </p>
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700">
+                      View service
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+          <div className="mt-12 text-center">
+            <Button href="/quote" variant="accent" size="lg">
+              Get a Free Quote <ArrowRight className="h-5 w-5" />
+            </Button>
           </div>
         </Container>
       </section>
-
-      {/* Detailed service sections */}
-      <div className="bg-white">
-        {services.map((service, index) => {
-          const reversed = index % 2 === 1;
-          return (
-            <section
-              key={service.slug}
-              id={service.slug}
-              className="scroll-mt-24 border-b border-slate-100 py-16 md:py-20 last:border-0"
-            >
-              <Container>
-                <div className="grid items-center gap-10 lg:grid-cols-2">
-                  <div
-                    className={cn(
-                      "relative",
-                      reversed && "lg:order-2",
-                      !service.gallery?.length &&
-                        !service.video &&
-                        "aspect-[4/3] overflow-hidden rounded-2xl shadow-card",
-                    )}
-                  >
-                    {service.video ? (
-                      <ServiceVideo
-                        src={service.video}
-                        poster={service.videoPoster ?? service.image}
-                        label={`${service.name} demo video`}
-                        fit={service.videoFit}
-                        showSoundControl={service.videoHasAudio !== false}
-                      />
-                    ) : service.gallery && service.gallery.length > 0 ? (
-                      <ImageSlideshow
-                        images={service.gallery}
-                        priority={index === 0}
-                        label={`${service.name} photos`}
-                      />
-                    ) : (
-                      <Image
-                        src={service.image}
-                        alt={service.name}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover"
-                      />
-                    )}
-                  </div>
-                  <div className={cn(reversed && "lg:order-1")}>
-                    <ServiceIconTile service={service} size="md" />
-                    <h2 className="mt-5 text-3xl text-brand-950">
-                      {service.name}
-                    </h2>
-                    <p className="mt-4 text-lg leading-relaxed text-slate-600">
-                      {service.longDescription}
-                    </p>
-                    <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                      {service.benefits.map((benefit) => (
-                        <li key={benefit} className="flex items-start gap-2.5">
-                          <Check className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                          <span className="text-sm text-slate-700">
-                            {benefit}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                      <Button href="/quote" variant="accent">
-                        Get a Quote <ArrowRight className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        href={whatsappLink(
-                          `Hello Brite MJ Technologies, I'm interested in your ${service.name} service. Please advise on next steps.`,
-                        )}
-                        variant="outline"
-                        external
-                      >
-                        <MessageCircle className="h-4 w-4" /> WhatsApp Us
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </Container>
-            </section>
-          );
-        })}
-      </div>
 
       <CtaSection
         title="Not Sure Which Solution You Need?"

@@ -24,7 +24,8 @@ export const siteConfig = {
   contact: {
     phone: process.env.NEXT_PUBLIC_COMPANY_PHONE || "0203412477",
     phoneAlt: process.env.NEXT_PUBLIC_COMPANY_PHONE_ALT || "0546847109",
-    email: process.env.NEXT_PUBLIC_COMPANY_EMAIL || "britemjtechnology@gmail.com",
+    email:
+      process.env.NEXT_PUBLIC_COMPANY_EMAIL || "info@britemjtechnologies.com",
     whatsapp: rawWhatsApp,
   },
   hours: [
@@ -57,7 +58,6 @@ export function telLink(phone: string = siteConfig.contact.phone): string {
 export const mainNav = [
   { title: "Home", href: "/" },
   { title: "Services", href: "/services" },
-  { title: "Products", href: "/products" },
   { title: "About", href: "/about" },
   { title: "Projects", href: "/projects" },
   { title: "Contact", href: "/contact" },
