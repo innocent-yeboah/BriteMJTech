@@ -7,6 +7,7 @@ import { WhatsAppButton } from "@/components/whatsapp-button";
 import { DeferredEffects } from "@/components/effects/deferred-effects";
 import { OrganizationJsonLd } from "@/components/structured-data";
 import { CookieBanner } from "@/components/cookies/cookie-banner";
+import { ConsentAnalytics } from "@/components/analytics/consent-analytics";
 import { siteConfig } from "@/lib/site";
 
 const inter = Inter({
@@ -133,6 +134,7 @@ export default function RootLayout({
         </div>
         <WhatsAppButton />
         <CookieBanner />
+        <ConsentAnalytics />
         <DeferredEffects />
         <OrganizationJsonLd />
       </body>

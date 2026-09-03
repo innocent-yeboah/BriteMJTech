@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { CheckCircle2, PhoneCall, CalendarClock, FileCheck } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { siteConfig, telLink, whatsappLink } from "@/lib/site";
+import { QuoteLeadTracker } from "@/components/analytics/quote-lead-tracker";
+import {
+  PhoneCtaButton,
+  WhatsAppCtaButton,
+} from "@/components/analytics/tracked-ctas";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -33,6 +37,7 @@ const steps = [
 export default function ThankYouPage() {
   return (
     <section className="section bg-surface">
+      <QuoteLeadTracker />
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100">
@@ -73,12 +78,12 @@ export default function ThankYouPage() {
             Need to reach us sooner?
           </p>
           <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button href={telLink()} variant="white" size="lg">
-              <PhoneCall className="h-5 w-5" /> Call {siteConfig.contact.phone}
-            </Button>
-            <Button href={whatsappLink()} variant="accent" size="lg" external>
-              Chat on WhatsApp
-            </Button>
+            <PhoneCtaButton placement="thank_you" variant="white" />
+            <WhatsAppCtaButton
+              placement="thank_you"
+              variant="accent"
+              label="Chat on WhatsApp"
+            />
           </div>
         </div>
 

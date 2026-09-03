@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { MessageCircle, X } from "lucide-react";
+import { trackPhoneClick, trackWhatsAppClick } from "@/lib/analytics";
 import { whatsappLink, telLink, siteConfig } from "@/lib/site";
 
 /**
@@ -11,11 +12,17 @@ import { whatsappLink, telLink, siteConfig } from "@/lib/site";
 export function WhatsAppButton() {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [showPing, setShowPing] = useState(true);
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 600);
     return () => clearTimeout(t);
   }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    setShowPing(false);
+  }, [open]);
 
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
@@ -33,6 +40,7 @@ export function WhatsAppButton() {
               href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick("floating_widget")}
               className="flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1eb955]"
             >
               <MessageCircle className="h-4 w-4" aria-hidden="true" />
@@ -40,6 +48,7 @@ export function WhatsAppButton() {
             </a>
             <a
               href={telLink()}
+              onClick={() => trackPhoneClick("floating_widget")}
               className="flex items-center justify-center gap-2 rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-semibold text-brand-950 transition-colors hover:bg-brand-50"
             >
               Call {siteConfig.contact.phone}
@@ -53,7 +62,7 @@ export function WhatsAppButton() {
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Close chat options" : "Open WhatsApp chat"}
         aria-expanded={open}
-        className={`flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-card-hover transition-all duration-300 hover:scale-105 ${
+        className={`relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-card-hover transition-all duration-300 hover:scale-105 ${
           mounted ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -62,7 +71,7 @@ export function WhatsAppButton() {
         ) : (
           <MessageCircle className="h-7 w-7" />
         )}
-        {!open && mounted ? (
+        {!open && mounted && showPing ? (
           <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
             <span className="relative inline-flex h-4 w-4 rounded-full bg-accent" />

@@ -1,10 +1,10 @@
-"use client";
-
 import { Container } from "@/components/ui/container";
-import { CountUp } from "@/components/ui/count-up";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { companyStats } from "@/lib/site";
 
+/**
+ * Trust-focused band — qualitative claims only (no unverified counters).
+ */
 export function StatsBand() {
   return (
     <section className="bg-brand-950 py-12">
@@ -18,13 +18,9 @@ export function StatsBand() {
             >
               <dt className="sr-only">{stat.label}</dt>
               <dd>
-                <CountUp
-                  value={stat.value}
-                  suffix={stat.suffix}
-                  durationMs={stat.durationMs}
-                  startOnMount={false}
-                  className="block font-heading text-4xl font-extrabold text-accent md:text-5xl"
-                />
+                <span className="block font-heading text-3xl font-extrabold text-accent md:text-4xl">
+                  {stat.display}
+                </span>
                 <span className="mt-2 block text-sm font-medium text-brand-100">
                   {stat.label}
                 </span>

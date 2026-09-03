@@ -372,8 +372,7 @@ export const projects: Project[] = [
       "Campus-wide CCTV, structured networking, and access control for a private school.",
     category: "institutional",
     location: "Spintex, Accra",
-    image:
-      "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/about/schools-institutions.jpg",
     completedYear: "2024",
   },
   {
@@ -393,8 +392,7 @@ export const projects: Project[] = [
       "Remote gate control, video intercom, and networked cameras across a residential complex.",
     category: "residential",
     location: "Cantonments, Accra",
-    image:
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/about/homes-residences.jpg",
     completedYear: "2025",
   },
   {

@@ -1,8 +1,11 @@
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import {
+  PhoneCtaButton,
+  WhatsAppCtaButton,
+} from "@/components/analytics/tracked-ctas";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
-import { siteConfig, telLink } from "@/lib/site";
 
 export function CtaSection({
   title = "Ready to Secure Your Property?",
@@ -27,9 +30,12 @@ export function CtaSection({
             <Button href="/quote" variant="accent" size="lg">
               {primaryLabel} <ArrowRight className="h-5 w-5" />
             </Button>
-            <Button href={telLink()} variant="white" size="lg">
-              <Phone className="h-5 w-5" /> Call {siteConfig.contact.phone}
-            </Button>
+            <WhatsAppCtaButton
+              placement="cta_band"
+              variant="white"
+              label="WhatsApp Us"
+            />
+            <PhoneCtaButton placement="cta_band" variant="white" />
           </div>
         </ScrollReveal>
       </Container>

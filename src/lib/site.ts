@@ -40,6 +40,12 @@ export const siteConfig = {
     linkedin: "https://www.linkedin.com/in/brite-m-j-tech",
     x: "#",
   },
+  /**
+   * Google Business Profile / Maps listing URL for review CTAs.
+   * Set NEXT_PUBLIC_GOOGLE_BUSINESS_URL once the listing is verified.
+   */
+  googleBusinessUrl:
+    process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_URL?.trim() || "",
 } as const;
 
 export const whatsappMessage =
@@ -64,8 +70,8 @@ export const mainNav = [
 ] as const;
 
 export const companyStats = [
-  { value: 10, suffix: "+", label: "Years of Experience", durationMs: 1400 },
-  { value: 100, suffix: "+", label: "Projects Completed", durationMs: 1800 },
-  { value: 24, suffix: "/7", label: "Support & Monitoring", durationMs: 1200 },
-  { value: 100, suffix: "%", label: "Quality Guaranteed", durationMs: 1600 },
+  { display: "Accra", label: "Based in Spintex" },
+  { display: "Free", label: "Site inspections" },
+  { display: "24/7", label: "Support line" },
+  { display: "One team", label: "Quote to handover" },
 ] as const;

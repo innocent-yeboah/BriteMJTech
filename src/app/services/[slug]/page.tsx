@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Check, MessageCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { PageHero } from "@/components/sections/page-hero";
 import { CtaSection } from "@/components/sections/cta-section";
 import { Container } from "@/components/ui/container";
@@ -11,12 +11,12 @@ import { Button } from "@/components/ui/button";
 import { ImageSlideshow } from "@/components/ui/image-slideshow";
 import { ServiceVideo } from "@/components/ui/service-video";
 import { BreadcrumbJsonLd } from "@/components/structured-data";
+import { WhatsAppCtaButton } from "@/components/analytics/tracked-ctas";
 import {
   getProductsForService,
   getService,
   services,
 } from "@/lib/data";
-import { whatsappLink } from "@/lib/site";
 import { createPageMetadata } from "@/lib/seo";
 
 type PageProps = {
@@ -134,15 +134,13 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <Button href="/quote" variant="accent">
                   Get a Quote <ArrowRight className="h-4 w-4" />
                 </Button>
-                <Button
-                  href={whatsappLink(
-                    `Hello Brite MJ Technologies, I'm interested in your ${service.name} service. Please advise on next steps.`,
-                  )}
+                <WhatsAppCtaButton
+                  placement={`service_${service.slug}`}
+                  message={`Hello Brite MJ Technologies, I'm interested in your ${service.name} service. Please advise on next steps.`}
                   variant="outline"
-                  external
-                >
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Us
-                </Button>
+                  size="md"
+                  label="WhatsApp Us"
+                />
               </div>
             </div>
           </div>

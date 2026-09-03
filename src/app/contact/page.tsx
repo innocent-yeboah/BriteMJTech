@@ -4,7 +4,8 @@ import { PageHero } from "@/components/sections/page-hero";
 import { Container } from "@/components/ui/container";
 import { ContactForm } from "@/components/forms/contact-form";
 import { BreadcrumbJsonLd } from "@/components/structured-data";
-import { siteConfig, telLink, whatsappLink } from "@/lib/site";
+import { TrackedWhatsAppLink } from "@/components/analytics/tracked-ctas";
+import { siteConfig, telLink } from "@/lib/site";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -100,14 +101,12 @@ export default function ContactPage() {
                 </ContactItem>
               </ul>
 
-              <a
-                href={whatsappLink()}
-                target="_blank"
-                rel="noopener noreferrer"
+              <TrackedWhatsAppLink
+                placement="contact_sidebar"
                 className="mt-8 flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-5 py-3 font-heading font-semibold text-white transition-colors hover:bg-[#1eb955]"
               >
                 <MessageCircle className="h-5 w-5" /> Chat on WhatsApp
-              </a>
+              </TrackedWhatsAppLink>
             </div>
 
             {/* Form */}

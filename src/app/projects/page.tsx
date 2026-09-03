@@ -44,7 +44,7 @@ export default function ProjectsPage() {
           <SectionHeading
             eyebrow="Portfolio"
             title="Recently Completed Projects"
-            description="Every project reflects our commitment to quality installation and lasting protection. Photos are representative — real project galleries available on request."
+            description="Selected installs across Accra. Want photos from a similar property type? Ask us on WhatsApp or during your free site visit."
           />
           <div className="mt-12">
             <ProjectsGallery projects={projects} />

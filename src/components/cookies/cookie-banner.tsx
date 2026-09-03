@@ -13,7 +13,7 @@ import {
 
 /**
  * Cookie notice for public pages. Essential cookies always run; analytics /
- * marketing stay off until the visitor accepts (ready for future trackers).
+ * marketing (GA4 / Meta Pixel) stay off until the visitor accepts.
  */
 export function CookieBanner() {
   const pathname = usePathname();

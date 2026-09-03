@@ -44,11 +44,13 @@ type ButtonAsLink = StyleProps & {
   external?: boolean;
   className?: string;
   children: React.ReactNode;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
 export function Button(props: ButtonAsButton | ButtonAsLink) {
   if ("href" in props && props.href !== undefined) {
-    const { href, external, variant, size, className, children } = props;
+    const { href, external, variant, size, className, children, onClick } =
+      props;
     const classes = classesFor({ variant, size }, className);
     if (external) {
       return (
@@ -57,13 +59,14 @@ export function Button(props: ButtonAsButton | ButtonAsLink) {
           className={classes}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={onClick}
         >
           {children}
         </a>
       );
     }
     return (
-      <Link href={href} className={classes}>
+      <Link href={href} className={classes} onClick={onClick}>
         {children}
       </Link>
     );
