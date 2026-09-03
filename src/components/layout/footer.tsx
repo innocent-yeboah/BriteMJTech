@@ -198,14 +198,6 @@ export function Footer() {
               Terms of Service
             </Link>
             <CookieSettingsButton className="transition-colors hover:text-accent" />
-            <a
-              href="https://buildwithinnocent.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-accent"
-            >
-              Built by Build With Innocent
-            </a>
           </div>
         </div>
       </div>
