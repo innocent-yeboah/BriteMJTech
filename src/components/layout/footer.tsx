@@ -9,8 +9,8 @@ import {
   Clock,
 } from "lucide-react";
 import { Logo } from "@/components/layout/logo";
-import { NewsletterForm } from "@/components/forms/newsletter-form";
 import { CookieSettingsButton } from "@/components/cookies/cookie-settings-button";
+import { TrackedWhatsAppLink } from "@/components/analytics/tracked-ctas";
 import { mainNav, siteConfig, telLink } from "@/lib/site";
 import { services } from "@/lib/data";
 
@@ -27,8 +27,8 @@ export function Footer() {
               <span className="md:hidden">{siteConfig.tagline}</span>
               <span className="hidden md:inline">
                 {siteConfig.tagline} Protecting homes, businesses, and
-                institutions across Accra with certified security and smart
-                systems.
+                institutions across Accra with professionally installed security
+                and smart systems.
               </span>
             </p>
             <div className="mt-3 flex gap-2.5 md:mt-5 md:gap-3">
@@ -97,7 +97,7 @@ export function Footer() {
                   href="/quote"
                   className="text-brand-100/80 transition-colors hover:text-accent"
                 >
-                  Get a Quote
+                  Book a Free Site Inspection
                 </Link>
               </li>
             </ul>
@@ -172,11 +172,19 @@ export function Footer() {
                 </span>
               </li>
             </ul>
-            <div className="mt-4 md:mt-5">
-              <p className="mb-2 text-sm font-semibold text-white">
-                Get security tips & offers
-              </p>
-              <NewsletterForm />
+            <div className="mt-4 flex flex-col gap-2 text-sm md:mt-5">
+              <Link
+                href="/quote"
+                className="font-semibold text-white transition-colors hover:text-accent"
+              >
+                Book a Free Site Inspection
+              </Link>
+              <TrackedWhatsAppLink
+                placement="footer"
+                className="font-semibold text-white transition-colors hover:text-accent"
+              >
+                WhatsApp an Expert
+              </TrackedWhatsAppLink>
             </div>
           </div>
         </div>
