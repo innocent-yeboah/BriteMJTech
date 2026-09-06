@@ -12,7 +12,10 @@ import { redeemQuoteConversionToken } from "@/app/actions/submit";
  */
 export function QuoteLeadTracker({ token }: { token?: string }) {
   const attempted = useRef(false);
-  const [status, setStatus] = useState<"idle" | "ok" | "denied">("idle");
+  // No token ⇒ denied on first paint (direct thank-you must never look "ready" to fire Lead).
+  const [status, setStatus] = useState<"idle" | "ok" | "denied">(
+    token ? "idle" : "denied",
+  );
 
   useEffect(() => {
     if (attempted.current) return;
