@@ -8,9 +8,9 @@ import {
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
 
 export function CtaSection({
-  title = "Ready to Secure Your Property?",
-  subtitle = "Contact us for a free site inspection and a customized quote. No pressure, no obligation — just expert advice.",
-  primaryLabel = "Get Your Free Quote Now",
+  title = "Not Sure What Your Property Needs?",
+  subtitle = "Let us assess the property, understand your priorities and recommend the right security system.",
+  primaryLabel = "Book a Free Site Inspection",
 }: {
   title?: string;
   subtitle?: string;
@@ -33,7 +33,7 @@ export function CtaSection({
             <WhatsAppCtaButton
               placement="cta_band"
               variant="white"
-              label="WhatsApp Us"
+              label="WhatsApp an Expert"
             />
             <PhoneCtaButton placement="cta_band" variant="white" />
           </div>

@@ -7,8 +7,7 @@ import { whyChooseUs } from "@/lib/data";
 import { siteConfig } from "@/lib/site";
 
 /**
- * Grounded "why us" story — real install photography + concrete operating
- * promises for Accra clients, without generic icon cards.
+ * Assess → Design → Install → Configure → Handover → Support.
  */
 export function WhyChooseUs() {
   return (
@@ -19,7 +18,7 @@ export function WhyChooseUs() {
       />
 
       <Container className="relative py-16 md:py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
           <ScrollReveal variant="left" className="relative lg:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden sm:aspect-[5/6]">
               <Image
@@ -35,7 +34,7 @@ export function WhyChooseUs() {
               />
               <div className="absolute inset-x-0 bottom-0 p-6 text-white">
                 <p className="font-heading text-lg font-bold leading-snug">
-                  On-site in Accra — from Spintex to the rest of Greater Accra.
+                  On-site in Accra — from Spintex across Greater Accra.
                 </p>
                 <p className="mt-1 text-sm text-white/80">
                   {siteConfig.address.full}
@@ -45,13 +44,14 @@ export function WhyChooseUs() {
           </ScrollReveal>
 
           <ScrollReveal variant="right" delayMs={80} className="lg:col-span-7">
-            <p className="eyebrow">Why Brite MJ</p>
+            <p className="eyebrow">How We Work</p>
             <h2 className="mt-3 max-w-xl font-heading text-3xl font-extrabold text-brand-950 md:text-4xl lg:text-[2.6rem] lg:leading-tight">
-              We show up, explain clearly, and leave you with a system that works.
+              From Site Assessment to Working System.
             </h2>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-600">
-              No brochure packages. We walk your property, recommend what fits
-              your space and budget, then install and stand behind it.
+              Tell us what you need to protect. We assess the property, design
+              the right system, install it properly, hand it over clearly, and
+              support you afterward.
             </p>
 
             <ol className="mt-10 divide-y divide-slate-200 border-y border-slate-200">
@@ -59,8 +59,8 @@ export function WhyChooseUs() {
                 <ScrollReveal
                   as="li"
                   key={pillar.title}
-                  delayMs={120 + index * 80}
-                  className="grid gap-3 py-6 sm:grid-cols-[3.5rem_1fr] sm:gap-6"
+                  delayMs={120 + index * 60}
+                  className="grid gap-3 py-5 sm:grid-cols-[3.5rem_1fr] sm:gap-6"
                 >
                   <span className="font-heading text-3xl font-extrabold tabular-nums text-accent">
                     {String(index + 1).padStart(2, "0")}
@@ -79,7 +79,7 @@ export function WhyChooseUs() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Button href="/quote" variant="accent" size="lg">
-                Book a free site inspection
+                Book a Free Site Inspection
                 <ArrowRight className="h-5 w-5" />
               </Button>
               <a

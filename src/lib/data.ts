@@ -451,27 +451,39 @@ export interface WhyChoosePillar {
 export const whyChooseUs: WhyChoosePillar[] = [
   {
     icon: "experience",
-    title: "We start with a free site visit",
+    title: "Assess",
     description:
-      "Before any quote, we walk the property with you — entry points, lighting, power, and how you actually use the space — so the recommendation fits Accra homes and workplaces, not a one-size template.",
+      "We inspect the property and understand what needs protection — entrances, boundaries, blind spots, power and how you use the space.",
   },
   {
     icon: "quality",
-    title: "Installed by our own crew",
+    title: "Design",
     description:
-      "Cabling, mounting, gate motors, and network setup are handled by Brite MJ technicians. You get one team accountable from the first visit to handover — based out of Spintex.",
-  },
-  {
-    icon: "support",
-    title: "You stay in control after handover",
-    description:
-      "We set up phone viewing, remotes, and access the way you need them, then leave clear instructions. When something needs adjusting, you reach us on 0203412477 or 0546847109.",
+      "We recommend a system suited to the property, your priorities and budget — the right combination, not a generic package.",
   },
   {
     icon: "trust",
-    title: "Built for Ghana conditions",
+    title: "Install",
     description:
-      "Outdoor cameras, fencing, and gate systems specified for heat, rain, and power interruptions — so your security holds up through the seasons, not just on installation day.",
+      "Our team installs the selected equipment and infrastructure so the system is built properly on site.",
+  },
+  {
+    icon: "support",
+    title: "Configure",
+    description:
+      "We set up the system so cameras, access, gates and networking work together the way they should.",
+  },
+  {
+    icon: "experience",
+    title: "Handover",
+    description:
+      "We explain the system and how to use it — phone viewing, remotes and day-to-day controls included.",
+  },
+  {
+    icon: "support",
+    title: "Support",
+    description:
+      "We remain available after installation. Reach us on 0203412477 or 0546847109 when something needs adjusting.",
   },
 ];
 

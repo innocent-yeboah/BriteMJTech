@@ -49,7 +49,7 @@ export const siteConfig = {
 } as const;
 
 export const whatsappMessage =
-  "Hello Brite MJ Technologies, I am interested in security solutions for my property. Please let me know how we can proceed.";
+  "Hello Brite MJ Technologies — I would like a security assessment for my property. Please advise on next steps for a site inspection.";
 
 export function whatsappLink(message: string = whatsappMessage): string {
   return `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(

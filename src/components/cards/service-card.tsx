@@ -2,7 +2,13 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { Service } from "@/lib/data";
 
-export function ServiceCard({ service }: { service: Service }) {
+export function ServiceCard({
+  service,
+  ctaLabel = "Explore this system",
+}: {
+  service: Service;
+  ctaLabel?: string;
+}) {
   return (
     <article className="group relative flex h-full flex-col rounded-2xl border border-slate-100 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-brand-100 hover:shadow-card-hover">
       <h3 className="text-xl text-brand-950">{service.name}</h3>
@@ -13,7 +19,7 @@ export function ServiceCard({ service }: { service: Service }) {
         href={`/services/${service.slug}`}
         className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-accent-600"
       >
-        Learn More
+        {ctaLabel}
         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
       </Link>
     </article>

@@ -1,22 +1,24 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
+import { ProblemNeed } from "@/components/sections/problem-need";
 import { ServicesOverview } from "@/components/sections/services-overview";
-import { StatsBand } from "@/components/sections/stats-band";
 import { WhyChooseUs } from "@/components/sections/why-choose-us";
-import { Testimonials } from "@/components/sections/testimonials";
+import { PropertySegments } from "@/components/sections/property-segments";
+import { TrustProof } from "@/components/sections/trust-proof";
 import { CtaSection } from "@/components/sections/cta-section";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Smart Security Systems for Home and Business",
+  title: "Protect Your Home or Business with the Right Security System",
   description:
-    "CCTV, fencing, networking, and smart access systems for homes and businesses in Accra. Free site inspection. No pressure — just expert advice.",
+    "CCTV, electric fencing, gate automation, video intercom and networking — professionally assessed, designed and installed across Greater Accra. Book a free site inspection.",
   path: "/",
   keywords: [
     "home security Accra",
-    "business CCTV Ghana",
-    "free security inspection Accra",
+    "CCTV installation Accra",
+    "electric fencing Ghana",
+    "free security site inspection Accra",
   ],
 });
 
@@ -25,16 +27,19 @@ export default function HomePage() {
     <>
       <Hero />
       <ScrollReveal>
-        <ServicesOverview />
+        <ProblemNeed />
       </ScrollReveal>
-      <ScrollReveal delayMs={60}>
-        <StatsBand />
+      <ScrollReveal>
+        <ServicesOverview />
       </ScrollReveal>
       <ScrollReveal variant="left">
         <WhyChooseUs />
       </ScrollReveal>
       <ScrollReveal>
-        <Testimonials />
+        <PropertySegments />
+      </ScrollReveal>
+      <ScrollReveal>
+        <TrustProof />
       </ScrollReveal>
       <ScrollReveal variant="scale" delayMs={40}>
         <CtaSection />

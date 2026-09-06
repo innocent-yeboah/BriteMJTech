@@ -27,8 +27,8 @@ const heroSlides: HeroSlide[] = [
 ];
 
 /**
- * First-viewport hero: brand promise, one supporting line, Quote + WhatsApp.
- * Longer persuasive copy lives below the fold in other sections.
+ * First-viewport hero: assess → install positioning, site inspection + WhatsApp.
+ * Longer persuasive copy lives below the fold.
  */
 export function Hero() {
   return (
@@ -44,31 +44,37 @@ export function Hero() {
         className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-950/50 to-transparent"
       />
 
-      <Container className="relative py-20 sm:py-24 lg:py-28">
+      <Container className="relative py-16 sm:py-20 lg:py-28">
         <div className="mx-auto max-w-3xl text-center">
           <div className="animate-fade-up">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-accent">
               Brite MJ Technologies · Accra
             </p>
-            <h1 className="mx-auto mt-4 max-w-4xl font-heading text-4xl font-extrabold leading-[1.08] text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.75)] sm:text-5xl lg:text-6xl">
-              Smart Security Systems for Home and Business
+            <h1 className="mx-auto mt-4 max-w-4xl font-heading text-[1.85rem] font-extrabold leading-[1.12] text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.75)] sm:text-5xl lg:text-6xl">
+              Protect Your Home or Business with the Right Security System
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.65)] sm:text-lg">
-              CCTV, fencing, gate control, and smart access — professionally
-              installed across Greater Accra. Free site inspection. No pressure.
+              CCTV, electric fencing, gate automation, video intercom and
+              networking — professionally designed and installed across Greater
+              Accra. Start with a free site inspection and get a solution suited
+              to your property.
             </p>
           </div>
 
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Button href="/quote" variant="primary" size="lg">
-              Get a Free Quote <ArrowRight className="h-5 w-5" />
+              Book a Free Site Inspection <ArrowRight className="h-5 w-5" />
             </Button>
             <WhatsAppCtaButton
               placement="hero"
               variant="white"
-              label="WhatsApp Us"
+              label="WhatsApp an Expert"
             />
           </div>
+
+          <p className="mt-5 text-sm font-medium tracking-wide text-white/80">
+            Site assessment · Professional installation · Handover &amp; support
+          </p>
         </div>
       </Container>
     </section>
