@@ -131,7 +131,7 @@ interface LeadEmailData {
 }
 
 /** Notify the Brite MJ team about a new lead / quote request. */
-export async function sendLeadNotification(data: LeadEmailData): Promise<void> {
+export async function sendLeadNotification(data: LeadEmailData): Promise<boolean> {
   const safeName = escapeHtml(data.name);
   const body = `
     <p>A new lead has been submitted through the website.</p>
@@ -150,7 +150,7 @@ export async function sendLeadNotification(data: LeadEmailData): Promise<void> {
       <a href="mailto:${encodeURIComponent(data.email).replace(/%40/g, "@")}" style="background:${brandBlue};color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;">Reply to ${safeName}</a>
     </p>`;
 
-  await sendEmail({
+  return sendEmail({
     to: internalInbox,
     replyTo: data.email,
     subject: `New Lead: ${data.name.replace(/[\r\n]+/g, " ")} — ${(data.services?.[0] ?? "Enquiry").replace(/[\r\n]+/g, " ")}`,
@@ -162,7 +162,7 @@ export async function sendLeadNotification(data: LeadEmailData): Promise<void> {
 export async function sendLeadConfirmation(data: {
   name: string;
   email: string;
-}): Promise<void> {
+}): Promise<boolean> {
   const firstName = escapeHtml(data.name.split(" ")[0] || "there");
   const body = `
     <p>Hi ${firstName},</p>
@@ -175,7 +175,7 @@ export async function sendLeadConfirmation(data: {
     </p>
     <p>Warm regards,<br/>The Brite MJ Technologies Team</p>`;
 
-  await sendEmail({
+  return sendEmail({
     to: data.email,
     replyTo: replyToEmail,
     subject: "We've received your request — Brite MJ Technologies",
@@ -194,7 +194,7 @@ interface EnquiryEmailData {
 /** Notify the team about a general enquiry (contact form). */
 export async function sendEnquiryNotification(
   data: EnquiryEmailData,
-): Promise<void> {
+): Promise<boolean> {
   const safeName = escapeHtml(data.name);
   const body = `
     <p>A new enquiry has been submitted through the contact form.</p>
@@ -209,7 +209,7 @@ export async function sendEnquiryNotification(
       <a href="mailto:${encodeURIComponent(data.email).replace(/%40/g, "@")}" style="background:${brandBlue};color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;">Reply to ${safeName}</a>
     </p>`;
 
-  await sendEmail({
+  return sendEmail({
     to: internalInbox,
     replyTo: data.email,
     subject: `New Enquiry: ${(data.subject || data.name).replace(/[\r\n]+/g, " ")}`,
@@ -218,7 +218,7 @@ export async function sendEnquiryNotification(
 }
 
 /** Notify the team about a newsletter signup. */
-export async function sendNewsletterNotification(email: string): Promise<void> {
+export async function sendNewsletterNotification(email: string): Promise<boolean> {
   const body = `
     <p>Someone subscribed to security tips and offers.</p>
     <table style="width:100%;border-collapse:separate;border-spacing:0 6px;font-size:14px;">
@@ -226,7 +226,7 @@ export async function sendNewsletterNotification(email: string): Promise<void> {
       ${row("Source", "Website newsletter")}
     </table>`;
 
-  await sendEmail({
+  return sendEmail({
     to: internalInbox,
     replyTo: email,
     subject: `Newsletter signup: ${email}`,
@@ -235,7 +235,7 @@ export async function sendNewsletterNotification(email: string): Promise<void> {
 }
 
 /** Confirm newsletter signup to the subscriber. */
-export async function sendNewsletterConfirmation(email: string): Promise<void> {
+export async function sendNewsletterConfirmation(email: string): Promise<boolean> {
   const body = `
     <p>You're in.</p>
     <p>Thanks for joining the Brite MJ Technologies list. We'll share practical security tips and occasional offers for homes and businesses in Accra.</p>
@@ -244,7 +244,7 @@ export async function sendNewsletterConfirmation(email: string): Promise<void> {
       <a href="${siteConfig.url}/quote" style="background:${brandAccent};color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;">Get a Free Quote</a>
     </p>`;
 
-  await sendEmail({
+  return sendEmail({
     to: email,
     replyTo: replyToEmail,
     subject: "You're subscribed — Brite MJ Technologies",

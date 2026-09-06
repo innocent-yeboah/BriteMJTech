@@ -14,11 +14,17 @@ import {
   newsletterSchema,
 } from "@/lib/validations";
 import { checkFormRateLimit } from "@/lib/rate-limit";
+import {
+  issueConversionToken,
+  redeemConversionToken,
+} from "@/lib/conversion-token";
 
 export interface ActionResult {
   ok: boolean;
   message: string;
   errors?: Record<string, string[]>;
+  /** Present only after a genuine successful quote submission (not honeypot). */
+  conversionToken?: string;
 }
 
 function phoneFallbackMessage(): string {
@@ -26,6 +32,18 @@ function phoneFallbackMessage(): string {
     "Something went wrong on our side. Please call us on " +
     (process.env.NEXT_PUBLIC_COMPANY_PHONE || "0203412477") +
     " and we'll help right away."
+  );
+}
+
+/**
+ * Resolve Promise.allSettled email results to actual send booleans.
+ * A fulfilled promise with value `false` means the send soft-failed.
+ */
+function emailActuallySent(
+  results: PromiseSettledResult<boolean>[],
+): boolean {
+  return results.some(
+    (r) => r.status === "fulfilled" && r.value === true,
   );
 }
 
@@ -50,7 +68,7 @@ export async function submitQuote(
     };
   }
 
-  // Honeypot triggered — silently accept without doing anything.
+  // Honeypot — silent accept, NO conversion token (must not fire ad Lead events).
   if (parsed.data.company.trim()) {
     return { ok: true, message: "Thank you." };
   }
@@ -77,9 +95,10 @@ export async function submitQuote(
       });
       if (error) {
         console.error("[submitQuote] Supabase insert failed:", error.message);
-        return { ok: false, message: phoneFallbackMessage() };
+        stored = false;
+      } else {
+        stored = true;
       }
-      stored = true;
     }
 
     const emailResults = await Promise.allSettled([
@@ -98,22 +117,62 @@ export async function submitQuote(
       sendLeadConfirmation({ name: data.name, email: data.email }),
     ]);
 
-    const notified = emailResults.some(
-      (r) => r.status === "fulfilled",
-    );
+    for (const result of emailResults) {
+      if (result.status === "rejected") {
+        console.error("[submitQuote] Email promise rejected:", result.reason);
+      } else if (result.value === false) {
+        console.error("[submitQuote] Email send returned false");
+      }
+    }
 
-    if (!stored && !notified) {
+    const emailed = emailActuallySent(emailResults);
+
+    if (!stored && !emailed) {
       return { ok: false, message: phoneFallbackMessage() };
     }
+
+    if (stored && !emailed) {
+      console.error(
+        "[submitQuote] Lead stored but email notification/confirmation failed",
+      );
+    }
+    if (!stored && emailed) {
+      console.error(
+        "[submitQuote] Email delivered but Supabase lead storage failed or skipped",
+      );
+    }
+
+    const conversionToken = await issueConversionToken();
 
     return {
       ok: true,
       message:
         "Your request has been received. Our team will contact you shortly to confirm your free site inspection.",
+      conversionToken,
     };
   } catch (error) {
     console.error("[submitQuote] Unexpected error:", error);
     return { ok: false, message: phoneFallbackMessage() };
+  }
+}
+
+/**
+ * Redeem a one-time quote conversion token before firing GA4/Meta Lead.
+ * Safe to call repeatedly — returns ok:false after first successful redeem.
+ */
+export async function redeemQuoteConversionToken(
+  token: string,
+): Promise<{ ok: boolean }> {
+  if (!token || typeof token !== "string" || token.length > 256) {
+    return { ok: false };
+  }
+
+  try {
+    const ok = await redeemConversionToken(token);
+    return { ok };
+  } catch (error) {
+    console.error("[redeemQuoteConversionToken] error:", error);
+    return { ok: false };
   }
 }
 
@@ -159,9 +218,10 @@ export async function submitEnquiry(
       });
       if (error) {
         console.error("[submitEnquiry] Supabase insert failed:", error.message);
-        return { ok: false, message: phoneFallbackMessage() };
+        stored = false;
+      } else {
+        stored = true;
       }
-      stored = true;
     }
 
     const emailResults = await Promise.allSettled([
@@ -175,10 +235,21 @@ export async function submitEnquiry(
       sendLeadConfirmation({ name: data.name, email: data.email }),
     ]);
 
-    const notified = emailResults.some((r) => r.status === "fulfilled");
+    const emailed = emailActuallySent(emailResults);
 
-    if (!stored && !notified) {
+    if (!stored && !emailed) {
       return { ok: false, message: phoneFallbackMessage() };
+    }
+
+    if (stored && !emailed) {
+      console.error(
+        "[submitEnquiry] Enquiry stored but email notification failed",
+      );
+    }
+    if (!stored && emailed) {
+      console.error(
+        "[submitEnquiry] Email delivered but Supabase storage failed or skipped",
+      );
     }
 
     return {
@@ -230,9 +301,10 @@ export async function submitNewsletter(
       });
       if (error) {
         console.error("[submitNewsletter] insert failed:", error.message);
-        return { ok: false, message: "Please try again in a moment." };
+        stored = false;
+      } else {
+        stored = true;
       }
-      stored = true;
     }
 
     const emailResults = await Promise.allSettled([
@@ -240,10 +312,16 @@ export async function submitNewsletter(
       sendNewsletterConfirmation(parsed.data.email),
     ]);
 
-    const notified = emailResults.some((r) => r.status === "fulfilled");
+    const emailed = emailActuallySent(emailResults);
 
-    if (!stored && !notified) {
+    if (!stored && !emailed) {
       return { ok: false, message: "Please try again in a moment." };
+    }
+
+    if (stored && !emailed) {
+      console.error(
+        "[submitNewsletter] Signup stored but email notification failed",
+      );
     }
 
     return { ok: true, message: "You're subscribed. Welcome aboard!" };

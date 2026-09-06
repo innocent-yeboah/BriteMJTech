@@ -34,10 +34,20 @@ const steps = [
   },
 ];
 
-export default function ThankYouPage() {
+type PageProps = {
+  searchParams?: Promise<{ token?: string }> | { token?: string };
+};
+
+export default async function ThankYouPage({ searchParams }: PageProps) {
+  const params = await Promise.resolve(searchParams ?? {});
+  const token =
+    typeof params.token === "string" && params.token.length > 0
+      ? params.token
+      : undefined;
+
   return (
     <section className="section bg-surface">
-      <QuoteLeadTracker />
+      <QuoteLeadTracker token={token} />
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100">

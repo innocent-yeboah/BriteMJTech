@@ -89,7 +89,15 @@ export function QuoteForm() {
     setServerError(null);
     const result = await submitQuote(values);
     if (result.ok) {
-      router.push("/quote/thank-you");
+      // Only attach a conversion token when the server issued one (real success).
+      // Honeypot returns ok without a token — thank-you must not fire Lead events.
+      if (result.conversionToken) {
+        router.push(
+          `/quote/thank-you?token=${encodeURIComponent(result.conversionToken)}`,
+        );
+      } else {
+        router.push("/quote/thank-you");
+      }
     } else {
       setServerError(result.message);
     }
