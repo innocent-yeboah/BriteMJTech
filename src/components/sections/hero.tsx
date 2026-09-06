@@ -9,13 +9,12 @@ import {
   type HeroSlide,
 } from "@/components/sections/hero-slideshow";
 
-/** CCTV installation footage (same clip as Services → CCTV Camera Installation). */
+/** Professional CCTV installation still — primary hero visual. */
 const heroSlides: HeroSlide[] = [
   {
-    src: "/videos/cctv-office.jpg",
-    video: "/videos/cctv-office.mp4",
-    alt: "Brite MJ Technologies CCTV camera installation for office and business security",
-    position: "object-center",
+    src: "/images/hero/install-technician.jpg",
+    alt: "Brite MJ Technologies technician installing an outdoor CCTV security camera",
+    position: "object-[center_35%]",
     eyebrow: "Security & Smart Systems",
     headline: [
       { text: "Protect what matters." },
@@ -37,11 +36,11 @@ export function Hero() {
 
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-b from-brand-950/20 via-transparent to-brand-950/55"
+        className="absolute inset-0 bg-gradient-to-b from-brand-950/45 via-brand-950/25 to-brand-950/70"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-950/50 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-brand-950/65 to-transparent"
       />
 
       <Container className="relative py-16 sm:py-20 lg:py-28">
