@@ -4,6 +4,7 @@ import { ProblemNeed } from "@/components/sections/problem-need";
 import { ServicesOverview } from "@/components/sections/services-overview";
 import { WhyChooseUs } from "@/components/sections/why-choose-us";
 import { PropertySegments } from "@/components/sections/property-segments";
+import { InstallationProof } from "@/components/sections/installation-proof";
 import { TrustProof } from "@/components/sections/trust-proof";
 import { CtaSection } from "@/components/sections/cta-section";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
@@ -37,6 +38,9 @@ export default function HomePage() {
       </ScrollReveal>
       <ScrollReveal>
         <PropertySegments />
+      </ScrollReveal>
+      <ScrollReveal>
+        <InstallationProof />
       </ScrollReveal>
       <ScrollReveal>
         <TrustProof />
