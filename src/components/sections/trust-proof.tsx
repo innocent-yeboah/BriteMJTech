@@ -6,8 +6,8 @@ import { WhatsAppCtaButton } from "@/components/analytics/tracked-ctas";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
 
 /**
- * Restrained credibility section.
- * Named testimonials and project case studies are withheld until owner-verified.
+ * Credibility section built around real installation evidence.
+ * Named testimonials and project case studies remain withheld until owner-verified.
  */
 export function TrustProof() {
   return (
@@ -17,8 +17,8 @@ export function TrustProof() {
           <ScrollReveal className="relative lg:col-span-5">
             <div className="relative aspect-[4/3] overflow-hidden sm:aspect-[5/4]">
               <Image
-                src="/images/hero/team-install.jpg"
-                alt="Brite MJ Technologies technicians installing security equipment on site"
+                src="/images/cctv/install-1.png"
+                alt="Brite MJ Technologies technician installing a CCTV camera on site"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover object-center"
