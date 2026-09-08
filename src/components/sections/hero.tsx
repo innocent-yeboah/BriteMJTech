@@ -23,8 +23,8 @@ export function Hero() {
       />
 
       <Container className="relative py-12 sm:py-16 lg:py-20">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-14">
-          <div className="text-center lg:text-left">
+        <div className="grid items-center gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-x-14 lg:gap-y-6">
+          <div className="text-center lg:col-start-1 lg:row-start-1 lg:text-left">
             <div className="animate-fade-up">
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-accent">
                 Brite MJ Technologies · Accra
@@ -35,28 +35,13 @@ export function Hero() {
               <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-brand-100 sm:text-lg lg:mx-0">
                 CCTV, electric fencing, gate automation, video intercom and
                 networking — professionally designed and installed across Greater
-                Accra. Start with a free site inspection and get a solution suited
-                to your property.
+                Accra. Get a solution suited to your property with a free site
+                inspection.
               </p>
             </div>
-
-            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-              <Button href="/quote" variant="primary" size="lg">
-                Book a Free Site Inspection <ArrowRight className="h-5 w-5" />
-              </Button>
-              <WhatsAppCtaButton
-                placement="hero"
-                variant="white"
-                label="WhatsApp an Expert"
-              />
-            </div>
-
-            <p className="mt-5 text-sm font-medium tracking-wide text-white/80">
-              Site assessment · Professional installation · Handover &amp; support
-            </p>
           </div>
 
-          <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
+          <div className="relative mx-auto w-full max-w-xl lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:max-w-none">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-brand-900 shadow-2xl shadow-black/25">
               <Image
                 src="/images/cctv/install-1.png"
@@ -84,6 +69,23 @@ export function Hero() {
               aria-hidden="true"
               className="absolute -bottom-3 -left-3 h-16 w-16 rounded-xl border border-accent/30 bg-accent/10"
             />
+          </div>
+
+          <div className="text-center lg:col-start-1 lg:row-start-2 lg:text-left">
+            <div className="flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
+              <Button href="/quote" variant="primary" size="lg">
+                Book a Free Site Inspection <ArrowRight className="h-5 w-5" />
+              </Button>
+              <WhatsAppCtaButton
+                placement="hero"
+                variant="white"
+                label="WhatsApp an Expert"
+              />
+            </div>
+
+            <p className="mt-5 text-sm font-medium tracking-wide text-white/80">
+              Site assessment · Professional installation · Handover &amp; support
+            </p>
           </div>
         </div>
       </Container>
