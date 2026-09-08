@@ -97,8 +97,20 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [{ url: "/images/logo/mj-mark.png", type: "image/png" }],
-    apple: [{ url: "/images/logo/mj-mark.png" }],
+    icon: [
+      {
+        url: "/images/logo/mj-mark.png",
+        type: "image/png",
+        sizes: "512x512",
+      },
+    ],
+    apple: [
+      {
+        url: "/images/logo/mj-mark.png",
+        type: "image/png",
+        sizes: "512x512",
+      },
+    ],
     shortcut: ["/images/logo/mj-mark.png"],
   },
   manifest: "/manifest.webmanifest",
