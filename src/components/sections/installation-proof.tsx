@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import { Button } from "@/components/ui/button";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
+import { Button } from "@/components/ui/button";
 import { WhatsAppCtaButton } from "@/components/analytics/tracked-ctas";
 
 const installationPhotos = [
@@ -64,6 +65,7 @@ export function InstallationProof() {
                     src={photo.src}
                     alt={photo.alt}
                     fill
+                    unoptimized
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
