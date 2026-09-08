@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { Button } from "@/components/ui/button";
 import { WhatsAppCtaButton } from "@/components/analytics/tracked-ctas";
@@ -57,24 +56,25 @@ export function InstallationProof() {
         </ScrollReveal>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {installationPhotos.map((photo, index) => (
-            <ScrollReveal key={photo.src} delayMs={index * 50}>
-              <figure className="group overflow-hidden border border-white/10 bg-white/5">
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    unoptimized
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
-                </div>
-                <figcaption className="px-4 py-3 text-sm font-semibold text-white/90">
-                  {photo.label}
-                </figcaption>
-              </figure>
-            </ScrollReveal>
+          {installationPhotos.map((photo) => (
+            <figure
+              key={photo.src}
+              className="group overflow-hidden border border-white/10 bg-white/5"
+            >
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  unoptimized
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
+              <figcaption className="px-4 py-3 text-sm font-semibold text-white/90">
+                {photo.label}
+              </figcaption>
+            </figure>
           ))}
         </div>
 

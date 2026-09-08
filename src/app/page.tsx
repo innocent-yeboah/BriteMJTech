@@ -39,9 +39,7 @@ export default function HomePage() {
       <ScrollReveal>
         <PropertySegments />
       </ScrollReveal>
-      <ScrollReveal>
-        <InstallationProof />
-      </ScrollReveal>
+      <InstallationProof />
       <ScrollReveal>
         <TrustProof />
       </ScrollReveal>
