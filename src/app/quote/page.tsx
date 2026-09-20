@@ -20,8 +20,8 @@ export const metadata: Metadata = createPageMetadata({
 
 const assurances = [
   { icon: ShieldCheck, text: "Free, no-obligation quote" },
-  { icon: Award, text: "Certified, professional installation" },
-  { icon: Clock, text: "Fast response — usually same day" },
+  { icon: Award, text: "Professional installation" },
+  { icon: Clock, text: "Clear next steps and follow-up" },
   { icon: PhoneCall, text: "Friendly experts, ready to help" },
 ];
 
@@ -68,8 +68,8 @@ export default function QuotePage() {
                 </ul>
                 <div className="mt-6 rounded-xl bg-brand-950 p-5 text-center">
                   <p className="text-sm text-brand-100">
-                    Your information is kept private and used only to prepare
-                    your quote. We never share your details.
+                    Your information is used to handle your enquiry and prepare
+                    your quote.
                   </p>
                 </div>
               </div>
