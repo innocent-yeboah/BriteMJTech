@@ -2,8 +2,8 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 /**
- * Brite MJ Technologies brand lockup.
- * Uses the official MJ mark with a responsive black/red wordmark.
+ * Brite MJ Technologies master logo.
+ * The supplied full logo artwork is the single source of truth.
  */
 export function Logo({
   className,
@@ -15,43 +15,22 @@ export function Logo({
   markOnly?: boolean;
 }) {
   return (
-    <span className={cn("inline-flex items-center gap-2.5 sm:gap-3", className)}>
-      <MjMark className="h-9 w-auto shrink-0 sm:h-10" />
-      {!markOnly ? (
-        <span className="flex min-w-0 flex-col leading-none">
-          <span
-            className={cn(
-              "font-heading text-[1.02rem] font-extrabold uppercase tracking-[-0.025em] sm:text-[1.2rem]",
-              light ? "text-white" : "text-brand-950",
-            )}
-          >
-            BRITE<span className="text-accent">MJ</span>
-          </span>
-          <span
-            className={cn(
-              "mt-1 text-[7px] font-bold uppercase tracking-[0.22em] sm:text-[8px] sm:tracking-[0.27em]",
-              light ? "text-white/80" : "text-slate-500",
-            )}
-          >
-            TECHNOLOGIES
-          </span>
-          <span
-            className={cn(
-              "mt-1 hidden text-[6px] font-semibold uppercase tracking-[0.08em] sm:block sm:text-[6.5px]",
-              light ? "text-white/70" : "text-slate-400",
-            )}
-          >
-            SMART SYSTEMS. <span className="text-accent">STRONGER</span> PROTECTION.
-          </span>
-        </span>
-      ) : null}
+    <span className={cn("inline-flex items-center", className)}>
+      <Image
+        src="/images/logo/brite-mj-technologies.jpg"
+        alt="Brite MJ Technologies — Smart Systems. Stronger Protection."
+        width={1000}
+        height={1000}
+        priority
+        className={cn(
+          "h-auto w-auto max-w-full object-contain",
+          markOnly ? "max-h-10 sm:max-h-11" : "max-h-12 sm:max-h-14",
+        )}
+      />
     </span>
   );
 }
 
-/**
- * Official MJ mark — black plate, white monogram, red edge accent.
- */
 export function MjMark({
   className,
   title = "Brite MJ Technologies",
@@ -61,12 +40,12 @@ export function MjMark({
 }) {
   return (
     <Image
-      src="/images/logo/mj-mark.png"
+      src="/images/logo/brite-mj-technologies.jpg"
       alt={title}
-      width={254}
-      height={260}
+      width={1000}
+      height={1000}
       priority
-      className={cn("h-9 w-auto object-contain sm:h-10", className)}
+      className={cn("h-10 w-auto object-contain", className)}
     />
   );
 }
