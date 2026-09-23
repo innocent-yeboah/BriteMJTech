@@ -19,10 +19,10 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 const assurances = [
-  { icon: ShieldCheck, text: "Free, no-obligation quote" },
-  { icon: Award, text: "Professional installation" },
-  { icon: Clock, text: "Clear next steps and follow-up" },
-  { icon: PhoneCall, text: "Friendly experts, ready to help" },
+  { icon: ShieldCheck, text: "Free quote — no obligation" },
+  { icon: Award, text: "Install by our own technicians" },
+  { icon: Clock, text: "We confirm the visit by phone" },
+  { icon: PhoneCall, text: "Ask anything before you decide" },
 ];
 
 export default function QuotePage() {
@@ -35,8 +35,8 @@ export default function QuotePage() {
         ]}
       />
       <PageHero
-        title="Get Your Free Quote"
-        subtitle="Answer a few quick questions and we'll prepare a customized quote — plus a free site inspection at a time that suits you."
+        title="Request a free quote"
+        subtitle="A few details about the property is enough. We will follow up to book a free site visit and send a clear price."
         breadcrumb={[
           { name: "Home", href: "/" },
           { name: "Get a Quote", href: "/quote" },
@@ -52,7 +52,7 @@ export default function QuotePage() {
             <aside className="lg:pt-4">
               <div className="rounded-2xl border border-slate-100 bg-white p-7 shadow-card">
                 <h2 className="text-xl text-brand-950">
-                  Why request a quote?
+                  What happens after you send this
                 </h2>
                 <ul className="mt-5 space-y-4">
                   {assurances.map((item) => (
@@ -68,8 +68,8 @@ export default function QuotePage() {
                 </ul>
                 <div className="mt-6 rounded-xl bg-brand-950 p-5 text-center">
                   <p className="text-sm text-brand-100">
-                    Your information is used to handle your enquiry and prepare
-                    your quote.
+                    We only use your details to handle this enquiry and prepare
+                    the quote.
                   </p>
                 </div>
               </div>

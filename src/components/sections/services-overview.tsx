@@ -8,17 +8,17 @@ import { featuredServices } from "@/lib/data";
 /** Outcome-focused blurbs for homepage service cards (does not change service pages). */
 const homepageOutcomes: Record<string, string> = {
   "cctv-camera-installation":
-    "See what happens on your property — day and night — with cameras planned around real blind spots and entrances.",
+    "Cameras aimed at the spots that matter — entrances, walls, parking — with phone viewing when you are away.",
   "security-fencing":
-    "Strengthen boundaries and deter intrusion with fencing and electric perimeter systems suited to the site.",
+    "Walls and electric fence strands that make climbing harder, fitted to the perimeter you already have.",
   "remote-gate-control":
-    "Control who enters and leaves — gate automation designed around your driveway, compound or estate access.",
+    "Open the gate from the car or phone. Useful when it rains, when you have kids, or when you get home late.",
   "video-intercom":
-    "See and speak to visitors before opening up — clearer access decisions at the door or gate.",
+    "See who is at the gate before you open. Talk to them. Unlock only when you are ready.",
   networking:
-    "Reliable connectivity so cameras, intercoms and access systems work together without guesswork.",
+    "Cabling and Wi‑Fi that keep cameras and intercoms online — not a separate guesswork job.",
   "smart-security-systems":
-    "Combined systems that fit how you live or work — designed as one solution, not disconnected gadgets.",
+    "Cameras, access and alerts set up to work together, instead of buying gadgets that never talk.",
 };
 
 export function ServicesOverview() {
@@ -27,9 +27,9 @@ export function ServicesOverview() {
       <Container>
         <ScrollReveal>
           <SectionHeading
-            eyebrow="What We Can Secure"
-            title="Systems Matched to Your Property"
-            description="We design and install the right combination of security systems for the space — not a one-size package."
+            eyebrow="What we install"
+            title="Pick what you need — we fit it to the site"
+            description="Most jobs mix a few of these. We will tell you what is worth doing and what you can skip."
           />
         </ScrollReveal>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -41,7 +41,7 @@ export function ServicesOverview() {
                   shortDescription:
                     homepageOutcomes[service.slug] ?? service.shortDescription,
                 }}
-                ctaLabel="Explore this system"
+                ctaLabel="See how we do it"
               />
             </ScrollReveal>
           ))}

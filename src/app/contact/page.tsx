@@ -32,8 +32,8 @@ export default function ContactPage() {
         ]}
       />
       <PageHero
-        title="Let's Secure Your Property Together"
-        subtitle="Reach out for a free site inspection and a no-obligation quote. Our team is ready to help."
+        title="Call, WhatsApp or send a note"
+        subtitle="Want a free site visit or a quick question answered? We are based at Spintex and work across Accra."
         breadcrumb={[
           { name: "Home", href: "/" },
           { name: "Contact", href: "/contact" },
@@ -45,10 +45,10 @@ export default function ContactPage() {
           <div className="grid gap-10 lg:grid-cols-5">
             {/* Contact info */}
             <div className="lg:col-span-2">
-              <h2 className="text-2xl text-brand-950">Get in Touch</h2>
+              <h2 className="text-2xl text-brand-950">Reach us directly</h2>
               <p className="mt-3 text-slate-600">
-                Prefer to talk? Call or WhatsApp us directly — we&apos;re happy
-                to answer any questions.
+                Phone and WhatsApp are usually fastest. Say what kind of
+                property you have and we will tell you next steps.
               </p>
 
               <ul className="mt-8 space-y-5">
@@ -112,9 +112,9 @@ export default function ContactPage() {
             {/* Form */}
             <div className="lg:col-span-3">
               <div className="rounded-2xl bg-white p-6 shadow-card md:p-8">
-                <h2 className="text-2xl text-brand-950">Send Us a Message</h2>
+                <h2 className="text-2xl text-brand-950">Or write to us here</h2>
                 <p className="mt-1.5 text-slate-600">
-                  Fill in the form and we&apos;ll get back to you shortly.
+                  Leave your details and we will reply as soon as we can.
                 </p>
                 <div className="mt-6">
                   <ContactForm />

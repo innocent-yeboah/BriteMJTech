@@ -19,18 +19,18 @@ export const metadata: Metadata = createPageMetadata({
 const steps = [
   {
     icon: PhoneCall,
-    title: "We'll call to confirm",
-    text: "A friendly member of our team will reach out to confirm your details and preferred inspection time.",
+    title: "We call you",
+    text: "Someone from the team will ring to confirm details and a good time to visit.",
   },
   {
     icon: CalendarClock,
-    title: "Free site inspection",
-    text: "Our expert visits your property, assesses your needs, and answers all your questions — at no cost.",
+    title: "Free site visit",
+    text: "We walk the property with you, answer questions, and note what is needed — no charge.",
   },
   {
     icon: FileCheck,
-    title: "Your customized quote",
-    text: "You receive a clear, tailored quote with the right solution for your property and budget.",
+    title: "Clear quote",
+    text: "You get a price that matches the site. No vague packages.",
   },
 ];
 
@@ -54,12 +54,11 @@ export default async function ThankYouPage({ searchParams }: PageProps) {
             <CheckCircle2 className="h-11 w-11 text-emerald-500" />
           </span>
           <h1 className="mt-6 font-heading text-3xl font-extrabold text-brand-950 md:text-4xl">
-            Thank You! Your Request Is In.
+            Got it — thank you
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-slate-600">
-            We&apos;ve received your quote request and a confirmation email is on
-            its way. Our team will be in touch shortly to arrange your free site
-            inspection.
+            Your request is in. Check your email for a confirmation. We will
+            call soon to book the free site visit.
           </p>
         </div>
 

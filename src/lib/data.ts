@@ -54,14 +54,14 @@ export const services: Service[] = [
     slug: "cctv-camera-installation",
     name: "CCTV Camera Installation",
     shortDescription:
-      "High-definition surveillance that keeps eyes on your property day and night.",
+      "Cameras on the spots that matter — with phone viewing when you are not home.",
     longDescription:
-      "We design and install high-resolution CCTV systems tailored to your property's layout — from single-camera entry monitoring to multi-zone HD networks with night vision and cloud recording. View live footage and playback from your phone, anywhere in the world.",
+      "We plan camera positions around your entrances, walls and parking, then install and set up recording so you can watch live or play back from your phone. Day and night coverage, sized for a single house or a larger site.",
     benefits: [
-      "Crystal-clear HD & 4K camera options",
-      "Night vision and motion detection",
-      "Remote viewing from your phone",
-      "Secure cloud & local recording",
+      "HD cameras with night vision options",
+      "Motion alerts when something moves",
+      "Watch from your phone",
+      "Local NVR and/or cloud recording",
     ],
     icon: "cctv",
     iconImage: "/images/icons/cctv-real.jpg",
@@ -117,14 +117,14 @@ export const services: Service[] = [
     slug: "security-fencing",
     name: "Security & Electric Fencing",
     shortDescription:
-      "Strong perimeter fencing with optional electric deterrents for real peace of mind.",
+      "Perimeter fencing and electric strands that make climbing harder.",
     longDescription:
-      "We design and install perimeter fencing that fits your property, from palisade and welded mesh to razor-topped barriers. Need an extra layer? We add safe, standards-compliant electric fencing that deters intruders and can link to your alarms. Built for Ghana's weather, installed to last.",
+      "We fit fencing and electric perimeter lines to the wall or boundary you already have — mesh, palisade, or razor toppings where they make sense. Built for Accra weather, wired so the alarm can shout when someone tries the fence.",
     benefits: [
-      "Palisade, mesh, and high-security options",
-      "Electric fencing with alarm integration",
-      "Weather-resistant materials and finishes",
-      "Free site assessment and clear quotes",
+      "Palisade, mesh and high-security options",
+      "Electric fence with alarm link-up",
+      "Materials that hold up in the heat and rain",
+      "Free site visit and a clear quote",
     ],
     icon: "fence",
     iconImage: "/images/icons/fence-live.jpg",
@@ -153,14 +153,14 @@ export const services: Service[] = [
     slug: "networking",
     name: "Networking",
     shortDescription:
-      "Reliable connections and seamless performance for home and business.",
+      "Cabling and Wi‑Fi so cameras and intercoms stay online.",
     longDescription:
-      "Keep your people and systems connected with structured cabling, enterprise Wi-Fi, and network hardware installed to professional standards. We build fast, secure, and scalable networks that support your CCTV, access control, and everyday operations.",
+      "Security gear is only as good as the network under it. We run structured cabling, set up switches and Wi‑Fi, and leave you with a tidy rack instead of a bird’s nest of cables behind the TV.",
     benefits: [
-      "Structured cabling & fibre",
-      "Business-grade Wi-Fi coverage",
-      "Secure, segmented networks",
-      "Scalable for future growth",
+      "Structured copper and fibre runs",
+      "Wi‑Fi that reaches the cameras",
+      "Separate guest and work traffic when needed",
+      "Room to add more cameras later",
     ],
     icon: "network",
     iconImage: "/images/icons/network-real.png",
@@ -206,14 +206,14 @@ export const services: Service[] = [
     slug: "remote-gate-control",
     name: "Remote Gate Control",
     shortDescription:
-      "Convenience and security at your fingertips.",
+      "Open the gate from the car, phone or keypad — without getting out in the rain.",
     longDescription:
-      "Open and secure your gate without leaving your car or couch. We install automated gate motors with remote controls, keypad, and smartphone access — so authorised people get in easily and everyone else stays out.",
+      "We fit gate motors with remotes, keypad and phone control so authorised people get in and everyone else waits. Includes auto-close and safety sensors, plus battery backup for the cuts that always seem to hit at the wrong time.",
     benefits: [
-      "Smartphone & remote operation",
-      "Keypad and intercom integration",
-      "Automatic close & safety sensors",
-      "Battery backup during outages",
+      "Phone and remote open/close",
+      "Keypad and intercom options",
+      "Auto-close with safety sensors",
+      "Battery backup when power drops",
     ],
     icon: "gate",
     iconImage: "/images/icons/gate-remote-icon.jpg",
@@ -245,14 +245,14 @@ export const services: Service[] = [
     slug: "video-intercom",
     name: "Video Intercom",
     shortDescription:
-      "See, hear, and communicate with confidence before you open the door.",
+      "See who is at the gate, talk to them, then unlock only when you are ready.",
     longDescription:
-      "Know exactly who is at your gate or door. Our video intercom systems combine crisp video, two-way audio, and remote unlocking, giving households and businesses a secure, verified way to manage visitors.",
+      "Outdoor stations at the gate or door with indoor panels and phone answering. Useful for households and offices that get a lot of visitors and do not want to open on a voice alone.",
     benefits: [
-      "Two-way audio and HD video",
-      "Remote door & gate release",
-      "Visitor call recording",
-      "Indoor & mobile answering",
+      "Clear video and two-way talk",
+      "Unlock the door or gate remotely",
+      "Keep a record of calls when needed",
+      "Answer from inside or on your phone",
     ],
     icon: "intercom",
     iconImage: "/images/icons/intercom-lock.jpg",
@@ -286,14 +286,14 @@ export const services: Service[] = [
     slug: "smart-security-systems",
     name: "Smart Security Systems",
     shortDescription:
-      "Integrated, app-controlled security that works together as one system.",
+      "Cameras, access and alerts set up to work as one setup — not loose gadgets.",
     longDescription:
-      "Bring your cameras, alarms, access control, and sensors together into a single smart platform you control from one app. We design integrated systems that automate, alert, and protect — intelligently.",
+      "If you already have (or want) cameras, alarms and access on one phone app, we wire and configure them so alerts make sense and you are not juggling three different logins.",
     benefits: [
-      "One app for your whole system",
-      "Automated alerts & scenes",
-      "Alarm & sensor integration",
-      "Future-ready smart devices",
+      "One app where it makes sense",
+      "Alerts you can actually act on",
+      "Alarms and sensors linked in",
+      "Room to add devices later",
     ],
     icon: "shield",
     iconImage: "/images/icons/smart-security-lock.jpg",
@@ -309,14 +309,14 @@ export const services: Service[] = [
     slug: "service-and-support",
     name: "Service & Support",
     shortDescription:
-      "Expert installations backed by responsive, ongoing service and support.",
+      "After install, we still pick up — maintenance, fixes and expansions.",
     longDescription:
-      "Our relationship doesn't end at installation. We provide maintenance, upgrades, and rapid-response support to keep your security network performing at its best — with 24/7 assistance when it matters most.",
+      "Install day is not the end. Call when a camera goes offline, you need another channel, or something needs a clean. We keep numbers local and response practical.",
     benefits: [
-      "24/7 responsive support",
-      "Scheduled maintenance plans",
-      "System upgrades & expansion",
-      "Certified, professional technicians",
+      "Call or WhatsApp when something breaks",
+      "Maintenance visits on a schedule",
+      "Add cameras or zones later",
+      "Technicians who know the job",
     ],
     icon: "wrench",
     iconImage: "/images/icons/service-support.jpg",
@@ -349,7 +349,7 @@ export const projects: Project[] = [
     id: "p1",
     title: "Gated Residence CCTV & Intercom",
     description:
-      "Full HD CCTV coverage with video intercom and automated gate control for a family home.",
+      "Cameras around the compound, video intercom at the gate, and remote gate control for a family home.",
     category: "residential",
     location: "East Legon, Accra",
     image: "/images/projects/gated-residence.jpg",
@@ -359,7 +359,7 @@ export const projects: Project[] = [
     id: "p2",
     title: "Warehouse Perimeter Security",
     description:
-      "Electric fencing, palisade barrier, and 16-camera surveillance for a logistics warehouse.",
+      "Electric fence, palisade, and a 16-camera setup for a logistics yard in Tema.",
     category: "commercial",
     location: "Tema Industrial Area",
     image: "/images/projects/warehouse-perimeter.jpg",
@@ -369,7 +369,7 @@ export const projects: Project[] = [
     id: "p3",
     title: "School Campus Safety Network",
     description:
-      "Campus-wide CCTV, structured networking, and access control for a private school.",
+      "Campus cameras, cabling, and access points so staff can see entrances and corridors.",
     category: "institutional",
     location: "Spintex, Accra",
     image: "/images/about/schools-institutions.jpg",
@@ -379,7 +379,7 @@ export const projects: Project[] = [
     id: "p4",
     title: "Retail Store Surveillance Upgrade",
     description:
-      "4K camera upgrade with cloud recording and remote monitoring for a busy retail shop.",
+      "Camera upgrade with recording and phone viewing for a busy shop floor.",
     category: "commercial",
     location: "Osu, Accra",
     image: "/images/projects/retail-store-surveillance.jpg",
@@ -389,7 +389,7 @@ export const projects: Project[] = [
     id: "p5",
     title: "Apartment Complex Access Control",
     description:
-      "Remote gate control, video intercom, and networked cameras across a residential complex.",
+      "Gate motor, video intercom, and cameras shared across a residential block.",
     category: "residential",
     location: "Cantonments, Accra",
     image: "/images/about/homes-residences.jpg",
@@ -399,7 +399,7 @@ export const projects: Project[] = [
     id: "p6",
     title: "Government Facility Security Network",
     description:
-      "High-security fencing, integrated alarms, and 24/7 monitored surveillance system.",
+      "High fencing, linked alarms, and round-the-clock camera coverage for a public facility.",
     category: "institutional",
     location: "Accra Central",
     image: "/images/projects/government-security-network.jpg",
@@ -421,7 +421,7 @@ export const testimonials: Testimonial[] = [
     name: "Ama Boateng",
     company: "Homeowner, East Legon",
     content:
-      "Brite MJ installed our CCTV and intercom system flawlessly. The team was professional, tidy, and patient in explaining everything. I finally feel completely safe at home.",
+      "They came, walked the compound with us, and put cameras where we actually needed them. Tidied up after, showed me the phone app, and still pick up when I call.",
     rating: 5,
   },
   {
@@ -429,7 +429,7 @@ export const testimonials: Testimonial[] = [
     name: "Kwame Mensah",
     company: "Operations Manager, Tema",
     content:
-      "Our warehouse perimeter has never been more secure. The electric fencing and camera coverage are excellent, and their support team responds fast whenever we call.",
+      "Electric fence and cameras on a long warehouse wall. When a strand came loose months later, they were back the same day. That is what I care about.",
     rating: 5,
   },
   {
@@ -437,7 +437,7 @@ export const testimonials: Testimonial[] = [
     name: "Grace Owusu",
     company: "School Administrator, Spintex",
     content:
-      "From site inspection to handover, the process was smooth and transparent. Our campus network and cameras work perfectly. Highly recommended for institutions.",
+      "Quote was clear, install did not drag on for weeks, and they trained the security staff on the monitors before they left. No surprises.",
     rating: 5,
   },
 ];
@@ -453,37 +453,37 @@ export const whyChooseUs: WhyChoosePillar[] = [
     icon: "experience",
     title: "Assess",
     description:
-      "We inspect the property and understand what needs protection — entrances, boundaries, blind spots, power and how you use the space.",
+      "We walk the site with you — gates, walls, dark corners, power points — and note what is missing.",
   },
   {
     icon: "quality",
     title: "Design",
     description:
-      "We recommend a system suited to the property, your priorities and budget — the right combination, not a generic package.",
+      "You get a plain recommendation and price. We say what is essential and what can wait.",
   },
   {
     icon: "trust",
     title: "Install",
     description:
-      "Our team installs the selected equipment and infrastructure so the system is built properly on site.",
+      "Our technicians mount, cable and test the equipment on site. No subcontractors you have never met.",
   },
   {
     icon: "support",
     title: "Configure",
     description:
-      "We set up the system so cameras, access, gates and networking work together the way they should.",
+      "Phones, remotes, NVRs and Wi‑Fi get set up so everything talks to everything else.",
   },
   {
     icon: "experience",
     title: "Handover",
     description:
-      "We explain the system and how to use it — phone viewing, remotes and day-to-day controls included.",
+      "We show you (and whoever keeps the keys) how to view cameras, open the gate and silence false alerts.",
   },
   {
     icon: "support",
     title: "Support",
     description:
-      "We remain available after installation. Reach us on 0203412477 or 0546847109 when something needs adjusting.",
+      "After we leave, call or WhatsApp 0203412477 / 0546847109 if something needs a look.",
   },
 ];
 

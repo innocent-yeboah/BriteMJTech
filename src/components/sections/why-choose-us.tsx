@@ -34,7 +34,7 @@ export function WhyChooseUs() {
               />
               <div className="absolute inset-x-0 bottom-0 p-6 text-white">
                 <p className="font-heading text-lg font-bold leading-snug">
-                  On-site in Accra — from Spintex across Greater Accra.
+                  Based at Spintex. We work across Greater Accra.
                 </p>
                 <p className="mt-1 text-sm text-white/80">
                   {siteConfig.address.full}
@@ -44,14 +44,14 @@ export function WhyChooseUs() {
           </ScrollReveal>
 
           <ScrollReveal variant="right" delayMs={80} className="lg:col-span-7">
-            <p className="eyebrow">How We Work</p>
+            <p className="eyebrow">How a job usually goes</p>
             <h2 className="mt-3 max-w-xl font-heading text-3xl font-extrabold text-brand-950 md:text-4xl lg:text-[2.6rem] lg:leading-tight">
-              From Site Assessment to Working System.
+              From the first visit to a system you can use
             </h2>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-600">
-              Tell us what you need to protect. We assess the property, design
-              the right system, install it properly, hand it over clearly, and
-              support you afterward.
+              No long pitch. We look at the property, agree on the work, install
+              it, show you the app and remotes, and stay reachable if something
+              needs fixing.
             </p>
 
             <ol className="mt-10 divide-y divide-slate-200 border-y border-slate-200">

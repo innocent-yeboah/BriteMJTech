@@ -10,9 +10,9 @@ const rawWhatsApp =
 export const siteConfig = {
   name: "Brite MJ Technologies",
   shortName: "Brite MJ",
-  tagline: "Smart Solutions. Stronger Security. Better Connections.",
+  tagline: "CCTV, fencing & access — installed in Accra.",
   description:
-    "Brite MJ Technologies designs and installs advanced CCTV surveillance, security fencing, networking, and smart access systems for homes, businesses, and institutions across Accra, Ghana.",
+    "Brite MJ Technologies installs CCTV, electric fencing, networking, and gate/intercom systems for homes and businesses across Accra and Greater Accra.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://britemjtechnologies.com",
   address: {
     street: "Spintex — Shell Signboard",
@@ -49,7 +49,7 @@ export const siteConfig = {
 } as const;
 
 export const whatsappMessage =
-  "Hello Brite MJ Technologies — I would like a security assessment for my property. Please advise on next steps for a site inspection.";
+  "Hi Brite MJ — I want someone to look at security for my property. When can you come for a site visit?";
 
 export function whatsappLink(message: string = whatsappMessage): string {
   return `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(

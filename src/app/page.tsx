@@ -11,9 +11,9 @@ import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Protect Your Home or Business with the Right Security System",
+  title: "CCTV, Fencing & Gate Security Installed in Accra",
   description:
-    "CCTV, electric fencing, gate automation, video intercom and networking — professionally assessed, designed and installed across Greater Accra. Book a free site inspection.",
+    "We install CCTV, electric fencing, gate motors, video intercoms and networking across Accra. Free site visit before we quote.",
   path: "/",
   keywords: [
     "home security Accra",

@@ -27,27 +27,27 @@ export function TrustProof() {
           </ScrollReveal>
 
           <ScrollReveal delayMs={80} className="lg:col-span-7">
-            <p className="eyebrow">Installed on Real Properties</p>
+            <p className="eyebrow">On real Accra properties</p>
             <h2 className="mt-3 max-w-xl font-heading text-3xl font-extrabold text-brand-950 md:text-4xl">
-              Security Systems Installed for Real Properties
+              We install. We show you how it works. We pick up when you call.
             </h2>
             <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-600">
-              We work on homes, workplaces and institutions across Greater Accra
-              — assessing the site, installing the right systems, and handing
-              over clearly so you know how everything works.
+              Most people do not want a lecture about “smart ecosystems.” They
+              want the gate to open, the cameras to record, and someone local
+              to call if a cable comes loose.
             </p>
             <ul className="mt-6 space-y-2 text-base text-slate-700">
               <li className="flex gap-2">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                Site assessment before recommendations
+                Free site visit before we quote
               </li>
               <li className="flex gap-2">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                Installation and configuration by our team
+                Our team does the install and setup
               </li>
               <li className="flex gap-2">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                Clear handover and ongoing support
+                You leave knowing the remotes, app and numbers to call
               </li>
             </ul>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -58,7 +58,7 @@ export function TrustProof() {
               <WhatsAppCtaButton
                 placement="trust_proof"
                 variant="outline"
-                label="WhatsApp an Expert"
+                label="WhatsApp us"
               />
             </div>
           </ScrollReveal>

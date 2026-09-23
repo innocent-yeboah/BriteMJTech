@@ -9,14 +9,13 @@ export function ProblemNeed() {
     <section className="section bg-white">
       <Container>
         <SectionHeading
-          eyebrow="Every Property Is Different"
-          title="Your Property Needs More Than a Camera on the Wall."
+          eyebrow="Before we sell you anything"
+          title="A camera alone rarely covers the whole story."
           description={
             <>
-              Blind spots, entrances, boundaries, gates, access points and
-              network conditions all affect what security system will actually
-              work. We assess your property first, then recommend and install
-              the right combination of systems for the space.
+              Gates, walls, dark corners, and weak internet all change what you
+              need. We walk the property with you, point out the gaps, and only
+              then say what to install.
             </>
           }
         />

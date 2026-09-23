@@ -38,8 +38,8 @@ export default function ServicesPage() {
       />
       <ServicesJsonLd />
       <PageHero
-        title="Our Security Solutions"
-        subtitle="Comprehensive, professionally installed security and smart systems — each with the products we install for that service."
+        title="What we install"
+        subtitle="CCTV, fencing, networking, gate motors, intercoms and related work — with the products we typically use for each job."
         breadcrumb={[
           { name: "Home", href: "/" },
           { name: "Services", href: "/services" },
@@ -49,9 +49,9 @@ export default function ServicesPage() {
       <section className="section bg-surface">
         <Container>
           <SectionHeading
-            eyebrow="Full Service Range"
-            title="Choose a Service"
-            description="Open any service to see how we install it and which products we typically use."
+            eyebrow="Services"
+            title="Choose a service"
+            description="Open any item for how we install it and which gear we usually put in."
           />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => {

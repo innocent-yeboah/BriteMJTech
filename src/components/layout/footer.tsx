@@ -26,9 +26,8 @@ export function Footer() {
             <p className="mt-3 max-w-xs text-sm leading-snug text-brand-100/80 md:mt-4 md:leading-relaxed">
               <span className="md:hidden">{siteConfig.tagline}</span>
               <span className="hidden md:inline">
-                {siteConfig.tagline} Protecting homes, businesses, and
-                institutions across Accra with professionally installed security
-                and smart systems.
+                {siteConfig.tagline} Based at Spintex. We work homes, shops and
+                yards across Greater Accra.
               </span>
             </p>
             <div className="mt-3 flex gap-2.5 md:mt-5 md:gap-3">
@@ -183,7 +182,7 @@ export function Footer() {
                 placement="footer"
                 className="font-semibold text-white transition-colors hover:text-accent"
               >
-                WhatsApp an Expert
+                WhatsApp us
               </TrackedWhatsAppLink>
             </div>
           </div>

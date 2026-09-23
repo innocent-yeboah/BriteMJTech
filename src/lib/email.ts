@@ -166,7 +166,7 @@ export async function sendLeadConfirmation(data: {
   const firstName = escapeHtml(data.name.split(" ")[0] || "there");
   const body = `
     <p>Hi ${firstName},</p>
-    <p>Thank you for reaching out to <strong>Brite MJ Technologies</strong>. We've received your request and a member of our team will contact you shortly to arrange your <strong>free site inspection</strong> and a tailored quote.</p>
+    <p>Thanks for contacting <strong>Brite MJ Technologies</strong>. We have your request. Someone from the team will call soon to arrange a <strong>free site visit</strong> and send a clear quote.</p>
     <p>Need us sooner? Call or WhatsApp us:</p>
     <p style="font-size:15px;">
       📞 <a href="tel:${siteConfig.contact.phone}" style="color:${brandBlue};">${siteConfig.contact.phone}</a>

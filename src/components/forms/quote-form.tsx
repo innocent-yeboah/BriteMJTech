@@ -161,8 +161,8 @@ export function QuoteForm() {
         {step === 0 ? (
           <div className="space-y-5 animate-fade-in">
             <StepHeader
-              title="Let's start with your details"
-              subtitle="So our team knows who to reach out to."
+              title="Your contact details"
+              subtitle="So we know who to call or WhatsApp."
             />
             <div>
               <Label htmlFor="q-name" required>
@@ -211,8 +211,8 @@ export function QuoteForm() {
         {step === 1 ? (
           <div className="space-y-5 animate-fade-in">
             <StepHeader
-              title="Tell us about your property"
-              subtitle="This helps us recommend the right solution and size the quote."
+              title="About the property"
+              subtitle="House, shop, warehouse — a short note is enough for a first quote."
             />
             <div>
               <Label htmlFor="q-propertyType" required>
@@ -251,8 +251,8 @@ export function QuoteForm() {
         {step === 2 ? (
           <div className="space-y-5 animate-fade-in">
             <StepHeader
-              title="What are you looking to secure?"
-              subtitle="Select all the services you're interested in."
+              title="What do you want installed?"
+              subtitle="Tick everything you are considering. We can trim the list after the visit."
             />
             <fieldset>
               <legend className="sr-only">Services of interest</legend>
@@ -306,8 +306,8 @@ export function QuoteForm() {
         {step === 3 ? (
           <div className="space-y-5 animate-fade-in">
             <StepHeader
-              title="Book your free site inspection"
-              subtitle="Pick a preferred date and time. We'll confirm by phone — no obligation."
+              title="Preferred site visit"
+              subtitle="Pick a date and time that works. We will confirm by phone — no obligation."
             />
             <div className="grid gap-5 sm:grid-cols-2">
               <div>

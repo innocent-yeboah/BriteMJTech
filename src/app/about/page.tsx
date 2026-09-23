@@ -13,7 +13,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "About Brite MJ Technologies",
   description:
-    "Learn about Brite MJ Technologies — a trusted security and smart systems company based at Spintex, Accra, protecting homes, businesses, and institutions.",
+    "We are a Spintex-based security install team — CCTV, fencing, networking and access for homes and businesses across Accra.",
   path: "/about",
   keywords: [
     "security company Accra",
@@ -24,10 +24,10 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 const values = [
-  "Certified products and professional installation standards",
-  "Transparent, honest advice with no pressure selling",
-  "Rapid-response support whenever you need us",
-  "Solutions tailored to your property and budget",
+  "We use gear we are willing to stand behind",
+  "Straight talk on price — no pressure to buy extras",
+  "We pick up when something needs fixing",
+  "Quotes match the property and the budget you share",
 ];
 
 /** Real environments help visitors recognise the communities we protect. */
@@ -59,8 +59,8 @@ export default function AboutPage() {
         ]}
       />
       <PageHero
-        title="Securing Accra, One Property at a Time"
-        subtitle="Brite MJ Technologies is a security and smart systems company built on trust, expertise, and a genuine commitment to your peace of mind."
+        title="A Spintex team that installs security for Accra"
+        subtitle="We put up cameras, fencing, gate motors and networks — then we show you how to use them and stay reachable after."
         breadcrumb={[
           { name: "Home", href: "/" },
           { name: "About", href: "/about" },
@@ -81,22 +81,22 @@ export default function AboutPage() {
               />
             </div>
             <div>
-              <span className="eyebrow">Our Story</span>
+              <span className="eyebrow">How we got here</span>
               <h2 className="mt-3 text-3xl text-brand-950 md:text-4xl">
-                Trusted Security Expertise, Rooted in Accra
+                Local installers, not a brochure company
               </h2>
               <div className="mt-5 space-y-4 text-lg leading-relaxed text-slate-600">
                 <p>
-                  Brite MJ Technologies was founded on a simple belief: everyone
-                  deserves to feel safe. From our base at Spintex — Shell
-                  Signboard, we&apos;ve grown into a trusted partner for
-                  families, businesses, and institutions across Accra.
+                  Brite MJ Technologies works from Spintex — Shell Signboard.
+                  Most of our days are spent on compounds, shop fronts and
+                  yards around Greater Accra: measuring walls, pulling cable,
+                  aiming cameras.
                 </p>
                 <p>
-                  We specialise in advanced CCTV surveillance, security and
-                  electric fencing, networking, and smart access systems. Every
-                  project begins with a free site inspection and ends with a
-                  system you can rely on, backed by responsive, ongoing support.
+                  We do CCTV, electric fencing, networking and access systems.
+                  Every job starts with a free site visit. You get a clear
+                  quote, an install by our team, and numbers to call when
+                  something needs a look later.
                 </p>
               </div>
               <ul className="mt-6 space-y-3">
@@ -122,22 +122,22 @@ export default function AboutPage() {
               <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-gradient text-white">
                 <Target className="h-7 w-7" />
               </span>
-              <h3 className="mt-5 text-2xl text-brand-950">Our Mission</h3>
+              <h3 className="mt-5 text-2xl text-brand-950">What we aim for</h3>
               <p className="mt-3 text-lg leading-relaxed text-slate-600">
-                To deliver smart, reliable security solutions that protect what
-                matters most — with expert installation, honest advice, and
-                support you can count on, every day.
+                Install security that works on the day we leave — and still
+                works six months later — with honest advice and a phone that
+                gets answered.
               </p>
             </div>
             <div className="rounded-2xl border border-slate-100 bg-white p-8 shadow-card">
               <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-accent text-white">
                 <Eye className="h-7 w-7" />
               </span>
-              <h3 className="mt-5 text-2xl text-brand-950">Our Vision</h3>
+              <h3 className="mt-5 text-2xl text-brand-950">Where we are headed</h3>
               <p className="mt-3 text-lg leading-relaxed text-slate-600">
-                To be Ghana&apos;s most trusted name in security and smart
-                systems — setting the standard for quality, innovation, and
-                customer care across every community we serve.
+                Keep earning referrals across Accra by doing tidy installs and
+                fixing issues without drama — not by chasing every buzzword in
+                security marketing.
               </p>
             </div>
           </div>
@@ -150,8 +150,8 @@ export default function AboutPage() {
       <section className="section bg-surface">
         <Container>
           <SectionHeading
-            eyebrow="Who We Serve"
-            title="Protection for Every Kind of Property"
+            eyebrow="Who calls us"
+            title="Houses, shops, schools and yards"
           />
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             {clientTypes.map((client) => (
@@ -179,8 +179,8 @@ export default function AboutPage() {
             ))}
           </div>
           <p className="mx-auto mt-8 max-w-2xl text-center text-slate-600">
-            We also proudly serve construction sites and government facilities
-            with tailored, high-security solutions.
+            We also take on construction sites and public facilities when the
+            brief is clear and the perimeter needs real work.
           </p>
         </Container>
       </section>

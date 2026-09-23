@@ -30,13 +30,12 @@ export function Hero() {
                 Brite MJ Technologies · Accra
               </p>
               <h1 className="mt-4 max-w-3xl font-heading text-[1.85rem] font-extrabold leading-[1.12] text-white sm:text-5xl lg:text-6xl">
-                Protect Your Home or Business with the Right Security System
+                Security that covers your property — not just a camera on the wall
               </h1>
               <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-brand-100 sm:text-lg lg:mx-0">
-                CCTV, electric fencing, gate automation, video intercom and
-                networking — professionally designed and installed across Greater
-                Accra. Get a solution suited to your property with a free site
-                inspection.
+                We install CCTV, electric fencing, gate motors, video intercoms
+                and networking across Accra. We come to the site first, then
+                quote what will actually work for your place.
               </p>
             </div>
           </div>
@@ -58,10 +57,10 @@ export function Hero() {
               />
               <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-                  Real installation work
+                  Our install team on site
                 </p>
                 <p className="mt-1 text-sm font-medium text-white sm:text-base">
-                  Professionally installed security systems across Greater Accra
+                  Work from homes and compounds around Accra
                 </p>
               </div>
             </div>
@@ -79,12 +78,12 @@ export function Hero() {
               <WhatsAppCtaButton
                 placement="hero"
                 variant="white"
-                label="WhatsApp an Expert"
+                label="WhatsApp us"
               />
             </div>
 
             <p className="mt-5 text-sm font-medium tracking-wide text-white/80">
-              Site assessment · Professional installation · Handover &amp; support
+              Free site visit · Install · We show you how it works
             </p>
           </div>
         </div>

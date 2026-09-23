@@ -31,8 +31,8 @@ export default function ProjectsPage() {
         ]}
       />
       <PageHero
-        title="Our Work Speaks for Itself"
-        subtitle="A selection of security and smart-system projects we've delivered for homes, businesses, and institutions across Accra."
+        title="Recent work around Accra"
+        subtitle="A few installs we have finished for homes, shops and institutions. Want something close to your property type? Ask on WhatsApp."
         breadcrumb={[
           { name: "Home", href: "/" },
           { name: "Projects", href: "/projects" },
@@ -43,8 +43,8 @@ export default function ProjectsPage() {
         <Container>
           <SectionHeading
             eyebrow="Portfolio"
-            title="Recently Completed Projects"
-            description="Selected installs across Accra. Want photos from a similar property type? Ask us on WhatsApp or during your free site visit."
+            title="Selected jobs"
+            description="Locations and scopes vary. Photos help you see the finish — not a polished brochure set."
           />
           <div className="mt-12">
             <ProjectsGallery projects={projects} />
@@ -53,8 +53,8 @@ export default function ProjectsPage() {
       </section>
 
       <CtaSection
-        title="Your Project Could Be Next"
-        subtitle="Tell us what you'd like to secure and we'll design a solution that fits — starting with a free site inspection."
+        title="Got a similar property?"
+        subtitle="Tell us what you want covered. We will visit for free and send a quote that matches the site."
       />
     </>
   );

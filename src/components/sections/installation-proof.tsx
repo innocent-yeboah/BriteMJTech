@@ -44,13 +44,13 @@ export function InstallationProof() {
       <Container>
         <ScrollReveal>
           <div className="max-w-3xl">
-            <p className="eyebrow text-accent">Real Installation Work</p>
+            <p className="eyebrow text-accent">From recent jobs</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold md:text-4xl">
-              See the Systems We Actually Install
+              Photos from installs we have done
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-brand-100">
-              Real photographs from Brite MJ Technologies installation work —
-              from CCTV and monitoring to electric perimeter fencing.
+              Cameras on walls, electric fence lines, monitoring screens — this
+              is the kind of work we leave behind when we pack up.
             </p>
           </div>
         </ScrollReveal>
@@ -87,7 +87,7 @@ export function InstallationProof() {
             <WhatsAppCtaButton
               placement="installation_proof"
               variant="white"
-              label="WhatsApp an Expert"
+              label="WhatsApp us"
             />
           </div>
         </ScrollReveal>
