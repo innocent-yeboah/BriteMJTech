@@ -27,9 +27,18 @@ interface NotificationSettings {
   email_invoice_paid: boolean;
 }
 
+function getSupabaseAuthProvidersUrl(): string {
+  const match = process.env.NEXT_PUBLIC_SUPABASE_URL?.match(
+    /^https:\/\/([a-z0-9-]+)\.supabase\.co/i,
+  );
+  if (!match?.[1]) return "https://supabase.com/dashboard";
+  return `https://supabase.com/dashboard/project/${match[1]}/auth/providers?provider=Email`;
+}
+
 function SettingsContent() {
   const searchParams = useSearchParams();
   const initialTab = searchParams.get("tab") || "company";
+  const supabaseAuthProvidersUrl = getSupabaseAuthProvidersUrl();
 
   const [activeTab, setActiveTab] = useState(initialTab);
   const [saving, setSaving] = useState(false);
@@ -424,7 +433,7 @@ function SettingsContent() {
                     Auth rejects weak passwords on every path:
                   </p>
                   <a
-                    href="https://supabase.com/dashboard/project/tnakosplvgsbyhaycgsr/auth/providers?provider=Email"
+                    href={supabaseAuthProvidersUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-2 inline-block font-medium text-brand-700 underline"

@@ -35,6 +35,13 @@ function phoneFallbackMessage(): string {
   );
 }
 
+/** True on Vercel or NODE_ENV=production — lead storage is required for success. */
+function isProductionRuntime(): boolean {
+  return (
+    process.env.VERCEL === "1" || process.env.NODE_ENV === "production"
+  );
+}
+
 /**
  * Resolve Promise.allSettled email results to actual send booleans.
  * A fulfilled promise with value `false` means the send soft-failed.
@@ -127,10 +134,6 @@ export async function submitQuote(
 
     const emailed = emailActuallySent(emailResults);
 
-    if (!stored && !emailed) {
-      return { ok: false, message: phoneFallbackMessage() };
-    }
-
     if (stored && !emailed) {
       console.error(
         "[submitQuote] Lead stored but email notification/confirmation failed",
@@ -138,8 +141,22 @@ export async function submitQuote(
     }
     if (!stored && emailed) {
       console.error(
-        "[submitQuote] Email delivered but Supabase lead storage failed or skipped",
+        "[submitQuote] CRITICAL: email delivered but Supabase lead storage failed or skipped — no CRM row, no conversion token",
       );
+    }
+
+    // Production / Vercel: a quote is only successful when the lead is persisted.
+    // Email-only fallback must not show success or fire paid Lead events.
+    // Local/dev may still acknowledge when email arrives so preview keeps working.
+    if (!stored) {
+      if (isProductionRuntime() || !emailed) {
+        return { ok: false, message: phoneFallbackMessage() };
+      }
+      return {
+        ok: true,
+        message:
+          "Your request has been received. Our team will contact you shortly to confirm your free site inspection.",
+      };
     }
 
     const conversionToken = await issueConversionToken();
@@ -237,10 +254,6 @@ export async function submitEnquiry(
 
     const emailed = emailActuallySent(emailResults);
 
-    if (!stored && !emailed) {
-      return { ok: false, message: phoneFallbackMessage() };
-    }
-
     if (stored && !emailed) {
       console.error(
         "[submitEnquiry] Enquiry stored but email notification failed",
@@ -248,8 +261,14 @@ export async function submitEnquiry(
     }
     if (!stored && emailed) {
       console.error(
-        "[submitEnquiry] Email delivered but Supabase storage failed or skipped",
+        "[submitEnquiry] CRITICAL: email delivered but Supabase storage failed or skipped",
       );
+    }
+
+    if (!stored) {
+      if (isProductionRuntime() || !emailed) {
+        return { ok: false, message: phoneFallbackMessage() };
+      }
     }
 
     return {
