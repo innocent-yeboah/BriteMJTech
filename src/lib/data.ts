@@ -1,13 +1,14 @@
 /**
  * Static content for Brite MJ Technologies.
  *
- * These arrays power the site out-of-the-box so it looks complete and
- * professional immediately. Once the Supabase `services`, `projects`, and
- * `testimonials` tables are populated, swap the reads in the pages for
- * Supabase queries — the shapes below intentionally mirror the DB schema.
+ * These arrays power the public site. Service copy describes what the
+ * company installs. The `projects` array is a set of illustrative example
+ * solutions — not completed client jobs. Do not add client names, site
+ * addresses, dates, measured results, or testimonials here.
  *
- * Images use high-quality Unsplash security/industrial photography.
- * REPLACE with the client's real project photography before launch.
+ * `testimonials` stays empty on purpose. Named quotes were removed because
+ * they were not owner-verified. Do not render that array until real,
+ * attributable feedback is confirmed.
  */
 
 export type ServiceIcon =
@@ -334,76 +335,106 @@ export function getService(slug: string): Service | undefined {
 
 export type ProjectCategory = "residential" | "commercial" | "institutional";
 
+/**
+ * One illustrative installation. Not a completed job: no client, address, or date.
+ */
 export interface Project {
   id: string;
   title: string;
-  description: string;
+  scenario: string;
+  system: string;
+  equipment: string;
+  outcome: string;
   category: ProjectCategory;
-  location: string;
   image: string;
-  completedYear: string;
+  imageCaption: string;
 }
 
 export const projects: Project[] = [
   {
     id: "p1",
-    title: "Gated Residence CCTV & Intercom",
-    description:
-      "Cameras around the compound, video intercom at the gate, and remote gate control for a family home.",
+    title: "Gated residence — CCTV and intercom",
+    scenario:
+      "A family compound with a gate, boundary walls, and a driveway.",
+    system:
+      "Cameras around the compound, a video intercom at the gate, and remote gate control.",
+    equipment:
+      "Outdoor cameras, a network video recorder, an outdoor intercom station, and a gate motor with remotes.",
+    outcome:
+      "See who is at the gate, open it from inside or by remote, and review recordings on a phone.",
     category: "residential",
-    location: "East Legon, Accra",
     image: "/images/projects/gated-residence.webp",
-    completedYear: "2025",
+    imageCaption: "Illustrative",
   },
   {
     id: "p2",
-    title: "Warehouse Perimeter Security",
-    description:
-      "Electric fence, palisade, and a 16-camera setup for a logistics yard in Tema.",
+    title: "Warehouse perimeter",
+    scenario:
+      "A commercial yard where the boundary, gate, and loading area all need attention.",
+    system:
+      "Electric fencing with a physical barrier, plus cameras covering the yard.",
+    equipment:
+      "Electric-fence hardware, palisade or mesh fencing, outdoor cameras, and a recorder.",
+    outcome:
+      "A boundary that is harder to climb, with recorded views of the yard and entrances.",
     category: "commercial",
-    location: "Tema Industrial Area",
     image: "/images/projects/warehouse-perimeter.webp",
-    completedYear: "2025",
+    imageCaption: "Illustrative",
   },
   {
     id: "p3",
-    title: "School Campus Safety Network",
-    description:
-      "Campus cameras, cabling, and access points so staff can see entrances and corridors.",
+    title: "School campus network",
+    scenario: "A school where staff need a clear view of entrances and corridors.",
+    system:
+      "Campus cameras tied together with cabling and network access points.",
+    equipment:
+      "Indoor and outdoor cameras, structured cabling, access points, and a recorder.",
+    outcome:
+      "Staff can watch entrances and corridors on a local screen or a phone.",
     category: "institutional",
-    location: "Spintex, Accra",
     image: "/images/about/schools-institutions.webp",
-    completedYear: "2024",
+    imageCaption: "Illustrative",
   },
   {
     id: "p4",
-    title: "Retail Store Surveillance Upgrade",
-    description:
-      "Camera upgrade with recording and phone viewing for a busy shop floor.",
+    title: "Retail shop surveillance",
+    scenario:
+      "A busy shop floor where the owner wants recording and a way to look in from elsewhere.",
+    system:
+      "Cameras over the floor and entrance, with recording and phone viewing.",
+    equipment: "Indoor cameras, a network video recorder, and a phone-viewing setup.",
+    outcome:
+      "Review what happened on the floor, and check a live view when you are away from the shop.",
     category: "commercial",
-    location: "Osu, Accra",
     image: "/images/projects/retail-store-surveillance.webp",
-    completedYear: "2024",
+    imageCaption: "Illustrative",
   },
   {
     id: "p5",
-    title: "Apartment Complex Access Control",
-    description:
-      "Gate motor, video intercom, and cameras shared across a residential block.",
+    title: "Apartment block access",
+    scenario: "A residential block with a shared gate and common areas.",
+    system:
+      "A gate motor, a video intercom, and cameras covering the shared entrance.",
+    equipment: "A gate motor, an outdoor intercom, cameras, and a recorder.",
+    outcome:
+      "Residents can see visitors and control the shared gate without walking down to the entrance.",
     category: "residential",
-    location: "Cantonments, Accra",
     image: "/images/about/homes-residences.webp",
-    completedYear: "2025",
+    imageCaption: "Illustrative",
   },
   {
     id: "p6",
-    title: "Government Facility Security Network",
-    description:
-      "High fencing, linked alarms, and round-the-clock camera coverage for a public facility.",
+    title: "Public facility perimeter",
+    scenario:
+      "A public or institutional site that needs a stronger perimeter and camera coverage through the day and night.",
+    system: "High fencing linked to alarms, with cameras covering the grounds.",
+    equipment:
+      "High-security fencing, an alarm link-up, outdoor cameras, and a recorder.",
+    outcome:
+      "An alarm if the perimeter is interfered with, and camera views staff can monitor through the day and night.",
     category: "institutional",
-    location: "Accra Central",
     image: "/images/projects/government-security-network.webp",
-    completedYear: "2023",
+    imageCaption: "Illustrative",
   },
 ];
 
@@ -415,32 +446,12 @@ export interface Testimonial {
   rating: number;
 }
 
-export const testimonials: Testimonial[] = [
-  {
-    id: "t1",
-    name: "Ama Boateng",
-    company: "Homeowner, East Legon",
-    content:
-      "They came, walked the compound with us, and put cameras where we actually needed them. Tidied up after, showed me the phone app, and still pick up when I call.",
-    rating: 5,
-  },
-  {
-    id: "t2",
-    name: "Kwame Mensah",
-    company: "Operations Manager, Tema",
-    content:
-      "Electric fence and cameras on a long warehouse wall. When a strand came loose months later, they were back the same day. That is what I care about.",
-    rating: 5,
-  },
-  {
-    id: "t3",
-    name: "Grace Owusu",
-    company: "School Administrator, Spintex",
-    content:
-      "Quote was clear, install did not drag on for weeks, and they trained the security staff on the monitors before they left. No surprises.",
-    rating: 5,
-  },
-];
+/**
+ * Intentionally unused and empty. Unverified named quotes were removed.
+ * Do not add or display testimonials until the owner confirms real,
+ * attributable client feedback.
+ */
+export const testimonials: Testimonial[] = [];
 
 export interface WhyChoosePillar {
   icon: "experience" | "quality" | "support" | "trust";

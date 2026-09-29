@@ -8,32 +8,32 @@ import { WhatsAppCtaButton } from "@/components/analytics/tracked-ctas";
 const installationPhotos = [
   {
     src: "/images/cctv/install-1.webp",
-    alt: "Technician installing a CCTV camera on a property",
+    alt: "Illustrative photo of a technician installing a CCTV camera",
     label: "CCTV installation",
   },
   {
     src: "/images/cctv/install-2.webp",
-    alt: "Technician adjusting a CCTV camera during installation",
+    alt: "Illustrative photo of a technician adjusting a CCTV camera",
     label: "Camera positioning",
   },
   {
     src: "/images/cctv/nvr-system.webp",
-    alt: "Installed CCTV monitoring system showing multiple camera views",
+    alt: "Illustrative photo of a CCTV monitoring system showing multiple camera views",
     label: "CCTV monitoring",
   },
   {
     src: "/images/fencing/install-tech.webp",
-    alt: "Technician installing electric fencing on a perimeter wall",
+    alt: "Illustrative photo of a technician installing electric fencing on a wall",
     label: "Electric fencing",
   },
   {
     src: "/images/fencing/wall-electric-1.webp",
-    alt: "Completed electric fencing installed along a perimeter wall",
+    alt: "Illustrative photo of electric fencing along a perimeter wall",
     label: "Perimeter protection",
   },
   {
     src: "/images/cctv/cameras-pole.webp",
-    alt: "Outdoor CCTV cameras mounted on a security pole",
+    alt: "Illustrative photo of outdoor CCTV cameras mounted on a pole",
     label: "Outdoor surveillance",
   },
 ] as const;
@@ -44,13 +44,14 @@ export function InstallationProof() {
       <Container>
         <ScrollReveal>
           <div className="max-w-3xl">
-            <p className="eyebrow text-accent">From recent jobs</p>
+            <p className="eyebrow text-accent">Example installations</p>
             <h2 className="mt-3 font-heading text-3xl font-extrabold md:text-4xl">
-              Photos from installs we have done
+              The kinds of systems we fit
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-brand-100">
-              Cameras on walls, electric fence lines, monitoring screens — this
-              is the kind of work we leave behind when we pack up.
+              Cameras on walls, electric fence lines, monitoring screens —
+              illustrations of the systems we design and install across Accra
+              and Ghana.
             </p>
           </div>
         </ScrollReveal>
@@ -72,6 +73,9 @@ export function InstallationProof() {
               </div>
               <figcaption className="px-4 py-3 text-sm font-semibold text-white/90">
                 {photo.label}
+                <span className="mt-0.5 block text-xs font-medium uppercase tracking-wide text-white/60">
+                  Illustrative
+                </span>
               </figcaption>
             </figure>
           ))}
