@@ -22,7 +22,13 @@ export function Footer() {
       <div className="container py-8 md:py-12 lg:py-14">
         <div className="grid grid-cols-2 gap-x-6 gap-y-7 md:gap-8 lg:grid-cols-4 lg:gap-10">
           <div className="col-span-2 lg:col-span-1">
-            <Logo light />
+            <Link
+              href="/"
+              className="group inline-flex max-w-full rounded-sm"
+              aria-label={`${siteConfig.name} home`}
+            >
+              <Logo light wordmark />
+            </Link>
             <p className="mt-3 max-w-xs text-sm leading-snug text-brand-100/80 md:mt-4 md:leading-relaxed">
               <span className="md:hidden">{siteConfig.tagline}</span>
               <span className="hidden md:inline">
