@@ -34,3 +34,10 @@ jobs:
 
       - name: Typecheck
         run: npm run typecheck
+
+      - name: Build
+        env:
+          # Public placeholders only. Never put real keys in this workflow.
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: build-placeholder-anon-key
+        run: npm run build
