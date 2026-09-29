@@ -113,9 +113,9 @@ const staticPublicRoutes = [
   },
   {
     path: "/projects",
-    title: "Security Projects Across Accra",
+    title: "Typical Installations",
     description:
-      "Completed residential, commercial, and institutional security projects by Brite MJ Technologies — CCTV, fencing, access control, and smart systems.",
+      "Examples of the kinds of systems we design and install across Accra and Ghana — CCTV, fencing, access control, and smart systems. Illustrative examples; ask us for a tailored proposal.",
     priority: 0.85,
     changeFrequency: "weekly" as const,
     image: "/images/projects/gated-residence.webp",

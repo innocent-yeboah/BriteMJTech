@@ -4,19 +4,22 @@ import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CtaSection } from "@/components/sections/cta-section";
 import { ProjectsGallery } from "@/components/projects/projects-gallery";
-import { BreadcrumbJsonLd } from "@/components/structured-data";
+import {
+  BreadcrumbJsonLd,
+  ExampleSolutionsJsonLd,
+} from "@/components/structured-data";
 import { projects } from "@/lib/data";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Security Projects Across Accra",
+  title: "Typical Installations",
   description:
-    "Completed residential, commercial, and institutional security projects by Brite MJ Technologies — CCTV, fencing, access control, and smart systems.",
+    "Examples of the kinds of systems we design and install across Accra and Ghana — CCTV, fencing, access control, and smart systems. Illustrative examples; ask us for a tailored proposal.",
   path: "/projects",
   keywords: [
-    "security projects Accra",
-    "CCTV installation portfolio Ghana",
-    "completed fencing projects Accra",
+    "typical security installations Accra",
+    "example CCTV systems Ghana",
+    "security system examples Accra",
   ],
   image: "/images/projects/gated-residence.webp",
 });
@@ -27,25 +30,34 @@ export default function ProjectsPage() {
       <BreadcrumbJsonLd
         items={[
           { name: "Home", url: "/" },
-          { name: "Projects", url: "/projects" },
+          { name: "Typical Installations", url: "/projects" },
         ]}
       />
+      <ExampleSolutionsJsonLd
+        items={projects.map((project) => ({
+          name: project.title,
+          description: `${project.scenario} ${project.system}`,
+        }))}
+      />
       <PageHero
-        title="Recent work around Accra"
-        subtitle="A few installs we have finished for homes, shops and institutions. Want something close to your property type? Ask on WhatsApp."
+        title="Typical Installations"
+        subtitle="Examples of the kinds of systems we design and install across Accra and Ghana."
         breadcrumb={[
           { name: "Home", href: "/" },
-          { name: "Projects", href: "/projects" },
+          { name: "Typical Installations", href: "/projects" },
         ]}
       />
 
       <section className="section bg-surface">
         <Container>
           <SectionHeading
-            eyebrow="Portfolio"
-            title="Selected jobs"
-            description="Locations and scopes vary. Photos help you see the finish — not a polished brochure set."
+            eyebrow="Example solutions"
+            title="Systems for homes, businesses and institutions"
+            description="Each example describes a typical situation, the system we would recommend, the equipment types, and the result you can expect."
           />
+          <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-slate-500">
+            Illustrative examples; ask us for a tailored proposal.
+          </p>
           <div className="mt-12">
             <ProjectsGallery projects={projects} />
           </div>
@@ -53,8 +65,8 @@ export default function ProjectsPage() {
       </section>
 
       <CtaSection
-        title="Got a similar property?"
-        subtitle="Tell us what you want covered. We will visit for free and send a quote that matches the site."
+        title="Want a system planned for your site?"
+        subtitle="Book a free site inspection. We will walk the property with you and recommend what fits."
       />
     </>
   );

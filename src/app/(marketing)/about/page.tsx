@@ -30,22 +30,22 @@ const values = [
   "Quotes match the property and the budget you share",
 ];
 
-/** Real environments help visitors recognise the communities we protect. */
+/** Property-type illustrations, not records of completed client sites. */
 const clientTypes = [
   {
     image: "/images/about/homes-residences.webp",
     label: "Homes & Residences",
-    alt: "Modern family residence protected by Brite MJ security systems",
+    alt: "Illustrative photo of a family residence — the kind of home we design systems for",
   },
   {
     image: "/images/about/businesses-offices.webp",
     label: "Businesses & Offices",
-    alt: "Professional office environment protected by Brite MJ security systems",
+    alt: "Illustrative photo of an office — the kind of workplace we design systems for",
   },
   {
     image: "/images/about/schools-institutions.webp",
     label: "Schools & Institutions",
-    alt: "Classroom representing schools and institutions served by Brite MJ",
+    alt: "Illustrative photo of a classroom — the kind of school setting we design systems for",
   },
 ];
 
@@ -172,9 +172,14 @@ export default function AboutPage() {
                     className="absolute inset-0 bg-gradient-to-t from-brand-950/35 via-transparent to-transparent"
                   />
                 </div>
-                <p className="px-6 py-5 text-center font-heading text-lg font-bold text-brand-950">
-                  {client.label}
-                </p>
+                <div className="px-6 py-5 text-center">
+                  <p className="font-heading text-lg font-bold text-brand-950">
+                    {client.label}
+                  </p>
+                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-500">
+                    Illustrative
+                  </p>
+                </div>
               </article>
             ))}
           </div>

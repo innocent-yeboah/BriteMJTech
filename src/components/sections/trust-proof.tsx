@@ -6,8 +6,8 @@ import { WhatsAppCtaButton } from "@/components/analytics/tracked-ctas";
 import { ScrollReveal } from "@/components/effects/scroll-reveal";
 
 /**
- * Credibility section built around real installation evidence.
- * Named testimonials and project case studies remain withheld until owner-verified.
+ * How an install is handled. The photo is an illustration, not a client case study.
+ * Named testimonials stay unpublished until owner-verified.
  */
 export function TrustProof() {
   return (
@@ -15,19 +15,24 @@ export function TrustProof() {
       <Container>
         <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
           <ScrollReveal className="relative lg:col-span-5">
-            <div className="relative aspect-[4/3] overflow-hidden sm:aspect-[5/4]">
-              <Image
-                src="/images/cctv/install-1.webp"
-                alt="Brite MJ Technologies technician installing a CCTV camera on site"
-                fill
-                sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover object-center"
-              />
-            </div>
+            <figure>
+              <div className="relative aspect-[4/3] overflow-hidden sm:aspect-[5/4]">
+                <Image
+                  src="/images/cctv/install-1.webp"
+                  alt="Illustrative photo of a technician installing a CCTV camera"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              <figcaption className="mt-2 text-xs font-medium uppercase tracking-wide text-slate-500">
+                Illustrative photo
+              </figcaption>
+            </figure>
           </ScrollReveal>
 
           <ScrollReveal delayMs={80} className="lg:col-span-7">
-            <p className="eyebrow">On real Accra properties</p>
+            <p className="eyebrow">How an install goes</p>
             <h2 className="mt-3 max-w-xl font-heading text-3xl font-extrabold text-brand-950 md:text-4xl">
               We install. We show you how it works. We pick up when you call.
             </h2>

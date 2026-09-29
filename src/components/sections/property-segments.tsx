@@ -67,7 +67,7 @@ export function PropertySegments() {
           <SectionHeading
             eyebrow="Where we work"
             title="Homes, shops, yards and campuses"
-            description="If it is in Greater Accra and you need eyes on the property or a stronger perimeter, we have likely done something similar."
+            description="If it is in Greater Accra and you need eyes on the property or a stronger perimeter, we will recommend a system for that kind of site."
           />
         </ScrollReveal>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

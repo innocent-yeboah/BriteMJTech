@@ -137,6 +137,38 @@ export function BreadcrumbJsonLd({
   return <JsonLd data={jsonLd} />;
 }
 
+/**
+ * Marks /projects as a collection of illustrative solutions.
+ * These are example systems, not completed client jobs.
+ */
+export function ExampleSolutionsJsonLd({
+  items,
+}: {
+  items: { name: string; description: string }[];
+}) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Typical Installations",
+    description:
+      "Illustrative examples of the kinds of security systems Brite MJ Technologies designs and installs across Accra and Ghana. Not a record of completed client jobs.",
+    url: `${siteConfig.url}/projects`,
+    isPartOf: { "@id": `${siteConfig.url}/#website` },
+    mainEntity: {
+      "@type": "ItemList",
+      name: "Example security solutions",
+      itemListElement: items.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+        description: item.description,
+      })),
+    },
+  };
+
+  return <JsonLd data={jsonLd} />;
+}
+
 /** Service catalog schema for the services page. */
 export function ServicesJsonLd() {
   const jsonLd = {

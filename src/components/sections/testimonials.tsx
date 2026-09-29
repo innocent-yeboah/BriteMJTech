@@ -6,7 +6,14 @@ import { ScrollReveal } from "@/components/effects/scroll-reveal";
 import { testimonials } from "@/lib/data";
 import { siteConfig } from "@/lib/site";
 
+/**
+ * Not mounted on any public page. The testimonials array is intentionally
+ * empty until the owner verifies real quotes. Render nothing in that state
+ * so unverified names cannot appear.
+ */
 export function Testimonials() {
+  if (testimonials.length === 0) return null;
+
   const googleUrl = siteConfig.googleBusinessUrl;
 
   return (

@@ -8,7 +8,7 @@ import { WhatsAppCtaButton } from "@/components/analytics/tracked-ctas";
 
 /**
  * First-viewport hero: assess → install positioning, site inspection + WhatsApp.
- * Uses a real Brite MJ installation photograph as immediate visual proof.
+ * The photograph illustrates the kind of install; it is not a client case study.
  */
 export function Hero() {
   return (
@@ -44,7 +44,7 @@ export function Hero() {
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-brand-900 shadow-2xl shadow-black/25">
               <Image
                 src="/images/cctv/install-1.webp"
-                alt="Brite MJ Technologies technician installing a CCTV security camera"
+                alt="Illustrative photo of a technician installing a CCTV security camera"
                 fill
                 priority
                 quality={80}
@@ -57,10 +57,10 @@ export function Hero() {
               />
               <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-                  Our install team on site
+                  Illustrative
                 </p>
                 <p className="mt-1 text-sm font-medium text-white sm:text-base">
-                  Work from homes and compounds around Accra
+                  The kind of CCTV installation we design and fit
                 </p>
               </div>
             </div>

@@ -3,14 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import type { Project, ProjectCategory } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 type Filter = "all" | ProjectCategory;
 
 const filters: { value: Filter; label: string }[] = [
-  { value: "all", label: "All Projects" },
+  { value: "all", label: "All examples" },
   { value: "residential", label: "Residential" },
   { value: "commercial", label: "Commercial" },
   { value: "institutional", label: "Institutional" },
@@ -34,7 +34,7 @@ export function ProjectsGallery({ projects }: { projects: Project[] }) {
     <div>
       <div
         role="tablist"
-        aria-label="Filter projects by category"
+        aria-label="Filter examples by property type"
         className="flex flex-wrap justify-center gap-2"
       >
         {filters.map((filter) => {
@@ -67,7 +67,7 @@ export function ProjectsGallery({ projects }: { projects: Project[] }) {
             <div className="relative aspect-[4/3] overflow-hidden">
               <Image
                 src={project.image}
-                alt={project.title}
+                alt={`${project.title} — illustrative example, not a client site`}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -75,21 +75,34 @@ export function ProjectsGallery({ projects }: { projects: Project[] }) {
               <span className="absolute left-4 top-4 rounded-full bg-accent px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
                 {categoryLabels[project.category]}
               </span>
+              <span className="absolute bottom-3 right-3 rounded-full bg-brand-950/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
+                {project.imageCaption}
+              </span>
             </div>
             <div className="flex flex-1 flex-col p-6">
               <h3 className="text-lg text-brand-950">{project.title}</h3>
-              <p className="mt-2 flex items-center gap-1.5 text-sm text-slate-500">
-                <MapPin className="h-4 w-4 text-accent" />
-                {project.location} &middot; {project.completedYear}
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                {project.scenario}
               </p>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-600">
-                {project.description}
-              </p>
+              <dl className="mt-4 space-y-3 text-sm leading-relaxed">
+                <div>
+                  <dt className="font-semibold text-brand-950">Recommended system</dt>
+                  <dd className="text-slate-600">{project.system}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-brand-950">Equipment types</dt>
+                  <dd className="text-slate-600">{project.equipment}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-brand-950">What you can expect</dt>
+                  <dd className="text-slate-600">{project.outcome}</dd>
+                </div>
+              </dl>
               <Link
-                href={`/contact?ref=${encodeURIComponent(project.title)}`}
+                href="/quote"
                 className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-colors hover:text-accent-600"
               >
-                Inquire About This Project
+                Book a free site inspection
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
@@ -99,7 +112,7 @@ export function ProjectsGallery({ projects }: { projects: Project[] }) {
 
       {visible.length === 0 ? (
         <p className="mt-10 text-center text-slate-500">
-          No projects in this category yet — check back soon.
+          No examples in this category.
         </p>
       ) : null}
     </div>

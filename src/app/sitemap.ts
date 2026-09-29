@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.95,
     },
     {
+      // Typical installations (illustrative examples). URL kept as /projects.
       url: `${base}/projects`,
       lastModified,
       changeFrequency: "weekly",
