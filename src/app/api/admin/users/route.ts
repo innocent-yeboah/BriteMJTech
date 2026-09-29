@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { requireAdmin, getServiceClient } from "@/lib/admin/auth";
+import { assertSecurePassword } from "@/lib/password-security";
 
 const createUserSchema = z.object({
   email: z.string().email(),
   full_name: z.string().min(2),
   phone: z.string().optional(),
   role: z.enum(["admin", "manager", "staff", "technician"]).default("staff"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
+  password: z.string().min(1, "Password is required"),
 });
 
 export async function GET() {
@@ -45,6 +46,11 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const input = createUserSchema.parse(body);
+
+    const passwordCheck = await assertSecurePassword(input.password);
+    if (!passwordCheck.ok) {
+      return NextResponse.json({ error: passwordCheck.error }, { status: 400 });
+    }
 
     const { data: created, error: createError } = await admin.auth.admin.createUser({
       email: input.email,

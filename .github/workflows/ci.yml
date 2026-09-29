@@ -35,6 +35,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Rate-limit policy
+        run: npm run verify:rate-limit
+
       - name: Build
         env:
           # Public placeholders only. Never put real keys in this workflow.

@@ -42,8 +42,9 @@
   `prefers-reduced-motion` support.
 - **Security:** Supabase RLS (anonymous clients cannot insert leads or
   enquiries; public forms insert with the server-only service role), Zod
-  validation on the server, honeypot fields, in-memory rate limiting, and
-  hardened HTTP headers.
+  validation on the server, honeypot fields, Upstash rate limiting (required
+  in production; in-memory fallback only in local development), and hardened
+  HTTP headers.
 
 ---
 
@@ -121,7 +122,40 @@ actually store leads and send email, configure Supabase and Resend below.
 2. Add `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, and `LEADS_NOTIFICATION_EMAIL`
    to `.env.local`.
 
-### 5. Run the dev server
+### 5. Rate limiting (Upstash Redis) — required in production
+
+Public quote, contact, and newsletter submissions, and
+`POST /api/auth/password-check`, are rate limited per IP.
+
+1. Create a Redis database at [console.upstash.com](https://console.upstash.com)
+   (the free tier is enough).
+2. Copy the **REST URL** and **REST token** into `.env.local` as
+   `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`.
+3. Set the same two variables on the Vercel project for **Production** and
+   **Preview**, then redeploy.
+
+Local `next dev` still rate-limits with an in-memory bucket when those
+variables are unset, so local development keeps working. Production
+(`next start` or Vercel) requires the two Upstash variables. If Redis is
+missing there, the public endpoints above
+respond with "Please try again shortly" and the cause is logged. If Redis is
+configured but a call fails, that isolate allows a small strict in-memory
+budget and then denies further requests until Redis answers again. The budget
+is 2 requests per IP for each bucket (quote, contact, newsletter, or
+password-check) and 30 requests total on that running instance across those
+buckets, per 10 minutes. A short outage can still accept a few real
+submissions, and a flood on that instance is rejected. Every later request
+tries Redis again, so once Redis recovers the fallback stops. If Redis
+stays down, that in-memory allowance also expires after 10 minutes. Upstash
+is what enforces the limit across instances.
+
+Check the decision logic without Redis:
+
+```bash
+npm run verify:rate-limit
+```
+
+### 6. Run the dev server
 
 ```bash
 npm run dev
@@ -140,6 +174,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run start`     | Start the production server          |
 | `npm run lint`      | Run ESLint                           |
 | `npm run typecheck` | Type-check with the TypeScript compiler |
+| `npm run verify:rate-limit` | Check production fail-closed rate-limit decisions |
 
 ---
 
@@ -191,7 +226,9 @@ supabase/migrations/          # 0001–0005; apply in order (see setup step 3)
 1. Push this repo to GitHub.
 2. Import it into [Vercel](https://vercel.com).
 3. Add all environment variables from `.env.example` in the Vercel project
-   settings.
+   settings. `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` are
+   required for Production and Preview. Without them, public forms and the
+   password-check endpoint fail closed.
 4. Deploy. Add the client's custom domain when ready.
 
 ---
@@ -200,6 +237,8 @@ supabase/migrations/          # 0001–0005; apply in order (see setup step 3)
 
 - Placeholder statistics (e.g. "10+ Years", "100+ Projects") and testimonials
   should be confirmed with the client before launch.
-- The in-memory rate limiter suits a single instance. For serverless scale,
-  back it with Upstash Redis or a Supabase table.
+- Upstash Redis is required in production. Without
+  `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`, public form
+  submissions and the password-check endpoint fail closed on Vercel. See
+  setup step 5.
 ```
