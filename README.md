@@ -40,8 +40,10 @@
 - **Performance & a11y:** Next.js `<Image>`, server components by default,
   semantic HTML, keyboard navigation, focus rings, skip-link, and
   `prefers-reduced-motion` support.
-- **Security:** Supabase RLS, Zod validation on the server, honeypot fields,
-  in-memory rate limiting, and hardened HTTP headers.
+- **Security:** Supabase RLS (anonymous clients cannot insert leads or
+  enquiries; public forms insert with the server-only service role), Zod
+  validation on the server, honeypot fields, in-memory rate limiting, and
+  hardened HTTP headers.
 
 ---
 
@@ -68,21 +70,49 @@ actually store leads and send email, configure Supabase and Resend below.
 ### 3. Set up the database (Supabase)
 
 1. Create a project at [supabase.com](https://supabase.com).
-2. Run the migration in `supabase/migrations/0001_init.sql` via the Supabase
-   **SQL Editor**, or with the CLI:
+2. Apply the SQL migrations in `supabase/migrations/` **in filename order**
+   (`0001_init.sql` through `0005_revoke_public_lead_inserts.sql`). Paste each
+   file into the Supabase **SQL Editor**, or with the CLI:
 
    ```bash
    supabase db push
    ```
 
+   **Existing database:** if `0001`–`0004` are already applied, run only
+   `supabase/migrations/0005_revoke_public_lead_inserts.sql`. It is safe to
+   run more than once. It removes the anonymous `INSERT` policies on `leads`
+   and `enquiries` (`WITH CHECK (true)`), which let anyone holding the public
+   anon key create rows and set staff fields such as `status`. Quote, contact,
+   and newsletter forms are unchanged: `src/app/actions/submit.ts` inserts with
+   `SUPABASE_SERVICE_ROLE_KEY`, which bypasses RLS. Signed-in staff still
+   create leads through the `leads_staff_insert` policy.
+
+   After it is applied, an anonymous insert that sets `status` must fail.
+   Replace the URL and anon key, then:
+
+   ```bash
+   curl -sS -o /tmp/lead-insert.json -w "%{http_code}\n" \
+     -X POST "$NEXT_PUBLIC_SUPABASE_URL/rest/v1/leads" \
+     -H "apikey: $NEXT_PUBLIC_SUPABASE_ANON_KEY" \
+     -H "Authorization: Bearer $NEXT_PUBLIC_SUPABASE_ANON_KEY" \
+     -H "Content-Type: application/json" \
+     -H "Prefer: return=minimal" \
+     -d '{"name":"Attacker","email":"a@example.com","phone":"0200000000","status":"won","source":"website"}'
+   ```
+
+   Expect `401` or `403` and a permission or row-level security error in
+   `/tmp/lead-insert.json`. The service-role smoke check is
+   `npm run smoke:leads`.
+
 3. Copy your project URL and keys into `.env.local`:
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   - `SUPABASE_SERVICE_ROLE_KEY` (server-only — never expose to the browser)
+   - `SUPABASE_SERVICE_ROLE_KEY` (server-only — never expose to the browser).
+     Required for quote, contact, and newsletter storage.
 
-4. **Admin access to leads:** the RLS policies grant read/manage rights to
-   users whose auth JWT has `app_metadata.role = 'admin'`. Set this on a user
-   from the Supabase dashboard or via the Admin API.
+4. **Admin access to leads:** an active row in `public.users` grants access.
+   `role` is `admin`, `manager`, `staff`, or `technician` (see `0002` and
+   `0004`). Do not rely on `app_metadata.role`.
 
 ### 4. Set up email (Resend)
 
@@ -139,7 +169,7 @@ src/
     ├── site.ts                # Company config & navigation
     ├── validations.ts         # Zod schemas
     └── utils.ts
-supabase/migrations/0001_init.sql
+supabase/migrations/          # 0001–0005; apply in order (see setup step 3)
 ```
 
 ---
