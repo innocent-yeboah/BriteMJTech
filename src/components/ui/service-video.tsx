@@ -87,7 +87,7 @@ export function ServiceVideo({
           muted={muted}
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           aria-label={label}
         />
       ) : poster ? (

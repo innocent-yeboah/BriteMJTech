@@ -20,7 +20,7 @@ export const metadata: Metadata = createPageMetadata({
     "Brite MJ Technologies about",
     "Spintex CCTV installers",
   ],
-  image: "/images/hero/team-install.jpg",
+  image: "/images/hero/team-install.webp",
 });
 
 const values = [
@@ -33,17 +33,17 @@ const values = [
 /** Real environments help visitors recognise the communities we protect. */
 const clientTypes = [
   {
-    image: "/images/about/homes-residences.jpg",
+    image: "/images/about/homes-residences.webp",
     label: "Homes & Residences",
     alt: "Modern family residence protected by Brite MJ security systems",
   },
   {
-    image: "/images/about/businesses-offices.jpg",
+    image: "/images/about/businesses-offices.webp",
     label: "Businesses & Offices",
     alt: "Professional office environment protected by Brite MJ security systems",
   },
   {
-    image: "/images/about/schools-institutions.jpg",
+    image: "/images/about/schools-institutions.webp",
     label: "Schools & Institutions",
     alt: "Classroom representing schools and institutions served by Brite MJ",
   },
@@ -73,7 +73,7 @@ export default function AboutPage() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-card">
               <Image
-                src="/images/hero/team-install.jpg"
+                src="/images/hero/team-install.webp"
                 alt="Brite MJ Technologies technicians installing security systems on site in Accra"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"

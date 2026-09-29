@@ -22,7 +22,7 @@ export function WhyChooseUs() {
           <ScrollReveal variant="left" className="relative lg:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden sm:aspect-[5/6]">
               <Image
-                src="/images/hero/team-install.jpg"
+                src="/images/hero/team-install.webp"
                 alt="Brite MJ Technologies technicians installing security systems on site in Accra"
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"

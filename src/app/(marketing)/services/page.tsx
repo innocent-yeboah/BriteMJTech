@@ -24,7 +24,7 @@ export const metadata: Metadata = createPageMetadata({
     "electric fence installation Ghana",
     "gate automation Accra",
   ],
-  image: "/images/hero/cctv-install.png",
+  image: "/images/hero/cctv-install.webp",
 });
 
 export default function ServicesPage() {

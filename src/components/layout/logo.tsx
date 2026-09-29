@@ -4,8 +4,11 @@ import { cn } from "@/lib/utils";
 /**
  * Brite MJ Technologies master logo.
  * The supplied full logo artwork is the single source of truth.
- * `unoptimized` bypasses the Next image optimizer, which has failed for
- * static assets on this project's Vercel deploy.
+ * Served directly (`unoptimized`). The file is already a 9KB JPEG, and this
+ * project's Vercel image optimizer has rejected some static files whose bytes
+ * did not match the extension (JPEG or WebP saved as `.png`). Those photos
+ * are now real WebP and use the optimizer again. The header mark stays a
+ * direct file so it does not depend on that service.
  */
 export function Logo({
   className,
@@ -22,8 +25,8 @@ export function Logo({
       <Image
         src="/images/logo/brite-mj-technologies.jpg"
         alt="Brite MJ Technologies — Smart Systems. Stronger Protection."
-        width={1000}
-        height={1000}
+        width={254}
+        height={260}
         priority
         unoptimized
         className={cn(
@@ -46,8 +49,8 @@ export function MjMark({
     <Image
       src="/images/logo/brite-mj-technologies.jpg"
       alt={title}
-      width={1000}
-      height={1000}
+      width={254}
+      height={260}
       priority
       unoptimized
       className={cn("h-10 w-auto object-contain", className)}

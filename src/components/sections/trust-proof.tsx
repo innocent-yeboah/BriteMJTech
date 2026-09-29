@@ -17,7 +17,7 @@ export function TrustProof() {
           <ScrollReveal className="relative lg:col-span-5">
             <div className="relative aspect-[4/3] overflow-hidden sm:aspect-[5/4]">
               <Image
-                src="/images/cctv/install-1.png"
+                src="/images/cctv/install-1.webp"
                 alt="Brite MJ Technologies technician installing a CCTV camera on site"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"

@@ -109,7 +109,7 @@ const staticPublicRoutes = [
       "Professional CCTV installation, security and electric fencing, networking, remote gate control, video intercom, and smart security systems across Accra, Ghana.",
     priority: 0.95,
     changeFrequency: "weekly" as const,
-    image: "/images/hero/cctv-install.png",
+    image: "/images/hero/cctv-install.webp",
   },
   {
     path: "/projects",
@@ -118,7 +118,7 @@ const staticPublicRoutes = [
       "Completed residential, commercial, and institutional security projects by Brite MJ Technologies — CCTV, fencing, access control, and smart systems.",
     priority: 0.85,
     changeFrequency: "weekly" as const,
-    image: "/images/projects/gated-residence.jpg",
+    image: "/images/projects/gated-residence.webp",
   },
   {
     path: "/about",
@@ -127,7 +127,7 @@ const staticPublicRoutes = [
       "Learn about Brite MJ Technologies — a trusted security and smart systems company based at Spintex, Accra, protecting homes, businesses, and institutions.",
     priority: 0.75,
     changeFrequency: "monthly" as const,
-    image: "/images/hero/team-install.jpg",
+    image: "/images/hero/team-install.webp",
   },
   {
     path: "/contact",
