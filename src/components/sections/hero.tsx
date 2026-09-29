@@ -43,11 +43,11 @@ export function Hero() {
           <div className="relative mx-auto w-full max-w-xl lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:max-w-none">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-brand-900 shadow-2xl shadow-black/25">
               <Image
-                src="/images/cctv/install-1.png"
+                src="/images/cctv/install-1.webp"
                 alt="Brite MJ Technologies technician installing a CCTV security camera"
                 fill
                 priority
-                unoptimized
+                quality={80}
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 className="object-cover"
               />

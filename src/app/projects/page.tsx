@@ -18,7 +18,7 @@ export const metadata: Metadata = createPageMetadata({
     "CCTV installation portfolio Ghana",
     "completed fencing projects Accra",
   ],
-  image: "/images/projects/gated-residence.jpg",
+  image: "/images/projects/gated-residence.webp",
 });
 
 export default function ProjectsPage() {

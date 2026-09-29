@@ -7,32 +7,32 @@ import { WhatsAppCtaButton } from "@/components/analytics/tracked-ctas";
 
 const installationPhotos = [
   {
-    src: "/images/cctv/install-1.png",
+    src: "/images/cctv/install-1.webp",
     alt: "Technician installing a CCTV camera on a property",
     label: "CCTV installation",
   },
   {
-    src: "/images/cctv/install-2.png",
+    src: "/images/cctv/install-2.webp",
     alt: "Technician adjusting a CCTV camera during installation",
     label: "Camera positioning",
   },
   {
-    src: "/images/cctv/nvr-system.png",
+    src: "/images/cctv/nvr-system.webp",
     alt: "Installed CCTV monitoring system showing multiple camera views",
     label: "CCTV monitoring",
   },
   {
-    src: "/images/fencing/install-tech.png",
+    src: "/images/fencing/install-tech.webp",
     alt: "Technician installing electric fencing on a perimeter wall",
     label: "Electric fencing",
   },
   {
-    src: "/images/fencing/wall-electric-1.png",
+    src: "/images/fencing/wall-electric-1.webp",
     alt: "Completed electric fencing installed along a perimeter wall",
     label: "Perimeter protection",
   },
   {
-    src: "/images/cctv/cameras-pole.png",
+    src: "/images/cctv/cameras-pole.webp",
     alt: "Outdoor CCTV cameras mounted on a security pole",
     label: "Outdoor surveillance",
   },
@@ -66,7 +66,6 @@ export function InstallationProof() {
                   src={photo.src}
                   alt={photo.alt}
                   fill
-                  unoptimized
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 />
