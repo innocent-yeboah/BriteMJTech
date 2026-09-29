@@ -35,14 +35,18 @@ export function Navbar() {
       )}
     >
       <nav
-        className="container flex h-20 items-center justify-between py-3"
+        className="container flex h-20 items-center justify-between gap-3 py-3"
         aria-label="Main navigation"
       >
-        <Link href="/" className="flex items-center" aria-label={siteConfig.name}>
-          <Logo />
+        <Link
+          href="/"
+          className="group flex shrink-0 items-center rounded-sm"
+          aria-label={`${siteConfig.name} home`}
+        >
+          <Logo wordmark />
         </Link>
 
-        <ul className="hidden items-center gap-1 lg:flex">
+        <ul className="hidden shrink-0 items-center gap-1 lg:flex">
           {mainNav.map((item) => {
             const active =
               item.href === "/"
@@ -67,7 +71,7 @@ export function Navbar() {
           })}
         </ul>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden shrink-0 items-center gap-3 lg:flex">
           <a
             href={telLink()}
             className="flex items-center gap-2 text-sm font-semibold text-brand-950 hover:text-brand-600"
@@ -82,7 +86,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-md p-2 text-brand-950 lg:hidden"
+          className="inline-flex shrink-0 items-center justify-center rounded-md p-2 text-brand-950 lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls="mobile-menu"
