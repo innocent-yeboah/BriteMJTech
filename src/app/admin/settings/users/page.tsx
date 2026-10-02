@@ -313,7 +313,7 @@ export default function AccessControlPage() {
             type="password"
             value={createForm.password}
             onChange={(e) => setCreateForm({ ...createForm, password: e.target.value })}
-            hint="Minimum 8 characters. Share securely with the user."
+            hint="At least 10 characters with upper and lowercase letters, a number, and a symbol. Share it securely with the user."
             required
           />
           <div className="flex justify-end gap-3">

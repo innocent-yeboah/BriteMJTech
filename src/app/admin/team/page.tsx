@@ -493,7 +493,8 @@ export default function TeamPage() {
             onChange={(e) =>
               setCreateForm((f) => ({ ...f, password: e.target.value }))
             }
-            placeholder="At least 8 characters"
+            placeholder="At least 10 characters"
+            hint="Upper and lowercase letters, a number, and a symbol."
             required
           />
           <p className="text-xs text-slate-500">

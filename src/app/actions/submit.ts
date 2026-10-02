@@ -54,17 +54,20 @@ function emailActuallySent(
   );
 }
 
+async function rejectIfRateLimited(
+  bucket: "quote" | "enquiry" | "newsletter",
+): Promise<ActionResult | null> {
+  const decision = await checkFormRateLimit(bucket);
+  if (decision.ok) return null;
+  return { ok: false, message: decision.message };
+}
+
 /** Handle a full quote / lead request (multi-step form). */
 export async function submitQuote(
   raw: Record<string, unknown>,
 ): Promise<ActionResult> {
-  if (!(await checkFormRateLimit("quote"))) {
-    return {
-      ok: false,
-      message:
-        "You've sent a few requests very quickly. Please try again in a minute.",
-    };
-  }
+  const rateLimited = await rejectIfRateLimited("quote");
+  if (rateLimited) return rateLimited;
 
   const parsed = quoteSchema.safeParse(raw);
   if (!parsed.success) {
@@ -197,13 +200,8 @@ export async function redeemQuoteConversionToken(
 export async function submitEnquiry(
   raw: Record<string, unknown>,
 ): Promise<ActionResult> {
-  if (!(await checkFormRateLimit("enquiry"))) {
-    return {
-      ok: false,
-      message:
-        "You've sent a few messages very quickly. Please try again in a minute.",
-    };
-  }
+  const rateLimited = await rejectIfRateLimited("enquiry");
+  if (rateLimited) return rateLimited;
 
   const parsed = contactSchema.safeParse(raw);
   if (!parsed.success) {
@@ -290,13 +288,8 @@ export async function submitEnquiry(
 export async function submitNewsletter(
   raw: Record<string, unknown>,
 ): Promise<ActionResult> {
-  if (!(await checkFormRateLimit("newsletter"))) {
-    return {
-      ok: false,
-      message:
-        "You've sent a few requests very quickly. Please try again in a minute.",
-    };
-  }
+  const rateLimited = await rejectIfRateLimited("newsletter");
+  if (rateLimited) return rateLimited;
 
   const parsed = newsletterSchema.safeParse(raw);
   if (!parsed.success) {

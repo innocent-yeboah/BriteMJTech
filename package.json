@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "smoke:leads": "node scripts/smoke-lead-path.mjs"
+    "smoke:leads": "node scripts/smoke-lead-path.mjs",
+    "verify:rate-limit": "tsx scripts/verify-rate-limit-policy.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -37,6 +38,7 @@
     "eslint-config-next": "^14.2.35",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
+    "tsx": "^4.23.15",
     "typescript": "^5.6.2"
   }
 }
