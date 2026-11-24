@@ -5,7 +5,7 @@
  */
 
 const rawWhatsApp =
-  process.env.NEXT_PUBLIC_COMPANY_WHATSAPP?.replace(/\D/g, "") || "233546847109";
+  process.env.NEXT_PUBLIC_COMPANY_WHATSAPP?.replace(/\D/g, "") || "233203412477";
 
 export const siteConfig = {
   name: "Brite MJ Technologies",
@@ -34,7 +34,7 @@ export const siteConfig = {
     { day: "Sunday", time: "Emergency only" },
   ],
   social: {
-    facebook: "https://www.facebook.com/profile.php?id=61589157173544",
+    facebook: "https://www.facebook.com/1061913280344627",
     instagram: "https://www.instagram.com/britemjtechnologies/",
     tiktok: "https://www.tiktok.com/@britemjtechnology",
     linkedin: "https://www.linkedin.com/in/brite-m-j-tech",
