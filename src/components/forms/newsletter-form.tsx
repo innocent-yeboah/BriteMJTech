@@ -9,6 +9,7 @@ import { submitNewsletter } from "@/app/actions/submit";
 
 export function NewsletterForm() {
   const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -19,8 +20,15 @@ export function NewsletterForm() {
   });
 
   async function onSubmit(values: NewsletterInput) {
-    const result = await submitNewsletter(values);
-    if (result.ok) setDone(true);
+    setError(null);
+    try {
+      const result = await submitNewsletter(values);
+      if (result?.ok) setDone(true);
+      else setError(result?.message || "Please try again in a moment.");
+    } catch (err) {
+      console.error("[NewsletterForm] submit failed:", err);
+      setError("Please try again in a moment.");
+    }
   }
 
   if (done) {
@@ -63,6 +71,11 @@ export function NewsletterForm() {
       </div>
       {errors.email ? (
         <p className="text-xs text-accent-300">{errors.email.message}</p>
+      ) : null}
+      {error ? (
+        <p role="alert" className="text-xs text-accent-300">
+          {error}
+        </p>
       ) : null}
     </form>
   );
