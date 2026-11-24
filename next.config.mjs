@@ -8,6 +8,12 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/:path*",
+        has: [{ type: "host", value: "brite-mj-tech.vercel.app" }],
+        destination: "https://britemjtechnologies.com/:path*",
+        permanent: true,
+      },
+      {
         source: "/products",
         destination: "/services",
         permanent: true,
