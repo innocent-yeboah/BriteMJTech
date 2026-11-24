@@ -54,8 +54,36 @@ function emailActuallySent(
   );
 }
 
+/**
+ * Send the customer confirmation only once the submission is reported as a
+ * success, so nobody is told "we've received your request" by email while the
+ * page shows an error. Never throws.
+ */
+async function confirmToSubmitter(
+  tag: string,
+  data: { name: string; email: string },
+): Promise<void> {
+  try {
+    const sent = await sendLeadConfirmation(data);
+    if (!sent) console.error(`[${tag}] Confirmation email send returned false`);
+  } catch (error) {
+    console.error(`[${tag}] Confirmation email failed:`, error);
+  }
+}
+
 /** Handle a full quote / lead request (multi-step form). */
 export async function submitQuote(
+  raw: Record<string, unknown>,
+): Promise<ActionResult> {
+  try {
+    return await handleQuote(raw);
+  } catch (error) {
+    console.error("[submitQuote] Unhandled error:", error);
+    return { ok: false, message: phoneFallbackMessage() };
+  }
+}
+
+async function handleQuote(
   raw: Record<string, unknown>,
 ): Promise<ActionResult> {
   if (!(await checkFormRateLimit("quote"))) {
@@ -121,7 +149,6 @@ export async function submitQuote(
         inspectionTime: data.inspectionTime || undefined,
         source: "website",
       }),
-      sendLeadConfirmation({ name: data.name, email: data.email }),
     ]);
 
     for (const result of emailResults) {
@@ -136,7 +163,7 @@ export async function submitQuote(
 
     if (stored && !emailed) {
       console.error(
-        "[submitQuote] Lead stored but email notification/confirmation failed",
+        "[submitQuote] Lead stored but team notification email failed",
       );
     }
     if (!stored && emailed) {
@@ -152,6 +179,7 @@ export async function submitQuote(
       if (isProductionRuntime() || !emailed) {
         return { ok: false, message: phoneFallbackMessage() };
       }
+      await confirmToSubmitter("submitQuote", data);
       return {
         ok: true,
         message:
@@ -159,7 +187,15 @@ export async function submitQuote(
       };
     }
 
-    const conversionToken = await issueConversionToken();
+    await confirmToSubmitter("submitQuote", data);
+
+    let conversionToken: string | undefined;
+    try {
+      conversionToken = await issueConversionToken();
+    } catch (error) {
+      // The lead is stored — never turn that into an error for the visitor.
+      console.error("[submitQuote] Conversion token issue failed:", error);
+    }
 
     return {
       ok: true,
@@ -195,6 +231,17 @@ export async function redeemQuoteConversionToken(
 
 /** Handle a general contact-form enquiry. */
 export async function submitEnquiry(
+  raw: Record<string, unknown>,
+): Promise<ActionResult> {
+  try {
+    return await handleEnquiry(raw);
+  } catch (error) {
+    console.error("[submitEnquiry] Unhandled error:", error);
+    return { ok: false, message: phoneFallbackMessage() };
+  }
+}
+
+async function handleEnquiry(
   raw: Record<string, unknown>,
 ): Promise<ActionResult> {
   if (!(await checkFormRateLimit("enquiry"))) {
@@ -249,8 +296,15 @@ export async function submitEnquiry(
         subject: data.subject || undefined,
         message: data.message,
       }),
-      sendLeadConfirmation({ name: data.name, email: data.email }),
     ]);
+
+    for (const result of emailResults) {
+      if (result.status === "rejected") {
+        console.error("[submitEnquiry] Email promise rejected:", result.reason);
+      } else if (result.value === false) {
+        console.error("[submitEnquiry] Email send returned false");
+      }
+    }
 
     const emailed = emailActuallySent(emailResults);
 
@@ -271,6 +325,8 @@ export async function submitEnquiry(
       }
     }
 
+    await confirmToSubmitter("submitEnquiry", data);
+
     return {
       ok: true,
       message:
@@ -278,16 +334,23 @@ export async function submitEnquiry(
     };
   } catch (error) {
     console.error("[submitEnquiry] Unexpected error:", error);
-    return {
-      ok: false,
-      message:
-        "Something went wrong on our side. Please call us and we'll help right away.",
-    };
+    return { ok: false, message: phoneFallbackMessage() };
   }
 }
 
 /** Handle a newsletter signup — stored as an enquiry-style lead source. */
 export async function submitNewsletter(
+  raw: Record<string, unknown>,
+): Promise<ActionResult> {
+  try {
+    return await handleNewsletter(raw);
+  } catch (error) {
+    console.error("[submitNewsletter] Unhandled error:", error);
+    return { ok: false, message: "Please try again in a moment." };
+  }
+}
+
+async function handleNewsletter(
   raw: Record<string, unknown>,
 ): Promise<ActionResult> {
   if (!(await checkFormRateLimit("newsletter"))) {

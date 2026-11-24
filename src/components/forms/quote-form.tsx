@@ -34,6 +34,11 @@ const steps = [
 
 type StepFields = (typeof steps)[number]["fields"][number];
 
+const SUBMIT_FAILED_MESSAGE =
+  "We couldn't send your request. Please check your connection and try again, or call us on " +
+  (process.env.NEXT_PUBLIC_COMPANY_PHONE || "0203412477") +
+  ".";
+
 export function QuoteForm() {
   const router = useRouter();
   const [step, setStep] = useState(0);
@@ -87,8 +92,17 @@ export function QuoteForm() {
 
   async function onSubmit(values: QuoteInput) {
     setServerError(null);
-    const result = await submitQuote(values);
-    if (result.ok) {
+    let result: Awaited<ReturnType<typeof submitQuote>>;
+    try {
+      result = await submitQuote(values);
+    } catch (error) {
+      // Network drop, function timeout or a stale deployment: the action
+      // promise rejects, so show an error instead of failing silently.
+      console.error("[QuoteForm] submit failed:", error);
+      setServerError(SUBMIT_FAILED_MESSAGE);
+      return;
+    }
+    if (result?.ok) {
       // Only attach a conversion token when the server issued one (real success).
       // Honeypot returns ok without a token — thank-you must not fire Lead events.
       if (result.conversionToken) {
@@ -99,7 +113,7 @@ export function QuoteForm() {
         router.push("/quote/thank-you");
       }
     } else {
-      setServerError(result.message);
+      setServerError(result?.message || SUBMIT_FAILED_MESSAGE);
     }
   }
 

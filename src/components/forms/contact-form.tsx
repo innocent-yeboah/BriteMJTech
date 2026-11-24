@@ -10,6 +10,11 @@ import { Input, Textarea, Select, Label, FieldError } from "@/components/ui/fiel
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/data";
 
+const SUBMIT_FAILED_MESSAGE =
+  "We couldn't send your message. Please check your connection and try again, or call us on " +
+  (process.env.NEXT_PUBLIC_COMPANY_PHONE || "0203412477") +
+  ".";
+
 export function ContactForm() {
   const [status, setStatus] = useState<{
     type: "success" | "error";
@@ -35,12 +40,22 @@ export function ContactForm() {
 
   async function onSubmit(values: ContactInput) {
     setStatus(null);
-    const result = await submitEnquiry(values);
-    if (result.ok) {
-      setStatus({ type: "success", message: result.message });
-      reset();
-    } else {
-      setStatus({ type: "error", message: result.message });
+    try {
+      const result = await submitEnquiry(values);
+      if (result?.ok) {
+        setStatus({ type: "success", message: result.message });
+        reset();
+      } else {
+        setStatus({
+          type: "error",
+          message: result?.message || SUBMIT_FAILED_MESSAGE,
+        });
+      }
+    } catch (error) {
+      // Network drop, function timeout or a stale deployment: the action
+      // promise rejects, so show an error instead of failing silently.
+      console.error("[ContactForm] submit failed:", error);
+      setStatus({ type: "error", message: SUBMIT_FAILED_MESSAGE });
     }
   }
 
