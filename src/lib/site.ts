@@ -5,7 +5,7 @@
  */
 
 const rawWhatsApp =
-  process.env.NEXT_PUBLIC_COMPANY_WHATSAPP?.replace(/\D/g, "") || "233546847109";
+  process.env.NEXT_PUBLIC_COMPANY_WHATSAPP?.replace(/\D/g, "") || "233203412477";
 
 export const siteConfig = {
   name: "Brite MJ Technologies",
